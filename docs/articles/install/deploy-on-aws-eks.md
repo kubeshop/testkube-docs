@@ -2,7 +2,7 @@
 
 This guide walks through deploying Testkube On-Prem on an existing **Amazon EKS** cluster. It covers
 prerequisites, S3 storage configuration with two authentication methods (EKS Pod Identity and IRSA),
-PostgreSQL connectivity, ingress setup, and production hardening.
+PostgreSQL connectivity, ingress setup, EKS Auto Mode, and production hardening.
 
 :::info
 A ready-to-use reference repository with all configuration files, IAM templates, and install scripts
@@ -216,6 +216,10 @@ Atlas deployment with AWS IAM authentication (`authMechanism=MONGODB-AWS`), the 
 be used for Atlas access.
 
 **Step 1 — Install the Pod Identity Runner addon:**
+
+:::info
+Skip this step on [EKS Auto Mode](#deploying-on-eks-auto-mode) clusters: the agent is built into the nodes.
+:::
 
 ```bash
 aws eks create-addon \
@@ -674,6 +678,278 @@ global:
 
 :::
 
+## Deploying on EKS Auto Mode
+
+[EKS Auto Mode](https://docs.aws.amazon.com/eks/latest/userguide/automode.html) manages nodes, block
+storage, load balancing, the Gateway API controller, and the EKS Pod Identity Agent for you. Testkube runs on Auto Mode clusters, and
+S3 access through EKS Pod Identity works the same way as on standard clusters. Apply the following
+changes to the steps above.
+
+### Pod Identity
+
+The EKS Pod Identity Agent is built into Auto Mode nodes. **Skip Step 1** of
+[Option A — EKS Pod Identity](#option-a--eks-pod-identity): don't install the `eks-pod-identity-agent`
+add-on, and don't look for its DaemonSet when troubleshooting. Steps 2 to 4 (IAM role, Pod Identity
+Associations, verification) are unchanged.
+
+Keep these points in mind:
+
+- Leave `global.storage.accessKeyId` and `global.storage.secretAccessKey` empty, so Testkube falls back to
+  the Pod Identity credentials.
+- Create the Pod Identity Associations **before** you install Testkube. EKS injects the credentials when a
+  pod starts, so pods that already run don't get them; restart them with
+  `kubectl -n testkube rollout restart deploy`.
+- The IAM role must be in the same AWS account as the cluster. For an S3 bucket in another account,
+  delegate access from that role to a role in the bucket's account.
+- If your pods use an HTTP proxy, add `169.254.170.23` (and `fd00:ec2::23` on IPv6 clusters) to
+  `NO_PROXY`.
+
+### External PostgreSQL and IAM
+
+Testkube connects to PostgreSQL with the static credentials in `global.postgres.dsn` or
+`global.postgres.secretRef`. It doesn't support
+[RDS IAM database authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html),
+so EKS Pod Identity can't replace the database password. Instead:
+
+- Create a dedicated database user with a password, and **don't** grant it the `rds_iam` role. On
+  PostgreSQL, `rds_iam` makes IAM authentication take precedence and password logins fail.
+- Keep the DSN in AWS Secrets Manager and sync it into the Secret referenced by
+  `global.postgres.secretRef`, using the
+  [External Secrets Operator](https://external-secrets.io/latest/provider/aws-secrets-manager/) or the
+  [Secrets Store CSI Driver](https://docs.aws.amazon.com/secretsmanager/latest/userguide/integrating_csi_driver.html).
+  Both can authenticate with EKS Pod Identity.
+- If the password rotates automatically, for example with an RDS-managed master password, Testkube keeps
+  using the old password until its pods restart. Use a user without automatic rotation, or restart the
+  Testkube pods after each rotation.
+
+**Network access to RDS:** Auto Mode supports security groups for individual pods only on Kubernetes
+1.36 and later. On earlier versions, allow inbound traffic on port `5432` to the database from the node
+security group, or from a custom security group that you assign to nodes through a `NodeClass`. If your
+nodes use security groups that don't follow the `eks-cluster-sg-*` naming pattern, the cluster IAM role
+needs extra permissions; see
+[Auto Mode load balancing considerations](https://docs.aws.amazon.com/eks/latest/userguide/auto-networking.html#auto-lb-consider).
+
+### Storage Class
+
+Auto Mode doesn't create a `StorageClass`, and the classes for the EBS CSI driver add-on
+(`ebs.csi.aws.com`, `gp2`) don't work with it. Without a default class, the PersistentVolumeClaims of the
+chart-managed PostgreSQL, MinIO, and NATS stay `Pending`. Create a default class that uses the Auto Mode
+provisioner:
+
+```yaml title="auto-ebs-sc.yaml"
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: auto-ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+allowedTopologies:
+  - matchLabelExpressions:
+      - key: eks.amazonaws.com/compute-type
+        values: ["auto"]
+provisioner: ebs.csi.eks.amazonaws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp3
+  encrypted: "true"
+```
+
+If you set a storage class explicitly in your Helm values, such as `storageClass: "gp3"` in
+[Production Hardening](#production-hardening), replace it with `auto-ebs-sc`.
+
+### Gateway API
+
+On Auto Mode, expose Testkube through the
+[Kubernetes Gateway API](https://docs.aws.amazon.com/eks/latest/userguide/auto-configure-gateway-api.html).
+Auto Mode includes the Gateway controller and provisions an Application Load Balancer (ALB) for the
+Testkube routes, so you don't install an ingress controller (step 2) or configure Ingress resources.
+
+**Step 1 — Enable the Gateway API on the cluster** and let AWS manage the Gateway API CRDs:
+
+```bash
+aws eks update-cluster-config \
+  --name <EKS_CLUSTER_NAME> \
+  --kubernetes-network-config '{"elasticLoadBalancing":{"enabled":true,"gatewayApi":{"crds":{"managed":true}}}}'
+```
+
+Auto Mode also requires subnet tags to place the load balancer; see
+[Tag subnets for EKS Auto Mode](https://docs.aws.amazon.com/eks/latest/userguide/tag-subnets-auto.html).
+
+**Step 2 — Request a TLS certificate in ACM** that covers `*.<domain>`. The ALB Gateway reads certificates
+from ACM only; it doesn't support Kubernetes Secrets in `certificateRefs`, so cert-manager doesn't issue
+the public certificate in this setup.
+
+**Step 3 — Create the Gateway.** Create it yourself, not through the chart, because it needs a
+`LoadBalancerConfiguration` that references the ACM certificate:
+
+```yaml title="testkube-gateway.yaml"
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: eks-auto-alb
+spec:
+  controllerName: eks.amazonaws.com/gateway-alb
+---
+apiVersion: gateway.k8s.aws/v1
+kind: LoadBalancerConfiguration
+metadata:
+  name: testkube-alb
+  namespace: testkube
+spec:
+  scheme: internet-facing
+  listenerConfigurations:
+    - protocolPort: HTTPS:443
+      defaultCertificate: <ACM_CERTIFICATE_ARN>
+      sslPolicy: ELBSecurityPolicy-TLS13-1-2-2021-06
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: testkube-gateway
+  namespace: testkube
+spec:
+  gatewayClassName: eks-auto-alb
+  infrastructure:
+    parametersRef:
+      group: gateway.k8s.aws
+      kind: LoadBalancerConfiguration
+      name: testkube-alb
+  listeners:
+    - name: https
+      protocol: HTTPS
+      port: 443
+      hostname: "*.<DOMAIN>"
+```
+
+The scheme defaults to `internal`. Keep `internet-facing` for a public installation, or remove it for an
+installation reachable only from inside the VPC. Create the `GatewayClass` first: a new `GatewayClass`
+takes a few moments before a `Gateway` can reference it.
+
+**Step 4 — Configure the target groups.** Testkube exposes the gRPC endpoint (`agent.<domain>`) through
+an `HTTPRoute`, so the ALB creates an HTTP/1.1 target group for it unless you set `protocolVersion: GRPC`.
+The API also terminates TLS itself (`api.tls.serveHTTPS: true` by default), and the ALB Gateway doesn't
+support `BackendTLSPolicy`, so set `protocol: HTTPS` on the API target groups:
+
+```yaml title="testkube-target-groups.yaml"
+apiVersion: gateway.k8s.aws/v1
+kind: TargetGroupConfiguration
+metadata:
+  name: testkube-api
+  namespace: testkube
+spec:
+  targetReference:
+    name: testkube-enterprise-api
+  defaultConfiguration:
+    targetType: ip
+    protocol: HTTPS
+    healthCheckConfig:
+      healthCheckProtocol: HTTPS
+      healthCheckPath: /health/readiness
+  routeConfigurations:
+    - routeIdentifier:
+        kind: HTTPRoute
+        namespace: testkube
+        name: testkube-enterprise-api-grpc
+      targetGroupProps:
+        protocol: HTTPS
+        protocolVersion: GRPC
+        healthCheckConfig:
+          matcher:
+            grpcCode: "0-99"
+---
+apiVersion: gateway.k8s.aws/v1
+kind: TargetGroupConfiguration
+metadata:
+  name: testkube-dex
+  namespace: testkube
+spec:
+  targetReference:
+    name: testkube-enterprise-dex
+  defaultConfiguration:
+    targetType: ip
+    healthCheckConfig:
+      healthCheckPath: /idp/.well-known/openid-configuration
+```
+
+:::warning
+Without `protocolVersion: GRPC` on the gRPC route, the ALB forwards HTTP/1.1, which breaks gRPC
+communication. Runners fail to connect to the control plane.
+:::
+
+**Step 5 — Configure the Helm values** to render Gateway API routes that attach to your Gateway:
+
+```yaml title="values-gateway.yaml"
+global:
+  exposure:
+    mode: gateway
+  gatewayAPI:
+    createHTTPRoutes: true
+    gateway:
+      create: false
+      name: testkube-gateway
+    certificate:
+      create: false
+    backendTLSPolicy:
+      enabled: false
+
+testkube-cloud-api:
+  gatewayAPI:
+    createRESTHTTPRoute: true
+    createGRPCRoute: true
+
+testkube-cloud-ui:
+  gatewayAPI:
+    createHTTPRoute: true
+
+dex:
+  gatewayAPI:
+    createHTTPRoute: true
+```
+
+**Step 6 — Point DNS at the Gateway.** After the Gateway reports `Programmed`, create CNAME or Alias
+records for `dashboard.<domain>`, `api.<domain>`, and `agent.<domain>` that point to its address:
+
+```bash
+kubectl -n testkube wait --for=condition=Programmed gateway/testkube-gateway --timeout=10m
+kubectl -n testkube get gateway testkube-gateway -o jsonpath='{.status.addresses[0].value}'
+```
+
+The ALB Gateway doesn't support `HTTPRouteTimeouts`. Live log streams and runner connections are subject
+to the ALB idle timeout, which is 60 seconds by default. For more options, see the
+[AWS Load Balancer Controller Gateway API guide](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v3.5/guide/gateway/l7gateway/).
+
+### Node Lifecycle
+
+Auto Mode replaces each node after at most 21 days and consolidates underused nodes, which evicts the
+pods that run on them.
+
+- Run at least two replicas of the API and worker service with Pod Disruption Budgets, as shown in
+  [Production Hardening](#production-hardening).
+- Long-running Test Workflow pods can be evicted in the middle of an execution. To prevent this, add the
+  `karpenter.sh/do-not-disrupt` annotation to the Test Workflow pods, either per workflow or for all
+  workflows with a [global template](/articles/test-workflow-templates#global-templates) in the
+  `testkube-runner` chart:
+
+  ```yaml
+  globalTemplate:
+    enabled: true
+    inline: true
+    spec:
+      pod:
+        annotations:
+          karpenter.sh/do-not-disrupt: "true"
+  ```
+
+  Pods with this annotation delay node replacement until they finish, up to the 21-day maximum node
+  lifetime.
+
+### Node Restrictions
+
+Auto Mode nodes run Bottlerocket with SELinux in enforcing mode and a read-only root file system, and
+they don't allow SSH or SSM access. Test Workflows that run privileged containers, Docker-in-Docker, or
+mount `hostPath` volumes may behave differently than on standard nodes, so run them on the cluster before
+you move production workloads.
+
 ## Production Hardening
 
 For production deployments, consider the following settings. A complete production overlay is provided
@@ -734,7 +1010,7 @@ kubectl logs <pod-name> -n testkube
 **S3 permission errors (Pod Identity):**
 
 ```bash
-# Verify the addon is running
+# Verify the addon is running (not applicable on EKS Auto Mode)
 kubectl get ds -n kube-system eks-pod-identity-agent
 
 # Check associations
