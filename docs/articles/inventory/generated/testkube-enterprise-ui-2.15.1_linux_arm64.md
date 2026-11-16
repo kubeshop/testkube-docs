@@ -44,7 +44,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -66,7 +66,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
