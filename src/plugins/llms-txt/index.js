@@ -13,11 +13,16 @@
  * content such as the CLI, OpenAPI and CRD pages) are left out, and `optional`
  * adds a closing "Optional" section that points at those references instead.
  *
+ * Every page is also written as Markdown, at its URL plus ".md", and llms.txt
+ * links to that version. Each section's pages are written to one file too,
+ * /llms-full/<section>.txt, linked at the end of the section.
+ *
  * The build warns about every listed page that has no `description`.
  */
 
 const fs = require("fs/promises");
 const path = require("path");
+const { toMarkdown } = require("./to-markdown");
 
 /**
  * @typedef {{title: string, path: string, description?: string}} OptionalLink
@@ -25,6 +30,7 @@ const path = require("path");
  *   sidebar?: string,
  *   excludePrefixes?: string[],
  *   optional?: OptionalLink[],
+ *   markdownExcludePrefixes?: string[],
  * }} PluginOptions
  */
 
@@ -52,6 +58,7 @@ module.exports = function llmsTxtPlugin(context, options) {
     sidebar: sidebarId = "main",
     excludePrefixes = [],
     optional = [],
+    markdownExcludePrefixes = [],
   } = options;
   const siteUrl = context.siteConfig.url.replace(/\/$/, "");
 
@@ -75,6 +82,79 @@ module.exports = function llmsTxtPlugin(context, options) {
       /** @type {Map<string, any>} */
       const docsById = new Map(version.docs.map((doc) => [doc.id, doc]));
       const seen = new Set();
+
+      // Every page is also published as Markdown, at its URL plus ".md"
+      // ("/index.md" for the home page), and llms.txt links to that version.
+      /** @type {Map<string, any>} */
+      const markdownDocs = new Map();
+      /** @type {Map<string, string>} */
+      const permalinkBySource = new Map();
+      for (const doc of version.docs) {
+        if (doc.unlisted || doc.draft) continue;
+        const file = path.join(
+          context.siteDir,
+          doc.source.replace(/^@site\//, "")
+        );
+        permalinkBySource.set(file, doc.permalink);
+        if (
+          !markdownExcludePrefixes.some((prefix) =>
+            doc.permalink.startsWith(prefix)
+          )
+        ) {
+          markdownDocs.set(doc.permalink, { ...doc, file });
+        }
+      }
+      /** @param {string} permalink */
+      const markdownPath = (permalink) =>
+        `${permalink === "/" ? "/index" : permalink}.md`;
+      /** The URL of a page: its Markdown version when it has one. */
+      const pageUrl = (/** @type {string} */ permalink) =>
+        siteUrl +
+        (markdownDocs.has(permalink) ? markdownPath(permalink) : permalink);
+
+      /**
+       * Makes a link in a page absolute. A link to a source file
+       * ("./other.md") or to a page ("/articles/other") becomes the URL of
+       * that page's Markdown version.
+       * @param {string} href
+       * @param {string} fromFile
+       */
+      const resolveLink = (href, fromFile) => {
+        if (/^([a-z][a-z0-9+.-]*:|#|\/\/)/i.test(href)) return href;
+        const [, target, suffix] = /** @type {RegExpMatchArray} */ (
+          href.match(/^([^?#]*)(.*)$/)
+        );
+        const fromPermalink = permalinkBySource.get(fromFile) ?? "/";
+        let permalink;
+        if (/\.mdx?$/.test(target)) {
+          const file = target.startsWith("/")
+            ? path.join(context.siteDir, "docs", target)
+            : path.resolve(path.dirname(fromFile), target);
+          permalink = permalinkBySource.get(file);
+        }
+        permalink ??= new URL(
+          target.replace(/\.mdx?$/, ""),
+          `${siteUrl}${fromPermalink}`
+        ).pathname;
+        if (permalink.length > 1) permalink = permalink.replace(/\/$/, "");
+        return pageUrl(permalink) + suffix;
+      };
+
+      /** The Markdown of each page, by permalink. @type {Map<string, string>} */
+      const markdown = new Map();
+      for (const [permalink, doc] of markdownDocs) {
+        let content = toMarkdown(doc.file, {
+          siteDir: context.siteDir,
+          resolveLink,
+        });
+        if (!/^# /m.test(content.replace(/^(```|~~~)[\s\S]*?^\1/gm, ""))) {
+          content = `# ${doc.title}\n\n${content}`;
+        }
+        markdown.set(permalink, content);
+        const file = path.join(outDir, markdownPath(permalink));
+        await fs.mkdir(path.dirname(file), { recursive: true });
+        await fs.writeFile(file, content);
+      }
       /** @type {string[]} */
       const undescribed = [];
 
@@ -94,7 +174,7 @@ module.exports = function llmsTxtPlugin(context, options) {
             await fs.readFile(path.join(context.siteDir, sourcePath), "utf8")
           ) ??
           doc.title;
-        const link = `- [${title}](${siteUrl}${doc.permalink})`;
+        const link = `- [${title}](${pageUrl(doc.permalink)})`;
         if (!doc.frontMatter.description) {
           undescribed.push(sourcePath);
           return link;
@@ -104,11 +184,55 @@ module.exports = function llmsTxtPlugin(context, options) {
 
       /** @type {string[]} */
       const sections = [];
-      /** @param {string} title @param {string[]} lines */
-      const addSection = (title, lines) => {
-        if (lines.length) {
-          sections.push([`## ${title}`, "", ...lines].join("\n"));
+      /** @type {Map<string, string>} */
+      const permalinkByUrl = new Map(
+        [...markdown.keys()].map((permalink) => [pageUrl(permalink), permalink])
+      );
+      await fs.mkdir(path.join(outDir, "llms-full"), { recursive: true });
+      /** The section files, for the index in llms-full.txt. @type {string[]} */
+      const fullFiles = [];
+
+      /**
+       * Adds a section to llms.txt. The Markdown of its pages is also written
+       * to one file, /llms-full/<section>.txt, which the section links to.
+       * @param {string} title
+       * @param {string[]} lines
+       * @param {boolean} [withFullFile]
+       */
+      const addSection = async (title, lines, withFullFile = true) => {
+        if (!lines.length) return;
+        const pages = lines.flatMap((line) => {
+          const url = line.match(/\]\((\S+?)\)/)?.[1] ?? "";
+          const permalink = permalinkByUrl.get(url);
+          const content = permalink && markdown.get(permalink);
+          return content ? [`Source: ${url}\n\n${content.trim()}`] : [];
+        });
+        const list = [...lines];
+        if (withFullFile && pages.length) {
+          const slug = title
+            .toLowerCase()
+            .replace(/&/g, "and")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+          const file = `/llms-full/${slug}.txt`;
+          const content = `${[
+            `# Testkube Documentation: ${title}`,
+            ...pages,
+          ].join("\n\n---\n\n")}\n`;
+          await fs.writeFile(path.join(outDir, file), content);
+          const count = `${pages.length} ${pages.length === 1 ? "page" : "pages"}`;
+          const size = Math.max(
+            1,
+            Math.round(Buffer.byteLength(content) / 1024)
+          );
+          fullFiles.push(
+            `- [${title}](${siteUrl}${file}): ${count}, ${size} KB`
+          );
+          list.push(
+            `- [All "${title}" pages in one file](${siteUrl}${file}): The full Markdown of the ${pages.length} ${pages.length === 1 ? "page" : "pages"} listed in this section.`
+          );
         }
+        sections.push([`## ${title}`, "", ...list].join("\n"));
       };
 
       /**
@@ -144,7 +268,7 @@ module.exports = function llmsTxtPlugin(context, options) {
       const topLevelPages = sidebar.filter(
         (/** @type {any} */ item) => item.type !== "category"
       );
-      addSection("Overview", await listPages(topLevelPages));
+      await addSection("Overview", await listPages(topLevelPages));
 
       for (const category of sidebar) {
         if (category.type !== "category") continue;
@@ -159,18 +283,19 @@ module.exports = function llmsTxtPlugin(context, options) {
             });
           }
         );
-        addSection(category.label, lines);
+        await addSection(category.label, lines);
         for (const subsection of subsections) {
-          addSection(subsection.title, subsection.lines);
+          await addSection(subsection.title, subsection.lines);
         }
       }
 
-      addSection(
+      await addSection(
         "Optional",
         optional.map(({ title, path: urlPath, description }) => {
-          const link = `- [${title}](${siteUrl}${urlPath})`;
+          const link = `- [${title}](${pageUrl(urlPath)})`;
           return description ? `${link}: ${description}` : link;
-        })
+        }),
+        false
       );
 
       if (undescribed.length) {
@@ -181,10 +306,29 @@ module.exports = function llmsTxtPlugin(context, options) {
         );
       }
 
-      const header = await fs.readFile(
-        path.join(__dirname, "header.md"),
-        "utf8"
+      // The links in the introduction go to the Markdown versions too.
+      const header = (
+        await fs.readFile(path.join(__dirname, "header.md"), "utf8")
+      ).replace(
+        /\]\(([^)\s]+)\)/g,
+        (_match, href) =>
+          `](${resolveLink(
+            href.startsWith(siteUrl) ? href.slice(siteUrl.length) || "/" : href,
+            ""
+          )})`
       );
+      // llms-full.txt is the conventional URL for the whole documentation in
+      // one file. That would be about 2 MB here, so it is an index of the
+      // section files instead.
+      await fs.writeFile(
+        path.join(outDir, "llms-full.txt"),
+        `${[
+          "# Testkube Documentation: full text by section",
+          `> The full Markdown of the Testkube documentation, split into one file per section of [llms.txt](${siteUrl}/llms.txt). Read llms.txt first to find the section you need: it describes every page.`,
+          fullFiles.join("\n"),
+        ].join("\n\n")}\n`
+      );
+
       await fs.writeFile(
         path.join(outDir, "llms.txt"),
         `${[header.trim(), ...sections].join("\n\n")}\n`
