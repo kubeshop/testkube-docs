@@ -118,6 +118,9 @@ metadata:
 
 The Runner ID is shown in the Runners list under Environment Settings.
 
+For the [Control Plane resources](#syncing-control-plane-resources), what ownership locks and how to move a resource to another
+runner step by step are described in [GitOps Ownership](/articles/control-plane-resources#gitops-ownership).
+
 ### Deleting Resources
 
 A runner with the GitOps capability will only delete Resources in the Control Plane if those are initially available and deleted locally, i.e. it won't delete
@@ -148,7 +151,9 @@ When the value is set to `"true"`, Control Plane sync for that resource is skipp
 - Delete sync requests are accepted but ignored.
 
 This applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates,
-TestTriggers, Webhooks, and Webhook Templates, and the [Control Plane resources](#syncing-control-plane-resources).
+TestTriggers, Webhooks, and Webhook Templates. For the [Control Plane resources](#syncing-control-plane-resources) it works only on
+the custom resource and pauses creates and updates, not deletes; see
+[GitOps Sync](/articles/control-plane-resources#gitops-sync) in Control Plane Resources as Code.
 
 #### Where to Place the Annotation
 
@@ -208,6 +213,8 @@ spec:
 ```
 
 The `testkube get <kind> <name> -o yaml` command exports a resource you built in the Dashboard in this form, so you can commit it to Git.
+The manifests, the CLI and REST API that apply them without a runner, and GitOps ownership of these resources are described in
+[Control Plane Resources as Code](/articles/control-plane-resources).
 
 These resources follow the rules above, with these differences:
 
@@ -227,8 +234,8 @@ These resources follow the rules above, with these differences:
   user's private Board or AI Agent of the same name: rename one of them, or ask its creator to make it no longer private.
 - **References are resolved in order.** MCP servers sync before the AI Agents that use them, and AI Agents before the Test Bundles
   that name them. A resource that names one the Control Plane does not have yet is retried until it arrives.
-- **Only what the runner synced is deleted.** Deleting the custom resource deletes the Control Plane resource only if a runner synced
-  it last. One that was changed in the Dashboard since is left as it is.
+- **Only what the runner synced is deleted.** Deleting the custom resource deletes the Control Plane resource only if a runner owns
+  it or synced it last. One that no runner owns and that was changed in the Dashboard since is left as it is.
 
 :::warning
 Deleting a `TestBundle` custom resource deletes the Test Bundle as the Dashboard does: its chats end, together with their sandbox.

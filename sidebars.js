@@ -1051,6 +1051,11 @@ const sidebars = {
             },
             {
               type: "doc",
+              label: "Control Plane Resources as Code",
+              id: "articles/control-plane-resources",
+            },
+            {
+              type: "doc",
               label: "Ephemeral Environments",
               id: "articles/ephemeral-environments",
             },
