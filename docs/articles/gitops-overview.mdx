@@ -216,8 +216,15 @@ These resources follow the rules above, with these differences:
 - **They are read-only while a runner owns them.** With [GitOps Resource Ownership](#gitops-resource-ownership) enabled, a resource a
   runner owns can't be changed in the Dashboard, through the MCP tools or with `testkube apply`. For an AI Agent this includes its
   roles, resource groups and Skills, and for a Test Bundle its Attached Context, Skills and AI Agents. Change it in Git instead.
-- **Private resources are never synced over.** A synced Board is always shared and a synced AI Agent is always public. A runner
-  refuses to sync over a user's private Board or AI Agent of the same name: rename one of them, or make it shared.
+- **Boards are shared across the Organization.** Unlike the other kinds, which belong to the Environment the runner is connected to,
+  a Board belongs to the Organization, and its `metadata.name` is the Board's slug, not its display name (`spec.displayName`).
+  Runners connected to different Environments of one Organization therefore sync to the same Board when their custom resources
+  have the same name, and overwrite each other unless [GitOps Resource Ownership](#gitops-resource-ownership) is enabled. Give
+  each Board a name that is unique across the Organization.
+- **Private resources are never synced over.** A synced Board is always shared, and a synced AI Agent is never private. A synced
+  AI Agent can still be open only to some roles or Resource Groups (`spec.access.roles` and `spec.access.resourceGroups`), which
+  the runner syncs from Git like the rest of it, see [AI Agent access](/articles/ai-agent-access). A runner refuses to sync over a
+  user's private Board or AI Agent of the same name: rename one of them, or ask its creator to make it no longer private.
 - **References are resolved in order.** MCP servers sync before the AI Agents that use them, and AI Agents before the Test Bundles
   that name them. A resource that names one the Control Plane does not have yet is retried until it arrives.
 - **Only what the runner synced is deleted.** Deleting the custom resource deletes the Control Plane resource only if a runner synced
