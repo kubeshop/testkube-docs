@@ -157,8 +157,12 @@ status:
 
 ## CLI
 
-The commands use the Organization and Environment of your current CLI context. Sign in with `testkube login`. An API token works for
-the Environment-scoped kinds, but not for Boards: API tokens belong to an Environment, and Boards to the Organization.
+The commands use the Organization and Environment of your current CLI context, and the credentials it holds:
+
+- **Boards** need a signed-in user (`testkube login`). The Board endpoints refuse [API tokens](/articles/api-token-management) of any
+  role, because every Board records the user who created it.
+- **The Environment-scoped kinds** also take an API token that has access to the Environment: an admin token, or a member token the
+  Environment was added to. The token needs the permission the same change needs in the Dashboard.
 
 ### Apply
 
@@ -199,7 +203,8 @@ testkube delete mcpserver github --ignore-not-found
 ## REST API
 
 The CLI calls these endpoints of the Control Plane API (`https://api.testkube.io` for Testkube Cloud, or your own API URL),
-with a bearer token:
+with a bearer token. The Board endpoints take only a signed-in user's token; the Environment endpoints also take an API token, as
+[CLI](#cli) describes.
 
 ```
 GET    /organizations/{org}/resources/boards
@@ -264,10 +269,40 @@ If a custom resource is deleted while the runner can't watch its namespace, for 
 can't tell whether it carried the annotation when it was deleted. To be safe, it leaves the resource in the Control Plane and logs
 that it did. Delete it there if it should go.
 
+### Syncing Resources Created Outside Git
+
+A custom resource syncs to the Control Plane resource of the same kind and `metadata.name`, however that resource was made: in
+the Dashboard, with the CLI, the REST API or the MCP tools. If such a resource exists, the sync takes it over and replaces its
+content with the manifest. Nothing else is needed. To bring an existing resource under Git, export it, commit it, and let the runner
+sync it:
+
+```sh
+testkube get board checkout-team -o yaml > manifests/checkout-team.yaml
+```
+
+Once the sync has written the resource:
+
+- With [GitOps Ownership](#gitops-ownership) on, the runner owns it, so it can only be changed in Git.
+- With ownership off, it has no owner, but it is Git's: a change made elsewhere is overwritten the next time the runner sends the
+  resource, such as when the custom resource changes or the runner restarts, and deleting the custom resource deletes it.
+
+The sync doesn't take over:
+
+- A user's private Board or private AI Agent, or one of the default AI Agents Testkube manages. The sync is refused; rename the
+  resource in Git, or ask the private resource's owner to rename it or share it.
+- A resource another runner owns, unless the custom resource names this runner in `testkube.io/gitops-owner` (see
+  [Transferring Ownership to Another Runner](#transferring-ownership-to-another-runner)).
+- Anything while the custom resource carries `testkube.io/no-gitops-sync`.
+
+Deleting a custom resource deletes only a resource the sync wrote. One made or last changed outside Git that the sync hasn't
+written since, for example while its custom resource was paused, is kept.
+
 ## GitOps Ownership
 
 With [GitOps Resource Ownership](/articles/gitops-overview#gitops-resource-ownership) enabled under
 **Organization Management → Product Features**, the first runner that syncs a resource owns it, and `status.gitOpsOwner` names it.
+That includes a resource made outside Git that had no owner (see
+[Syncing Resources Created Outside Git](#syncing-resources-created-outside-git)).
 
 ### What Ownership Locks
 

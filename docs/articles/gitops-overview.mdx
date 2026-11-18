@@ -228,6 +228,10 @@ These resources follow the rules above, with these differences:
   Runners connected to different Environments of one Organization therefore sync to the same Board when their custom resources
   have the same name, and overwrite each other unless [GitOps Resource Ownership](#gitops-resource-ownership) is enabled. Give
   each Board a name that is unique across the Organization.
+- **Existing resources are taken over.** A custom resource syncs to the Control Plane resource of the same kind and name, even one
+  made in the Dashboard, with the CLI or through the REST API. The sync replaces it with the manifest, and with
+  [GitOps Resource Ownership](#gitops-resource-ownership) enabled the runner owns it from then on, see
+  [Syncing Resources Created Outside Git](/articles/control-plane-resources#syncing-resources-created-outside-git).
 - **Private resources are never synced over.** A synced Board is always shared, and a synced AI Agent is never private. A synced
   AI Agent can still be open only to some roles or Resource Groups (`spec.access.roles` and `spec.access.resourceGroups`), which
   the runner syncs from Git like the rest of it, see [AI Agent access](/articles/ai-agent-access). A runner refuses to sync over a
