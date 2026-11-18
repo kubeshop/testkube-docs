@@ -29,6 +29,10 @@ A Board belongs to the Organization and is shared by all its Environments. The o
 `metadata.name` is the resource's name in the Control Plane (its slug), not its display name, which is `spec.displayName`.
 It never changes: renaming the manifest creates a new resource. For a resource made in the Dashboard, `testkube get` shows the name it was given.
 
+A runner with the GitOps capability syncs custom resources, whose names Kubernetes limits to lowercase letters, digits, `-` and `.`.
+A Test Bundle made in the Dashboard can have a `_` in its name: you can still apply it with the CLI or the REST API, but not sync it
+as a custom resource.
+
 :::note
 On a self-hosted Control Plane, AI Agents, MCP servers, LLM providers and Test Bundles need PostgreSQL as its database.
 :::
@@ -99,7 +103,7 @@ A Test Bundle whose tests are read from Git and that may delegate to the AI Agen
 apiVersion: testbundles.testkube.io/v1alpha1
 kind: TestBundle
 metadata:
-  name: checkout_api
+  name: checkout-api
 spec:
   displayName: Checkout API
   gitSource:
@@ -188,7 +192,7 @@ With `-o yaml` or `-o json` the output is in the form `testkube apply` takes, so
 ### Delete
 
 ```sh
-testkube delete testbundle checkout_api
+testkube delete testbundle checkout-api
 testkube delete mcpserver github --ignore-not-found
 ```
 
