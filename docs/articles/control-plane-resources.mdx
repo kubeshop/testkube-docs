@@ -260,6 +260,10 @@ For these kinds the annotation works only on the custom resource. The Control Pl
 the resource in the Control Plane. It pauses creates, updates and deletes: deleting a custom resource that carries the annotation
 leaves the resource in the Control Plane as it is.
 
+If a custom resource is deleted while the runner can't watch its namespace, for example during a network interruption, the runner
+can't tell whether it carried the annotation when it was deleted. To be safe, it leaves the resource in the Control Plane and logs
+that it did. Delete it there if it should go.
+
 ## GitOps Ownership
 
 With [GitOps Resource Ownership](/articles/gitops-overview#gitops-resource-ownership) enabled under
