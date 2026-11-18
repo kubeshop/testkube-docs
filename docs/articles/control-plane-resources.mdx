@@ -253,9 +253,8 @@ metadata:
 ```
 
 For these kinds the annotation works only on the custom resource. The Control Plane doesn't store annotations, so it can't be set on
-the resource in the Control Plane. It pauses creates and updates, but not deletes: deleting the custom resource still deletes a
-resource the runner synced last, or one it owns. The sync never deletes a resource that no runner owns and that was last changed
-outside the sync, so to keep such a resource, change it in the Control Plane before you delete its custom resource.
+the resource in the Control Plane. It pauses creates, updates and deletes: deleting a custom resource that carries the annotation
+leaves the resource in the Control Plane as it is.
 
 ## GitOps Ownership
 

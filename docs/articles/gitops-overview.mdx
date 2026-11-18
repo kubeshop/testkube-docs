@@ -152,7 +152,7 @@ When the value is set to `"true"`, Control Plane sync for that resource is skipp
 
 This applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates,
 TestTriggers, Webhooks, and Webhook Templates. For the [Control Plane resources](#syncing-control-plane-resources) it works only on
-the custom resource and pauses creates and updates, not deletes; see
+the custom resource, not on the resource in the Control Plane; see
 [GitOps Sync](/articles/control-plane-resources#gitops-sync) in Control Plane Resources as Code.
 
 #### Where to Place the Annotation

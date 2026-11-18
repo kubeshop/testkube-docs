@@ -60,6 +60,10 @@ The collected data looks like this.
 }
 ```
 
+Every hour the API server sends a heartbeat with its version, the cluster type and the capabilities the Runner has enabled, such as
+`gitops-sync`. A Runner that [syncs Control Plane resources](/articles/control-plane-resources#gitops-sync) also sends how many
+resources of each kind it syncs, for example `{"boards": 3, "aiagents": 1}`. It sends counts only, never names or contents.
+
 ## How to Opt Out?
 
 ### Testkube CLI and Runner {#testkube-cli-and-agent}
