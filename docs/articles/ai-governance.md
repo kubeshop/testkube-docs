@@ -35,13 +35,13 @@ On a self-hosted control plane, AI governance needs PostgreSQL, and the **AI Gov
 
 The page has one tab per area. **Access**, **Models** and **Limits** start from an **Environment** picker or filter, because AI Agents and models belong to an Environment.
 
-| Tab     | What it shows                                                                                                                    | Read more                                                              |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                           | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
-| Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here. | [Token limits and pauses](ai-token-limits#review-all-limits)           |
-| Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                    | [Model access](ai-model-access#review-models-across-an-environment)    |
-| Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                | [AI tracing](ai-tracing)                                               |
-| Audit   | Opens the Audit log filtered to the **MCP** source. An AI Agent's own tool calls carry the **AI Agent** source instead.          | [Audit log](audit-logs#ai-and-mcp-events)                              |
+| Tab     | What it shows                                                                                                                       | Read more                                                              |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                              | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
+| Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here.    | [Token limits and pauses](ai-token-limits#review-all-limits)           |
+| Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                       | [Model access](ai-model-access#review-models-across-an-environment)    |
+| Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                   | [AI tracing](ai-tracing)                                               |
+| Audit   | Opens the Audit log filtered to the **MCP Tool Called** event type: every tool call, the ones an AI Agent made and the ones served. | [Audit log](audit-logs#ai-and-mcp-events)                              |
 
 ![AI Governance Limits tab](images/ai-governance-limits.png)
 
