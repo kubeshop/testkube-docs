@@ -1352,6 +1352,11 @@ const sidebars = {
           items: [
             {
               type: "doc",
+              label: "AI Testing Metrics",
+              id: "articles/examples/ai-metrics",
+            },
+            {
+              type: "doc",
               label: "Promptfoo",
               id: "articles/examples/promptfoo-basic",
             },
