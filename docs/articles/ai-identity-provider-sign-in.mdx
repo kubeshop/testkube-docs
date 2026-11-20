@@ -153,13 +153,30 @@ anything else, and AI Agents then report that no identity provider is set up.
    exchange tokens from it, decide how a subject maps to one of your users, give the client a
    service account for unattended runs, and allow it to request a token for each MCP Server's
    audience.
-2. **In Testkube**, open **Organization, AI Governance, Identity provider**, and enter the token
-   endpoint, client id and client secret. Add an audience for each MCP Server. Select **Test
-   connection**: it asks your provider for a token as Testkube's own account, so a wrong secret
-   or an unreachable endpoint shows up here rather than in somebody's chat. To give one
-   Environment a provider of its own, do the same under that Environment's **AI Settings,
-   Identity provider**.
+2. **In Testkube**, open **Organization, AI Governance, Identity provider**, and fill the form
+   described below. Select **Test connection**: it asks your provider for a token as Testkube's
+   own account, so a wrong secret or an unreachable endpoint shows up here rather than in
+   somebody's chat. To give one Environment a provider of its own, do the same under that
+   Environment's **AI Settings, Identity provider**.
 3. **On the AI Agent**, set the MCP Server's **Sign-in** to **Through the identity provider**.
+
+### The form
+
+| Field                                  | What goes in it                                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Token endpoint**                     | Your provider's token endpoint, the one the exchange is posted to.                                                                                   |
+| **Client ID** and **Client secret**    | The client your identity admin registered for Testkube in step 1.                                                                                    |
+| **Testkube's issuer at your provider** | The name your provider knows Testkube's Dex by, when it needs the issuer named rather than inferred. Leave it empty when your provider does not ask. |
+| **Subject token type**                 | The RFC 8693 type your provider's policy matches on. See below.                                                                                      |
+| **Audience per MCP Server**            | One audience per MCP Server, by MCP Server id.                                                                                                       |
+
+:::warning Subject token type decides which policy mapping runs
+Left empty, Testkube sends `urn:ietf:params:oauth:token-type:access_token`. A provider that keys
+one mapping per subject token type then runs the mapping for that type, not the one you
+configured for a JWT, and the person is matched on the wrong claim or not at all. PingFederate
+works this way, and its recipe maps the `email` claim under
+`urn:ietf:params:oauth:token-type:jwt`, so enter that value for it.
+:::
 
 ## When it does not work
 
