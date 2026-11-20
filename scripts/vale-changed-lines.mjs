@@ -6,7 +6,8 @@
 //
 // The existing pages carry thousands of Vale alerts, so linting whole files would fail every
 // pull request on text it did not touch. The diff is taken from the merge base to the working
-// tree, so uncommitted edits count too. Exits 1 when an added line has an error-level alert.
+// tree, so uncommitted edits count too, and every line of an untracked page counts as added.
+// Exits 1 when an added line has an error-level alert.
 import { execFileSync, spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
@@ -61,6 +62,21 @@ for (const line of diff.split("\n")) {
     const count = hunk[2] === undefined ? 1 : Number(hunk[2]);
     for (let n = start; n < start + count; n++) added.get(file).add(n);
   }
+}
+// git diff leaves out files that are not tracked yet, such as a new page before git add,
+// so every line of an untracked page counts as added.
+const untracked = git(
+  "ls-files",
+  "--others",
+  "--exclude-standard",
+  "--",
+  "docs/*.md",
+  "docs/*.mdx"
+);
+for (const path of untracked.split("\n")) {
+  if (!path || GENERATED.some((dir) => path.startsWith(dir))) continue;
+  const count = readFileSync(path, "utf8").split("\n").length;
+  added.set(path, new Set(Array.from({ length: count }, (_, i) => i + 1)));
 }
 for (const [path, lines] of added) if (lines.size === 0) added.delete(path);
 
