@@ -36,6 +36,8 @@ An added filter becomes a chip next to the dropdown. Click the chip to change it
 
 **AI Agent** and **MCP Server** need an **Environment** picked first, and their labels say so until you pick one. Both belong to an environment, so there is no list to choose from before that.
 
+![The Add a filter dropdown, with AI Agent and MCP Server waiting for an Environment](images/audit-log-add-filter.png "The Add a filter dropdown, with AI Agent and MCP Server waiting for an Environment")
+
 ### Sharing a filtered view
 
 The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP, and `?environmentId=<environment ID>&aiAgentId=<AI Agent ID>` opens one AI Agent's trail. **Organization Management**, **AI Governance**, **Audit** opens the **MCP** view. That tab is only there for people who can see both AI Governance and the Audit log.
@@ -49,7 +51,7 @@ A tool call is recorded as an **MCP Tool Called** event in both directions:
 
 One event type covers both, so one filter reads both directions and **Source** separates them.
 
-In the list, the event reads **Executed MCP Tool** followed by the tool's name, then the MCP Server and the AI Agent when the call names them. A call an AI Agent made then says how the run started and how the agent signed in, for example **run from the dashboard as the person who asked**. It ends with **which failed** when the call failed, or **whose result was cut short** when the result was too long to keep. Hover that for the reason. Refused calls show neither.
+In the list, the event reads **Executed MCP Tool** followed by the tool's name, then the MCP Server and the AI Agent when the call names them. Next comes **which failed** when the call failed, or **whose result was cut short** when the result was too long to keep; hover that for the reason, and a refused call shows neither. A call an AI Agent made ends with how the run started and how the agent signed in, so a whole row reads **Executed MCP Tool conn_reset, MCP Server Notion, AI Agent Support Triage, which failed, run from the dashboard through the identity provider**.
 
 ### Calls into an Environment's MCP endpoint
 
@@ -84,6 +86,8 @@ The event is attributed to the AI Agent, not to a person. How the run started an
 **Argument values and results are never recorded for these calls.** Testkube does not know a third-party MCP Server's tools in advance, so there is no list of fields it could keep safely, and anything a server puts in an argument may be a credential or customer data. The argument names say what shape the call had without carrying the payload, and the failure reason is one of a fixed set for the same reason: a tool's own error text can echo its arguments back. An investigation that needs the values goes to your own tracing backend, and only if a trace destination was configured with content included before the call ran.
 
 A tool the AI Agent carries itself, rather than one from an MCP Server, is recorded with no MCP Server. It still shows under the **AI Agent** filter; it is the **MCP Server** filter that does not reach it.
+
+![The Audit log filtered to one AI Agent](images/audit-log-ai-agent.png "The Audit log filtered to one AI Agent")
 
 ### When a chat's trail is incomplete
 
