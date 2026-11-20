@@ -120,6 +120,20 @@ For the current behavior and lifecycle details, see [Concurrency & Queueing](/ar
 - Use `spec.job.activeDeadlineSeconds` for Kubernetes wall-clock enforcement.
 - Keep installation defaults (`SCHEDULER_*`) as environment-wide guardrails.
 
+## Retrying after a timeout
+
+A timeout stops the execution; it does not start it again. To run the whole Workflow again when the execution is stopped for running too long (`execution-timeout`), add `timeout` to the Workflow [`retry`](/articles/test-workflows-rerun#retrying-a-workflow-automatically):
+
+```yaml
+spec:
+  execution:
+    retry:
+      count: 1
+      on: [infrastructure, timeout]
+```
+
+Only do this when the slowness comes from the cluster rather than the test — a test that hangs will time out on every attempt. A step that exceeds its own `timeout` fails the step, and that is never retried at the Workflow level; use the step [`retry`](/articles/test-workflows-best-practices#use-retries-for-flaky-steps) for it.
+
 ## Related documentation
 
 - [Workflow Best Practices](/articles/test-workflows-best-practices)
