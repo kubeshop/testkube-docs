@@ -23,6 +23,7 @@ Setting this up takes two different people, and the split is the point of this p
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Identity admin**              | Registers Testkube at your identity provider, trusts Testkube's Dex as a token issuer, decides how a Testkube subject maps to one of your users, and gives the agent a principal of its own. |
 | **Testkube organization admin** | Enters the relationship under **Organization, AI Governance, Identity provider**, and sets one audience per MCP Server.                                                                      |
+| **Testkube environment admin**  | Optional. Declares a different provider for one Environment, under its **AI Settings, Identity provider**, when that Environment should not exchange at the organization's.                  |
 | **Platform or QA engineer**     | Picks this sign-in on the AI Agent's MCP Server, once the two above are done.                                                                                                                |
 
 ## Which MCP Servers this is for
@@ -125,6 +126,26 @@ In Testkube, the organization admin lists the audience each MCP Server expects, 
 under **Organization, AI Governance, Identity provider**. At the provider, the registered client
 needs permission to request a token for each of those audiences.
 
+## One provider, or one per Environment
+
+The organization declares one provider and every Environment under it exchanges there. For most
+installations that is the whole of it.
+
+An Environment can declare its own instead, and then every AI Agent in it exchanges at that
+provider rather than at the organization's. Nothing else about the exchange changes. This is what
+separate providers for production and development need: one relationship for the whole
+organization would mint both environments' tokens from the same client id and the same secret.
+
+An environment admin declares it under that Environment's **AI Settings, Identity provider**.
+Until one is declared there, the page shows what the Environment inherits, marked **Resolved
+from: The organization**, so which provider answers is visible before anybody changes it.
+Audiences are set per MCP Server and MCP Servers belong to an Environment, so an Environment with
+its own provider lists its own audiences as well.
+
+Removing the Environment's provider puts that Environment back on the organization's. Removing
+the organization's is not the same thing: it turns the sign-in off rather than falling back to
+anything else, and AI Agents then report that no identity provider is set up.
+
 ## Setting it up
 
 1. **At your identity provider**, register a client for Testkube with a client id and secret,
@@ -135,7 +156,9 @@ needs permission to request a token for each of those audiences.
 2. **In Testkube**, open **Organization, AI Governance, Identity provider**, and enter the token
    endpoint, client id and client secret. Add an audience for each MCP Server. Select **Test
    connection**: it asks your provider for a token as Testkube's own account, so a wrong secret
-   or an unreachable endpoint shows up here rather than in somebody's chat.
+   or an unreachable endpoint shows up here rather than in somebody's chat. To give one
+   Environment a provider of its own, do the same under that Environment's **AI Settings,
+   Identity provider**.
 3. **On the AI Agent**, set the MCP Server's **Sign-in** to **Through the identity provider**.
 
 ## When it does not work
@@ -145,7 +168,7 @@ reasons are fixed in different places:
 
 | What the AI Agent reports                     | What it means                                                                                                                                                                                                |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| No identity provider is set up                | Nothing is declared for this organization. An organization admin declares one.                                                                                                                               |
+| No identity provider is set up                | Nothing is declared for this Environment or for its organization. An organization admin declares one, or an environment admin declares one for this Environment.                                             |
 | Your provider refused the sign-in itself      | The relationship is wrong: the client, the secret or the audience. An organization admin or your identity admin checks it.                                                                                   |
 | Your provider would not issue a token for you | Your provider does not recognise this person, or will not give them that audience. This is normal and personal, and it is your directory that decides.                                                       |
 | Your provider could not be reached            | A network or availability problem. Nothing is misconfigured.                                                                                                                                                 |
