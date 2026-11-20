@@ -12,7 +12,7 @@ AI governance gives Organization admins and owners control over how AI is used i
 - **[Token limits and pauses](ai-token-limits).** How many AI tokens a Member, an AI Agent, an Environment or the Organization can use, and stopping AI at any of those levels.
 - **[Token usage](ai-usage#ai-token-usage).** How many AI tokens were used, split by AI Agent, Member, model or Environment.
 - **[AI tracing](ai-tracing).** OpenTelemetry traces of every AI turn, sent to your own observability tool.
-- **[Audit log](audit-logs#ai-and-mcp-events).** Every tool call made through MCP.
+- **[Audit log](audit-logs#ai-and-mcp-events).** Every tool call, both the ones made through MCP and the ones an AI Agent makes to its MCP Servers.
 
 Most of it lives on one page: **Organization Management** → **AI Governance**. Only Organization admins and owners see that page. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
 
@@ -35,13 +35,13 @@ On a self-hosted control plane, AI governance needs PostgreSQL, and the **AI Gov
 
 The page has one tab per area. **Access**, **Models** and **Limits** start from an **Environment** picker or filter, because AI Agents and models belong to an Environment.
 
-| Tab     | What it shows                                                                                                                    | Read more                                                              |
-| ------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                           | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
-| Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here. | [Token limits and pauses](ai-token-limits#review-all-limits)           |
-| Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                    | [Model access](ai-model-access#review-models-across-an-environment)    |
-| Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                | [AI tracing](ai-tracing)                                               |
-| Audit   | Opens the Audit log filtered to the **MCP** source.                                                                              | [Audit log](audit-logs#sharing-a-filtered-view)                        |
+| Tab     | What it shows                                                                                                                       | Read more                                                              |
+| ------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                              | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
+| Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here.    | [Token limits and pauses](ai-token-limits#review-all-limits)           |
+| Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                       | [Model access](ai-model-access#review-models-across-an-environment)    |
+| Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                   | [AI tracing](ai-tracing)                                               |
+| Audit   | Opens the Audit log filtered to the **MCP Tool Called** event type: every tool call, the ones an AI Agent made and the ones served. | [Audit log](audit-logs#ai-and-mcp-events)                              |
 
 ![AI Governance Limits tab](images/ai-governance-limits.png)
 

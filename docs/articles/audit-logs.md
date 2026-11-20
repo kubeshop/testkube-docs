@@ -20,22 +20,42 @@ Here, **Organization Owners** and **Admins** can review detailed records of user
 
 ## Filtering Audit Logs
 
-Events in the Audit Log can be filtered using various parameters to focus on specific actions or time frames:
+The search box above the list finds events by the name or ID of the resource they changed. Everything else is a filter you add from the **Add a filter** dropdown.
 
-- **Search**: Find events by the name or ID of the resource they changed.
-- **Date Range**: Filter by the time period during which the events were recorded.
-- **Event Type**: For example, filter for actions like **Environment Deleted** or **Test Workflow Executed**.
-- **Environment**: Focus on a specific environment within the organization.
-- **Actor**: Filter by the specific user or service that initiated the event.
-- **Source**: Filter by where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent** or **MCP**. A call made with an API token through MCP has the **MCP** source.
+An added filter becomes a chip next to the dropdown. Click the chip to change its value, pick the same value again to clear that one filter, or use **Clear filters** to remove all of them at once.
+
+| Filter          | What it narrows to                                                                                                                                                               |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Date**        | **Today**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **Custom range** to pick a first and last day. A range always covers whole days.                              |
+| **Event type**  | One kind of event, for example **Environment Deleted** or **Test Workflow Executed**.                                                                                            |
+| **Source**      | Where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent**, **MCP**, **A2A** or **AI Agent**. A call made with an API token through MCP has the **MCP** source. |
+| **Environment** | One environment of the organization.                                                                                                                                             |
+| **Actor**       | The user or service that started the event.                                                                                                                                      |
+| **AI Agent**    | Everything one AI Agent did, including every tool it called.                                                                                                                     |
+| **MCP Server**  | Everything that went out to one MCP Server, whichever AI Agent called it.                                                                                                        |
+
+**AI Agent** and **MCP Server** need an **Environment** picked first, and their labels say so until you pick one. Both belong to an environment, so there is no list to choose from before that.
+
+![The Add a filter dropdown, with AI Agent and MCP Server waiting for an Environment](images/audit-log-add-filter.png "The Add a filter dropdown, with AI Agent and MCP Server waiting for an Environment")
 
 ### Sharing a filtered view
 
-The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP. **Organization Management** → **AI Governance** → **Audit** opens that view. That tab is only there for people who can see both AI Governance and the Audit log.
+The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP, and `?environmentId=<environment ID>&aiAgentId=<AI Agent ID>` opens one AI Agent's trail. **Organization Management**, **AI Governance**, **AI Audit Log** opens every tool call, both directions at once, by filtering on the **MCP Tool Called** event type. That item is only there for people who can see both AI Governance and the Audit log.
 
 ## AI and MCP events
 
-Each tool call through an Environment's [MCP endpoint](/articles/mcp-hosted) is recorded as an **MCP Tool Called** event. It records:
+A tool call is recorded as an **MCP Tool Called** event in both directions:
+
+- A call that arrives at an Environment's [MCP endpoint](/articles/mcp-hosted). Its source is **MCP**.
+- A call an AI Agent makes outward, to one of its [MCP Servers](/articles/mcp-servers-for-ai-agents) or to a tool it carries itself. Its source is **AI Agent**.
+
+One event type covers both, so one filter reads both directions and **Source** separates them.
+
+In the list, the event reads **Executed MCP Tool** followed by the tool's name, then the MCP Server and the AI Agent when the call names them. Next comes **which failed** when the call failed, or **whose result was cut short** when the result was too long to keep; hover that for the reason, and a refused call shows neither. A call an AI Agent made ends with how the run started and how the agent signed in, so a whole row reads **Executed MCP Tool conn_reset, MCP Server Notion, AI Agent Support Triage, which failed, run from the dashboard through the identity provider**.
+
+### Calls into an Environment's MCP endpoint
+
+Each one records:
 
 - The tool that was called, who called it, and the Environment.
 - Whether the call succeeded, failed, or was refused before it ran (for example over a limit), and the reason, cut to 500 characters.
@@ -45,11 +65,33 @@ Each tool call through an Environment's [MCP endpoint](/articles/mcp-hosted) is 
 
 Workflow YAML, run configuration, tags, filters and log searches can hold secrets, so they're never recorded.
 
-In the list, the event reads **Executed MCP Tool** followed by the tool's name, and ends with **which failed** when the call failed. Hover it for the reason. Refused calls don't show **which failed**.
-
-Every event recorded while serving a tool call has the **MCP** source, including the actions the tool takes. A workflow run started through MCP is recorded as **Test Workflow Executed** with the **MCP** source, next to its **MCP Tool Called** event.
+Every event recorded while serving one of these calls has the **MCP** source, including the actions the tool takes. A workflow run started through MCP is recorded as **Test Workflow Executed** with the **MCP** source, next to its **MCP Tool Called** event.
 
 ![Audit log filtered to the MCP source](images/audit-log-mcp.png "Audit log filtered to the MCP source")
+
+### Calls an AI Agent makes
+
+These are recorded as part of [MCP Servers for AI Agents](/articles/mcp-servers-for-ai-agents). An installation with that feature turned off records only the calls that arrive at its own MCP endpoint. Each one records:
+
+- The tool, the MCP Server it went out to, and the AI Agent that called it.
+- Whether the call completed, failed, or came back cut short, and a reason from a fixed set of categories.
+- How long it took and when it started, as the AI Agent measured them.
+- How the run started: from the dashboard, through the API, from a trigger, from a Git integration, through the MCP endpoint, or from another agent.
+- How the AI Agent signed in to the server: with no sign-in, with the agent's own key, as the person who asked, or through the identity provider.
+- The chat the call belongs to, and an identifier for the call itself.
+- The names of the call's arguments, never their values.
+
+The event is attributed to the AI Agent, not to a person. How the run started and which identity the AI Agent presented are recorded next to it, and both show in the row, so an unattended run on the agent's own key reads differently from a chat where the agent acted as the person asking.
+
+**Argument values and results are never recorded for these calls.** Testkube does not know a third-party MCP Server's tools in advance, so there is no list of fields it could keep safely, and anything a server puts in an argument may be a credential or customer data. The argument names say what shape the call had without carrying the payload, and the failure reason is one of a fixed set for the same reason: a tool's own error text can echo its arguments back. An investigation that needs the values goes to your own tracing backend, and only if a trace destination was configured with content included before the call ran.
+
+A tool the AI Agent carries itself, rather than one from an MCP Server, is recorded with no MCP Server. It still shows under the **AI Agent** filter; it is the **MCP Server** filter that does not reach it.
+
+![The Audit log filtered to one AI Agent](images/audit-log-ai-agent.png "The Audit log filtered to one AI Agent")
+
+### When a chat's trail is incomplete
+
+Recording an AI Agent's tool call is best effort. The call has already run by the time its record is written, and a write that fails never fails the call. A chat that lost a record is marked as incomplete, and that mark travels with the chat wherever it is read, so a chat without it lost nothing that Testkube knows of. What is missing from an incomplete trail is the record of one or more tool calls, never a call that did not happen.
 
 ## Exporting Audit Logs
 
