@@ -52,6 +52,28 @@ Server's own audience, so one server's token is not accepted by another.
 PingFederate does all three. [Its recipe](./ai-identity-provider-pingfederate.mdx) is the worked
 example, and the shape it follows is a fair guide to what any provider will ask for.
 
+### Providers we have looked at
+
+Checked in November 2026, against the three points above. The last column is the part that
+matters: a product's own documentation is a weaker answer than a run, and both go stale when the
+vendor ships something, so take an untested row as a place to start rather than as an answer.
+
+| Provider                                       | What we found                                                                                                                       | How we know                        |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| **PingFederate**                               | Yes, all three. Mapping is configured once rather than per person.                                                                  | Run end to end, on 13.1.4.1        |
+| **Keycloak**                                   | Only on its legacy preview path, and it needs a stored account link per person.                                                     | Read its documentation             |
+| **Microsoft Entra ID**                         | No. No token exchange grant for an external issuer.                                                                                 | Read its documentation             |
+| **Okta**                                       | No, for the same reason.                                                                                                            | Read its documentation             |
+| **OpenShift built-in OAuth**                   | No.                                                                                                                                 | Read its documentation             |
+| **Google Workspace**                           | Federates into Google Cloud only, not into your own services.                                                                       | Read its documentation             |
+| **Auth0**                                      | Yes, through Custom Token Exchange, on the paid tiers. An Action you write picks the user, so it is custom code rather than a rule. | Read its documentation, not tested |
+| **PingOne**                                    | Probably, it documents token exchange with external trusted issuers.                                                                | Not tested, not confirmed          |
+| **PingAM and PingOne Advanced Identity Cloud** | Probably, it documents RFC 8693 and a trusted JWT issuer entity.                                                                    | Not tested, not confirmed          |
+| **WSO2 Identity Server and Asgardeo**          | Probably, it documents exchanging a federated token.                                                                                | Not tested, not confirmed          |
+| **Curity**                                     | Only with a custom plugin, and the vendor's example is labelled a demo.                                                             | Read its documentation, not tested |
+
+A provider that is not here is not a no. Put the three points above to it.
+
 ## The trust direction that is easy to confuse
 
 Your installation may already use your identity provider for signing in to Testkube. That is the
@@ -177,6 +199,13 @@ configured for a JWT, and the person is matched on the wrong claim or not at all
 works this way, and its recipe maps the `email` claim under
 `urn:ietf:params:oauth:token-type:jwt`, so enter that value for it.
 :::
+
+## Recipes
+
+A recipe is one provider configured end to end, with its own objects named as that provider names
+them. There is one today, [PingFederate](./ai-identity-provider-pingfederate.mdx), and it is the
+best thing to read even for another provider: the five headings it is built on are the five
+decisions any provider makes you take.
 
 ## When it does not work
 
