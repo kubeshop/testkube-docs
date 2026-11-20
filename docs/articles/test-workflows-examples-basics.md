@@ -275,6 +275,8 @@ As an example, **`condition: always`** will cause the step to always be executed
 
 It’s possible to automatically retry the step on a failure (or any other condition).
 
+A step retry runs inside the same pod. To run the **whole Workflow** again when the cluster stops it — a node shutting down, the pod evicted or preempted — use the Workflow-level `retry` on `spec.execution` instead; see [Retrying a Workflow Automatically](/articles/test-workflows-rerun#retrying-a-workflow-automatically).
+
 ![Step Orchestration](../img/step-orchestration.png)
 
 ### Step Timeout
