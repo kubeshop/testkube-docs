@@ -5,10 +5,22 @@ metadata:
   name: ragas-getting-started
   namespace: testkube
   labels:
+    docs: example
     type: ai
 spec:
+  config:
+    model:
+      type: string
+      default: gpt-4o-mini
   content:
     files:
+      - path: /data/requirements.txt
+        content: |
+          ragas>=0.2,<0.3
+          langchain-openai>=0.2,<0.3
+          langchain<0.4
+          langchain-community<0.4
+          langchain-core<0.4
       - path: /data/ragas_eval.py
         content: |
           import os
@@ -18,7 +30,7 @@ spec:
           from ragas.embeddings import LangchainEmbeddingsWrapper
           from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
-          llm = LangchainLLMWrapper(ChatOpenAI(model="gpt-4o-mini", temperature=0))
+          llm = LangchainLLMWrapper(ChatOpenAI(model=os.environ["JUDGE_MODEL"], temperature=0))
           emb = LangchainEmbeddingsWrapper(OpenAIEmbeddings(model="text-embedding-3-small"))
 
           samples = [
@@ -54,8 +66,12 @@ spec:
     env:
       - name: HOME
         value: /data
+      - name: PIP_CACHE_DIR
+        value: /root/.cache/pip
       - name: RAGAS_DO_NOT_TRACK
         value: "true"
+      - name: JUDGE_MODEL
+        value: "{{config.model}}"
       - name: OPENAI_API_KEY
         value: '{{credential("OPENAI_API_KEY")}}'
     resources:
@@ -64,13 +80,25 @@ spec:
         memory: 2Gi
   steps:
     - name: Install and run Ragas
+      cache:
+        key: 'pip-{{ hash_files("requirements.txt") }}'
+        restoreKeys:
+          - "pip-"
+        paths:
+          - /root/.cache/pip
       shell: |
         set -e
-        pip install --no-cache-dir "ragas>=0.2,<0.3" "langchain-openai>=0.2,<0.3" "langchain<0.4" "langchain-community<0.4" "langchain-core<0.4"
+        pip install -r requirements.txt
         python ragas_eval.py
+    - name: Export metrics
+      condition: always
+      container:
+        image: docker.io/kubeshop/testkube-ai-metrics-parser:latest
+      shell: testkube-ai-metrics-parser ragas -i results/ragas_results.json -o results/metrics.lp --tag model={{config.model}} --stdout
     - name: Save results
       condition: always
       artifacts:
         paths:
           - results/*.json
+          - results/*.lp
 ```

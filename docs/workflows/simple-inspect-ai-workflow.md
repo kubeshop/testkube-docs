@@ -5,10 +5,22 @@ metadata:
   name: inspect-ai-getting-started
   namespace: testkube
   labels:
+    docs: example
     type: ai
 spec:
+  config:
+    model:
+      type: string
+      default: gpt-5.4-mini
+    minAccuracy:
+      type: string
+      default: "0.5"
   content:
     files:
+      - path: /data/requirements.txt
+        content: |
+          inspect-ai
+          openai
       - path: /data/task.py
         content: |
           from inspect_ai import Task, task
@@ -29,9 +41,9 @@ spec:
               )
       - path: /data/gate.py
         content: |
-          import glob, json, sys
+          import glob, json, os, sys
 
-          THRESHOLD = 0.5   # fail the workflow below this accuracy
+          THRESHOLD = float(os.environ["MIN_ACCURACY"])
 
           files = sorted(glob.glob("logs/*.json"))
           if not files:
@@ -63,6 +75,10 @@ spec:
     env:
       - name: HOME
         value: /data
+      - name: PIP_CACHE_DIR
+        value: /root/.cache/pip
+      - name: MIN_ACCURACY
+        value: "{{config.minAccuracy}}"
       - name: OPENAI_API_KEY
         value: '{{credential("OPENAI_API_KEY")}}'
     resources:
@@ -70,15 +86,27 @@ spec:
         cpu: 500m
         memory: 1Gi
   steps:
-    - name: Install, eval and gate
+    - name: Run evaluation and quality gate
+      cache:
+        key: 'pip-{{ hash_files("requirements.txt") }}'
+        restoreKeys:
+          - "pip-"
+        paths:
+          - /root/.cache/pip
       shell: |
         set -e
-        pip install --no-cache-dir inspect-ai openai
-        inspect eval task.py --model openai/gpt-5.4-mini --log-dir ./logs --log-format json
+        pip install -r requirements.txt
+        inspect eval task.py --model openai/{{config.model}} --log-dir ./logs --log-format json
         python gate.py
-    - name: Save logs
+    - name: Export metrics
+      condition: always
+      container:
+        image: docker.io/kubeshop/testkube-ai-metrics-parser:latest
+      shell: testkube-ai-metrics-parser inspect-ai -i 'logs/*.json' -o metrics/eval.lp --tag model={{config.model}} --stdout
+    - name: Save logs and metrics
       condition: always
       artifacts:
         paths:
           - logs/*.json
+          - metrics/*.lp
 ```

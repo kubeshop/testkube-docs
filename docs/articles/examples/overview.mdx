@@ -1,5 +1,5 @@
 ---
-description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, and infrastructure testing.
+description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, AI, and infrastructure testing.
 ---
 
 # Testkube Examples and Guides
@@ -79,13 +79,18 @@ Frameworks for unit tests, integration tests, and BDD:
 
 ## AI Testing
 
-Tools for evaluating LLMs, prompts, and RAG pipelines:
+Tools for evaluating LLMs, prompts, and RAG pipelines. Each example exports its scores with the
+[`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser), so they show up as
+[custom metrics in Insights](/articles/custom-metrics-in-insights) that you can chart across executions.
+These examples are about testing your own AI applications and models; to use AI to create and analyze tests in
+Testkube, see [Testkube AI](/articles/testkube-ai-overview).
 
-- [Promptfoo](promptfoo-basic) - Shows how to run a Promptfoo evaluation and collect its JSON/HTML reports.
-- [DeepEval](deepeval-basic) - Shows how to run a DeepEval test suite against multiple models in parallel with JUnit reporting.
+- [Promptfoo](promptfoo-basic) - Shows how to run a Promptfoo evaluation and collect its JSON and HTML reports.
+- [DeepEval](deepeval-basic) - Shows how to run a DeepEval test suite against several models in parallel and compare their scores.
 - [Inspect AI](inspect-ai-basic) - Shows how to run an Inspect AI evaluation with an accuracy quality gate.
 - [Ragas](ragas-basic) - Shows how to evaluate a RAG pipeline with faithfulness and relevancy metrics.
-- [LM Evaluation Harness](lm-eval-basic) - Shows how to run an academic benchmark (gsm8k) against an OpenAI model.
+- [LM Evaluation Harness](lm-eval-basic) - Shows how to run an academic benchmark (`gsm8k`) against an OpenAI model.
+- [TestContainers with Ollama](test-containers-basic) - Shows how to test a local model served by Ollama, using TestContainers.
 
 ## Infrastructure Testing
 
