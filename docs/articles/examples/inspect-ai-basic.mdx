@@ -1,0 +1,39 @@
+---
+description: Example Test Workflow that runs an inline Inspect AI evaluation against a configurable OpenAI model, fails below an accuracy threshold and exports the scores as custom metrics in Insights.
+---
+
+import SimpleInspectAi from "../../workflows/simple-inspect-ai-workflow.md";
+
+# Basic Inspect AI Example
+
+[Inspect AI](https://inspect.aisi.org.uk/) is an open source framework from the UK AI Security Institute for
+evaluating large language models. The Workflow below defines a small inline evaluation task, runs it against
+an OpenAI model, applies a quality gate that fails the Workflow if accuracy drops below a threshold, and exports
+the scores as metrics.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.config` property defines two [configuration parameters](/articles/test-workflows-examples-configuration):
+  `model`, the OpenAI model to evaluate, and `minAccuracy`, the accuracy below which the quality gate fails. Override
+  them when you run the Workflow to evaluate another model or tighten the gate.
+- The `spec.content.files` property defines three inline files:
+  - `requirements.txt` - the Python packages the evaluation needs.
+  - `task.py` - an Inspect AI task with three samples that are scored with the `includes()` scorer.
+  - `gate.py` - a quality gate script that reads the Inspect log and fails the run if accuracy is below `minAccuracy`.
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself.
+- The **Run evaluation and quality gate** step installs Inspect AI, runs the evaluation, and applies the quality gate -
+  turning a model evaluation into a pass/fail test result. Its `cache` block keeps the pip download cache between
+  executions, so later runs install the packages from the cache instead of downloading them again; see [Dependency Caching](/articles/test-workflows-dependency-cache).
+- The **Export metrics** step runs the [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser)
+  image, which converts the Inspect log into an `eval.lp` file with the score of each scorer metric, tagged with the model.
+- The **Save logs and metrics** step uploads the Inspect JSON logs and the metrics file as artifacts; the `always`
+  condition makes sure they are uploaded even if the evaluation or quality gate fails.
+
+<SimpleInspectAi />
+
+After execution, the evaluation output and quality-gate result are shown in the Log Output tab, and the
+Inspect JSON logs are available under the Artifacts tab of the execution. Testkube ingests the `eval.lp` file as
+[custom metrics](/articles/custom-metrics-in-insights) under the `inspect_eval` measurement, so you can follow the
+accuracy of each model across executions in Insights.
