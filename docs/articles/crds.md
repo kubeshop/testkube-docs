@@ -19,6 +19,13 @@ The following Resource Group/Versions are available (click for documentation)
 - [tests.testkube.io/v1](crds/tests.testkube.io-v1.mdx)
 - [executor.testkube.io/v1](crds/executor.testkube.io-v1.mdx)
 
+The Control Plane resources a runner with the GitOps capability can sync have groups of their own (see
+[Syncing Control Plane Resources](/articles/gitops-overview#syncing-control-plane-resources)):
+
+- `insights.testkube.io/v1alpha1` - `Board`
+- `ai.testkube.io/v1alpha1` - `MCPServer`, `LLMProvider` and `AIAgent`
+- `testbundles.testkube.io/v1alpha1` - `TestBundle`
+
 The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 
 ## Checking installed CRDs

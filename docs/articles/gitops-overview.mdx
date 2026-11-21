@@ -1,5 +1,5 @@
 ---
-description: How Testkube fits GitOps, covering the Runner GitOps capability that syncs CRDs to the Control Plane, resource ownership, pausing sync, Kubernetes Event Triggers and ArgoCD or Flux practices.
+description: How Testkube fits GitOps, covering the Runner GitOps capability that syncs CRDs to the Control Plane (including Boards, AI resources and Test Bundles), resource ownership, pausing sync, Kubernetes Event Triggers and ArgoCD or Flux practices.
 ---
 
 # GitOps with Testkube
@@ -100,7 +100,7 @@ syncs from other runners with the GitOps capability are rejected until you trans
 Enable it under **Organization Management → Product Features → GitOps Resource Ownership**. The feature is off by default.
 
 Ownership applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates, TestTriggers,
-WorkflowTriggers, Webhooks, and Webhook Templates.
+WorkflowTriggers, Webhooks, and Webhook Templates, and the [Control Plane resources](#syncing-control-plane-resources) when the runner syncs them.
 
 #### Transferring Ownership
 
@@ -117,6 +117,9 @@ metadata:
 ```
 
 The Runner ID is shown in the Runners list under Environment Settings.
+
+For the [Control Plane resources](#syncing-control-plane-resources), what ownership locks and how to move a resource to another
+runner step by step are described in [GitOps Ownership](/articles/control-plane-resources#gitops-ownership).
 
 ### Deleting Resources
 
@@ -148,7 +151,9 @@ When the value is set to `"true"`, Control Plane sync for that resource is skipp
 - Delete sync requests are accepted but ignored.
 
 This applies to all resource types synced by the runner with the GitOps capability: TestWorkflows, TestWorkflow Templates,
-TestTriggers, Webhooks, and Webhook Templates.
+TestTriggers, Webhooks, and Webhook Templates. For the [Control Plane resources](#syncing-control-plane-resources) it works only on
+the custom resource, not on the resource in the Control Plane; see
+[GitOps Sync](/articles/control-plane-resources#gitops-sync) in Control Plane Resources as Code.
 
 #### Where to Place the Annotation
 
@@ -172,6 +177,74 @@ To re-enable sync, remove the annotation (or set it to `"false"`) and then apply
 resource state again from Git. If the annotation was set on the Control Plane resource, you also
 need to remove or update it there (via the Dashboard or API) before syncs will be applied again.
 
+### Syncing Control Plane Resources
+
+A runner with the GitOps capability can also sync the resources that live only in the Control Plane, so they can be managed in Git
+next to your Test Workflows:
+
+| Kind          | API version                        | Control Plane resource                                          |
+| ------------- | ---------------------------------- | --------------------------------------------------------------- |
+| `Board`       | `insights.testkube.io/v1alpha1`    | [Insights Board](/articles/test-insights)                       |
+| `MCPServer`   | `ai.testkube.io/v1alpha1`          | [MCP server for AI Agents](/articles/mcp-servers-for-ai-agents) |
+| `LLMProvider` | `ai.testkube.io/v1alpha1`          | [LLM provider](/articles/ai-configuration)                      |
+| `AIAgent`     | `ai.testkube.io/v1alpha1`          | [AI Agent](/articles/ai-agents)                                 |
+| `TestBundle`  | `testbundles.testkube.io/v1alpha1` | [Test Bundle](/articles/ai-test-creation-test-bundles)          |
+
+This sync is off by default. Turn it on with the Helm value shown in
+[Enable a Runner with the GitOps capability via Helm](#enable-gitops-agent-via-helm). It grants the runner read access to
+these custom resources, whose CRDs the Testkube charts install.
+
+```yaml
+apiVersion: insights.testkube.io/v1alpha1
+kind: Board
+metadata:
+  name: checkout-team
+spec:
+  displayName: Checkout team
+  layout:
+    rows:
+      - cells: [pass-rate]
+  reports:
+    - id: pass-rate
+      kind: pass-fail
+      name: Pass rate
+      params:
+        duration: week
+```
+
+The `testkube get <kind> <name> -o yaml` command exports a resource you built in the Dashboard in this form, so you can commit it to Git.
+The manifests, the CLI and REST API that apply them without a runner, and GitOps ownership of these resources are described in
+[Control Plane Resources as Code](/articles/control-plane-resources).
+
+These resources follow the rules above, with these differences:
+
+- **Your Control Plane must support them.** A kind the Control Plane does not support is not synced, and the runner keeps syncing
+  everything else. A kind whose CRD is not installed, or that the runner may not read, is skipped with a warning in the runner's log.
+- **They are read-only while a runner owns them.** With [GitOps Resource Ownership](#gitops-resource-ownership) enabled, a resource a
+  runner owns can't be changed in the Dashboard, through the MCP tools or with `testkube apply`. For an AI Agent this includes its
+  roles, resource groups and Skills, and for a Test Bundle its Attached Context, Skills and AI Agents. Change it in Git instead.
+- **Boards are shared across the Organization.** Unlike the other kinds, which belong to the Environment the runner is connected to,
+  a Board belongs to the Organization, and its `metadata.name` is the Board's slug, not its display name (`spec.displayName`).
+  Runners connected to different Environments of one Organization therefore sync to the same Board when their custom resources
+  have the same name, and overwrite each other unless [GitOps Resource Ownership](#gitops-resource-ownership) is enabled. Give
+  each Board a name that is unique across the Organization.
+- **Existing resources are taken over.** A custom resource syncs to the Control Plane resource of the same kind and name, even one
+  made in the Dashboard, with the CLI or through the REST API. The sync replaces it with the manifest, and with
+  [GitOps Resource Ownership](#gitops-resource-ownership) enabled the runner owns it from then on, see
+  [Syncing Resources Created Outside Git](/articles/control-plane-resources#syncing-resources-created-outside-git).
+- **Private resources are never synced over.** A synced Board is always shared, and a synced AI Agent is never private. A synced
+  AI Agent can still be open only to some roles or Resource Groups (`spec.access.roles` and `spec.access.resourceGroups`), which
+  the runner syncs from Git like the rest of it, see [AI Agent access](/articles/ai-agent-access). A runner refuses to sync over a
+  user's private Board or AI Agent of the same name: rename one of them, or ask its creator to make it no longer private.
+- **References are resolved in order.** MCP servers sync before the AI Agents that use them, and AI Agents before the Test Bundles
+  that name them. A resource that names one the Control Plane does not have yet is retried until it arrives.
+- **Only what the runner synced is deleted.** Deleting the custom resource deletes the Control Plane resource only if a runner owns
+  it or synced it last. One that no runner owns and that was changed in the Dashboard since is left as it is.
+
+:::warning
+Deleting a `TestBundle` custom resource deletes the Test Bundle as the Dashboard does: its chats end, together with their sandbox.
+:::
+
 ### Enable a Runner with the GitOps capability via Helm {#enable-gitops-agent-via-helm}
 
 Enable Kubernetes-to-Control-Plane sync in your runner Helm values.
@@ -190,6 +263,29 @@ For self-registering runners (`testkube-runner` chart):
 ```yaml
 gitops:
   enabled: true
+```
+
+To also sync the [Control Plane resources](#syncing-control-plane-resources) (Boards, MCP servers, LLM providers, AI Agents
+and Test Bundles), add the value below. It is off by default. Turning it on doesn't change how the runner syncs its other resources,
+and needs no Secret.
+
+For the full `testkube` chart:
+
+```yaml
+testkube-api:
+  next:
+    gitops:
+      syncKubernetesToCloud: true
+      syncControlPlaneResources: true
+```
+
+For the `testkube-runner` chart:
+
+```yaml
+gitops:
+  enabled: true
+  controlPlaneResources:
+    enabled: true
 ```
 
 ## Triggering Testkube Workflows in GitOps
