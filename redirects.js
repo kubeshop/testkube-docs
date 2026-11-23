@@ -702,6 +702,10 @@ const redirects = [
     from: "/articles/filtering-test-workflow-executions-using-tags",
     to: "/articles/execution-tags",
   },
+  {
+    from: "/articles/trial-limitations",
+    to: "/articles/trial-limits",
+  },
 ];
 
 module.exports = redirects;
