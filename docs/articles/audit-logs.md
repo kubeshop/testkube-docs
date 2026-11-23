@@ -5,7 +5,7 @@ description: View, filter and export the Organization Audit Log, see how AI and 
 # Testkube Audit Logs
 
 **Testkube** records significant events in its internal **Audit Log**,
-providing **Organization Owners** and **Admins** with valuable insights into
+providing **Organization Owners**, **Admins** and **Billers** with valuable insights into
 how **Organization Members** are using the platform.
 
 These logs can help monitor usage patterns, identify security risks, and ensure compliance with internal policies.
@@ -14,7 +14,7 @@ These logs can help monitor usage patterns, identify security risks, and ensure 
 
 **Audit Logs** can be accessed via the **Audit log** menu item under the **Organization Management** page.
 
-Here, **Organization Owners** and **Admins** can review detailed records of user actions.
+Here, **Organization Owners**, **Admins** and **Billers** can review detailed records of user actions. No other Organization role can read or export the Audit Log, whatever its Environment roles.
 
 ![Audit log](../img/audit-log.png "Audit log")
 
@@ -91,7 +91,7 @@ A tool the AI Agent carries itself, rather than one from an MCP Server, is recor
 
 ### When a chat's trail is incomplete
 
-Recording an AI Agent's tool call is best effort. The call has already run by the time its record is written, and a write that fails never fails the call. A chat that lost a record is marked as incomplete, and that mark travels with the chat wherever it is read, so a chat without it lost nothing that Testkube knows of. What is missing from an incomplete trail is the record of one or more tool calls, never a call that did not happen.
+Recording an AI Agent's tool call is best effort. The call has already run by the time its record is written, and a write that fails never fails the call. A chat that lost a record is marked as incomplete, on the `auditTrailIncomplete` field of the chat in the API, so a chat without the mark lost nothing that Testkube knows of. The dashboard does not show the mark, so read it from the API when completeness is the question. What is missing from an incomplete trail is the record of one or more tool calls, never a call that did not happen.
 
 ## Exporting Audit Logs
 
@@ -106,7 +106,10 @@ This makes it easy to integrate the audit log events with other reporting or ana
 
 ## Retention Period
 
-By default, audit log events are retained for **180 days**. After this period, the logs are automatically cleaned up to optimize storage.
+By default, audit log events are retained for **30 days**. After this period, the logs are automatically
+cleaned up to optimize storage. On Testkube On-Prem the Helm chart always sets the period from
+`audit.cleanup.retentionPeriod`, so that value decides it, and the control plane's own 180-day default
+never takes effect. Change it in the configuration below.
 
 ## Console Logging
 
