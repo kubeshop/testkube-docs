@@ -1,0 +1,76 @@
+---
+description: Example Test Workflow that runs Harbor agent evaluation tasks against a configurable agent and model in a Docker daemon inside the Workflow pod, fails below a mean reward threshold and exports the results as custom metrics in Insights.
+---
+
+import SimpleHarbor from "../../workflows/simple-harbor-workflow.md";
+
+# Basic Harbor Example
+
+[Harbor](https://github.com/harbor-framework/harbor) is an open source framework, from the creators of Terminal-Bench,
+for evaluating AI agents and models. Each Harbor task gives an agent an instruction, lets it work in a sandbox container,
+and then runs a test script that scores the result with a reward. The Workflow below defines two small inline tasks,
+runs an agent on them with an OpenAI model, applies a quality gate that fails the Workflow if the mean reward drops
+below a threshold, and exports the results as metrics.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.config` property defines three [configuration parameters](/articles/test-workflows-examples-configuration):
+  `agent`, the Harbor agent to evaluate, `model`, the model the agent uses, and `minReward`, the mean reward below which
+  the quality gate fails. Override them when you run the Workflow to evaluate another agent or model.
+- The `spec.content.files` property defines two Harbor tasks, `hello-world` and `count-errors`, in a `tasks` folder.
+  Each task has the files Harbor expects:
+  - `task.toml` - the name, timeouts and resources of the task.
+  - `instruction.md` - the instruction the agent receives.
+  - `environment/Dockerfile` - the image of the sandbox the agent works in.
+  - `solution/solve.sh` - a reference solution, which Harbor's `oracle` agent runs instead of a model.
+  - `tests/test.sh` - the verifier, which checks the agent's work and writes a reward of `1` or `0` to `/logs/verifier/reward.txt`.
+- The `spec.container` property defines the working directory, image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself. The container runs the `docker:dind` image in
+  `privileged` mode, because Harbor builds and starts a sandbox container for each task; see
+  [Running the Docker daemon](#running-the-docker-daemon) below.
+- The **Run tasks and quality gate** step starts the Docker daemon, installs Harbor with `uv`, runs every task in the
+  `tasks` folder with `harbor run`, and applies the quality gate. Harbor exits with code `0` when an agent fails a task,
+  so the gate is what turns an evaluation into a pass/fail test result: it reads the `result.json` summary of the job
+  and fails the step if a trial ended with an error or the mean reward is below `minReward`.
+- The **Export metrics** step runs the [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser)
+  image, which converts the `result.json` files of the trials into a `harbor.lp` file with the mean reward, the pass
+  rate, the number of trials and errors, the token usage, the cost and the duration of the job, tagged with the agent,
+  model and dataset. The `always` condition makes sure the metrics are exported even if the quality gate fails.
+- The **Save results and metrics** step uploads the Harbor job folder and the metrics file as artifacts; the `always`
+  condition makes sure they are uploaded even if the quality gate fails.
+
+<SimpleHarbor />
+
+After execution, the Harbor results table and the quality-gate result are shown in the Log Output tab. The job folder
+under the Artifacts tab of the execution has the `result.json` summary of the job and, for each trial, its own
+`result.json`, the agent's trajectory and the output of the verifier. Testkube ingests the `harbor.lp` file as
+[custom metrics](/articles/custom-metrics-in-insights) under the `harbor_eval` measurement, so you can follow the
+mean reward, pass rate, token usage and cost of each agent and model across executions in Insights; see
+[AI Testing Metrics](ai-metrics) for the full list of fields and how to chart them.
+
+## Running the Docker daemon
+
+Harbor's default `docker` environment starts the sandbox of each task with Docker Compose and mounts folders of the job
+directory into it, to collect the agent's logs and the reward the verifier writes. The Docker daemon therefore has to
+see the same files as Harbor, which is why this Workflow starts the daemon in the same container as Harbor and does not
+use a separate Docker-in-Docker [service](/articles/test-workflows-services), as the
+[TestContainers example](test-containers-basic) does.
+
+:::warning
+The Workflow container runs in `privileged` mode, which your cluster's Pod Security Standards or admission policies have
+to allow in the namespace where the Workflow runs. If they do not, use one of Harbor's remote environments, such as
+`daytona` or `modal`, with the `--env` argument of `harbor run`; the Workflow then needs neither the `docker:dind` image
+nor `privileged` mode, only the credentials of that provider.
+:::
+
+## Evaluating other agents, models and tasks
+
+- Set `agent` to another of Harbor's agents, such as `claude-code` or `codex`, and add the API key that agent needs to
+  `spec.container.env`, for example `ANTHROPIC_API_KEY`. The `oracle` agent runs the reference solution of each task and
+  needs no API key, which makes it a quick way to check that your tasks and their verifiers work.
+- Set `model` to any model the agent supports, in the `provider/model` form Harbor uses.
+- To run your own tasks, replace `spec.content.files` with a `spec.content.git` property that points at the repository
+  with your tasks, and pass the path of the tasks folder to `harbor run -p`. To run a benchmark from the Harbor registry,
+  use `harbor run -d` with the name of the dataset, such as `terminal-bench@2.0`, and raise the resource requests and
+  the `minReward` threshold to match.

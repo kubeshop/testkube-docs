@@ -1380,6 +1380,11 @@ const sidebars = {
               label: "LM Evaluation Harness",
               id: "articles/examples/lm-eval-basic",
             },
+            {
+              type: "doc",
+              label: "Harbor",
+              id: "articles/examples/harbor-basic",
+            },
           ],
         },
         {
