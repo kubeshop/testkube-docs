@@ -65,8 +65,8 @@ This behavior can lead to privilege escalation in programs using the idna packag
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.858%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.827%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -82,8 +82,8 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.651%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -99,8 +99,8 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.716%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.835%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -135,8 +135,8 @@ Parsing a multipart form can bypass memory limits and read an arbitrarily long l
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.528%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.616%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -154,8 +154,8 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.847%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.817%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -188,8 +188,8 @@ When parsing a Range header containing a large number of small ranges, FileServe
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.542%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.523%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -205,8 +205,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.866%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.851%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -324,8 +324,8 @@ Enforce a recursion limit in Unmarshal to prevent stack exhaustion when parsing 
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.396%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.501%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -398,8 +398,8 @@ Previously, pathological inputs could close an unescaped '/' early, allowing for
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -508,7 +508,7 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -559,8 +559,8 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.602%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.633%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -593,8 +593,8 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.916%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>61st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.935%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -610,8 +610,8 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.8-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.8-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.622%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.611%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -678,8 +678,8 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -695,7 +695,7 @@ FROM alpine:3.24.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 

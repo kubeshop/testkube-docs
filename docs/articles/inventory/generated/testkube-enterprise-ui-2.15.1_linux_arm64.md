@@ -21,8 +21,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.512%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>17.103%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -38,8 +38,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>6.086%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>94th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>17.525%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -55,8 +55,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>6.033%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>94th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>29.863%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>98th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -72,8 +72,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.663%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>77th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>16.404%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -89,8 +89,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.503%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>75th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>13.860%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -106,8 +106,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.940%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>3.788%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>90th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -123,8 +123,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.450%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>1.380%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>73rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -140,8 +140,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.361%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.647%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -157,8 +157,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.30.7-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.30.7-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.193%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>9th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.333%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -179,7 +179,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -230,8 +230,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -247,7 +247,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -269,7 +269,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -320,8 +320,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -337,8 +337,30 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>sqlite-libs</strong> <code>3.53.4-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/sqlite-libs@3.53.4-r0?arch=aarch64&distro=alpine-3.24.4&upstream=sqlite</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-119586?s=alpine&n=sqlite&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D3.53.4-r0"><img alt="high : CVE--2026--119586" src="https://img.shields.io/badge/CVE--2026--119586-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;=3.53.4-r0</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>1.545%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -383,28 +405,6 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>sqlite-libs</strong> <code>3.53.4-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/sqlite-libs@3.53.4-r0?arch=aarch64&distro=alpine-3.24.4&upstream=sqlite</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-119586?s=alpine&n=sqlite&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C%3D3.53.4-r0"><img alt="high : CVE--2026--119586" src="https://img.shields.io/badge/CVE--2026--119586-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;=3.53.4-r0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>1.545%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>76th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

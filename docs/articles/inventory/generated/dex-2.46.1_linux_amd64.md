@@ -43,7 +43,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -94,8 +94,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -111,7 +111,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -133,7 +133,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -184,8 +184,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -201,7 +201,7 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -225,8 +225,8 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>4.1.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.489%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -319,8 +319,8 @@ Reported by Yuval Saggie and Mor Weinberger (powered by Echo Frontier)
 <tr><td>Fixed version</td><td><code>4.1.5</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.342%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -354,8 +354,8 @@ Thanks to Dohyun Kim (@<!-- -->azza999), Joshua Rogers of AISLE Research, and Su
 <tr><td>Fixed version</td><td><code>4.1.5</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.318%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>25th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -396,8 +396,8 @@ Thanks to Joshua Rogers of AISLE Research for reporting this problem.
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.409%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.481%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -415,8 +415,8 @@ Accumulate coalesced text in per-node byte slices during parsing and materialize
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.322%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -463,8 +463,8 @@ Continue walking the full ancestor chain and verify that every transition from a
 <tr><td>Fixed version</td><td><code>4.1.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.489%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -613,18 +613,18 @@ A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK f
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/trace</strong> <code>1.45.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.45.0</code> (golang)</summary>
 
-<small><code>pkg:golang/go.opentelemetry.io/otel/trace@1.45.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=trace&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.35.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
+<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.45.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.33.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.35.0<br/><1.47.0</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.33.0<br/><1.47.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.536%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -960,18 +960,18 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.45.0</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/trace</strong> <code>1.45.0</code> (golang)</summary>
 
-<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.45.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.33.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
+<small><code>pkg:golang/go.opentelemetry.io/otel/trace@1.45.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=trace&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.35.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
 
 <table>
-<tr><td>Affected range</td><td><code>>=1.33.0<br/><1.47.0</code></td></tr>
+<tr><td>Affected range</td><td><code>>=1.35.0<br/><1.47.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.536%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1315,8 +1315,8 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 <table>
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

@@ -59,7 +59,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -110,8 +110,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -127,7 +127,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -157,7 +157,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -208,8 +208,8 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -225,7 +225,7 @@ FROM ${ALPINE_IMAGE}
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -272,8 +272,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.391%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.498%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -289,8 +289,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.10.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.10.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.425%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.541%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -336,8 +336,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.711%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -353,8 +353,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.530%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -370,8 +370,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.245%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.163%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -387,8 +387,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.208%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -404,8 +404,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.154%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -421,8 +421,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.256%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -451,8 +451,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.711%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>54th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -468,8 +468,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.530%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -485,8 +485,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.245%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>16th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.163%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>5th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -502,8 +502,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.232%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.208%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -519,8 +519,8 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.219%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.154%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -536,44 +536,14 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.256%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.178%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>7th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (34:34)
-COPY --from=build /app/testworkflow-init /init
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
 
 </blockquote>
 </details>
@@ -596,8 +566,68 @@ RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' 
 <table>
 <tr><td>Affected range</td><td><code>&lt;10.6_p2-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>10.6_p2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>18.900%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>87.680%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssh-client-common</strong> <code>10.3_p1-r1</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/openssh-client-common@10.3_p1-r1?arch=aarch64&distro=alpine-3.24.3&upstream=openssh</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (31:31)
+RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 git openssh-client "libexpat>=2.9.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-123158?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.6_p2-r0"><img alt="high : CVE--2026--123158" src="https://img.shields.io/badge/CVE--2026--123158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;10.6_p2-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>10.6_p2-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>87.680%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssh-keygen</strong> <code>10.3_p1-r1</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/openssh-keygen@10.3_p1-r1?arch=aarch64&distro=alpine-3.24.3&upstream=openssh</code></small><br/>
+
+```dockerfile
+# tw-toolkit.Dockerfile (31:31)
+RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 git openssh-client "libexpat>=2.9.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-123158?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.6_p2-r0"><img alt="high : CVE--2026--123158" src="https://img.shields.io/badge/CVE--2026--123158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;10.6_p2-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>10.6_p2-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>87.680%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -670,60 +700,30 @@ FROM ${ALPINE_IMAGE}
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssh-keygen</strong> <code>10.3_p1-r1</code> (apk)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
 
-<small><code>pkg:apk/alpine/openssh-keygen@10.3_p1-r1?arch=aarch64&distro=alpine-3.24.3&upstream=openssh</code></small><br/>
+<small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
 
 ```dockerfile
-# tw-toolkit.Dockerfile (31:31)
-RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 git openssh-client "libexpat>=2.9.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+# tw-toolkit.Dockerfile (34:34)
+COPY --from=build /app/testworkflow-init /init
 ```
 
 <br/>
 
-<a href="https://scout.docker.com/v/CVE-2026-123158?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.6_p2-r0"><img alt="high : CVE--2026--123158" src="https://img.shields.io/badge/CVE--2026--123158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;10.6_p2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>10.6_p2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>18.900%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>>=19.03.0+incompatible</code></td></tr>
+<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
+<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>openssh-client-common</strong> <code>10.3_p1-r1</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/openssh-client-common@10.3_p1-r1?arch=aarch64&distro=alpine-3.24.3&upstream=openssh</code></small><br/>
-
-```dockerfile
-# tw-toolkit.Dockerfile (31:31)
-RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 git openssh-client "libexpat>=2.9.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-123158?s=alpine&n=openssh&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C10.6_p2-r0"><img alt="high : CVE--2026--123158" src="https://img.shields.io/badge/CVE--2026--123158-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;10.6_p2-r0</code></td></tr>
-<tr><td>Fixed version</td><td><code>10.6_p2-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>18.900%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>97th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
+Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Escalation on Windows in github.com/docker/cli
 
 </blockquote>
 </details>
@@ -746,8 +746,8 @@ COPY --from=build /app/testworkflow-init /init
 <table>
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -778,8 +778,8 @@ COPY --from=build /app/testworkflow-init /init
 <tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.536%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

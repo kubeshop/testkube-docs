@@ -130,7 +130,7 @@ FROM alpine:3.24.2
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -181,8 +181,8 @@ FROM alpine:3.24.2
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -198,7 +198,7 @@ FROM alpine:3.24.2
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
 </table>
 
@@ -285,8 +285,8 @@ COPY --from=deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 <table>
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>

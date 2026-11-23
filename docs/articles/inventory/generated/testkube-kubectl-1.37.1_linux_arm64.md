@@ -251,7 +251,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.995%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>63rd percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>64th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -420,8 +420,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.604%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.530%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -467,8 +467,8 @@ On Windows, when the target of Root.Mkdir or Root.MkdirAll is a junction pointin
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.858%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.827%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -484,8 +484,8 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.651%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -501,8 +501,8 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.716%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>55th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.835%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -537,8 +537,8 @@ Parsing a multipart form can bypass memory limits and read an arbitrarily long l
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.528%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.616%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>50th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -556,8 +556,8 @@ The impact of this misbehavior is mostly limited to potential request smuggling,
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.847%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.817%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -590,8 +590,8 @@ When parsing a Range header containing a large number of small ranges, FileServe
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.542%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.523%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -607,8 +607,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.866%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.851%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -641,8 +641,8 @@ When http.Transport sends an HTTP/1 CONNECT request with a non-empty Request.Bod
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.10</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.10</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.396%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.501%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -698,8 +698,8 @@ We now ensure that template-literal expression entries correctly reset context v
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.11</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -728,8 +728,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.858%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.827%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -745,8 +745,8 @@ The HTTP/2 server can refund connection-level flow control twice for the same da
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>53rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.651%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -762,8 +762,8 @@ HTTP/2 servers could end up crashing due to inadvertently modifying its HPACK en
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.847%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.817%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>58th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -779,8 +779,8 @@ A malicious HTTP/2 peer can cause excessive CPU consumption in the client or ser
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.409%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.481%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>42nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -798,8 +798,8 @@ Accumulate coalesced text in per-node byte slices during parsing and materialize
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.542%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.523%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -815,8 +815,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.866%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>60th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.851%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>59th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -832,8 +832,8 @@ When "Trailer" headers are sent by a client, the HTTP server internally uses the
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.322%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -911,7 +911,7 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.1-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.1-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>82.370%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>99.931%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>100th percentile</code></td></tr>
 </table>
 
@@ -941,7 +941,7 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
@@ -992,8 +992,8 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>28th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>35th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1009,8 +1009,38 @@ FROM alpine/kubectl:1.37.1
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.6-r2</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl@1.2.6-r2?arch=aarch64&os_name=alpine&os_version=3.24</code></small><br/>
+
+```dockerfile
+# kubectl-release.dockerfile (5:5)
+FROM alpine/kubectl:1.37.1
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1047,36 +1077,6 @@ FROM alpine/kubectl:1.37.1
 <blockquote>
 
 The Nickname profile can panic with an out-of-bounds slice error when transforming crafted input into a short destination buffer.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.6-r2</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/musl@1.2.6-r2?arch=aarch64&os_name=alpine&os_version=3.24</code></small><br/>
-
-```dockerfile
-# kubectl-release.dockerfile (5:5)
-FROM alpine/kubectl:1.37.1
-```
-
-<br/>
-
-<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
 
 </blockquote>
 </details>
@@ -1148,8 +1148,8 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.536%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>46th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
