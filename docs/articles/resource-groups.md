@@ -79,6 +79,8 @@ can hold:
 | Webhook Templates       | the `testkube.io/group` label                                                                   |
 | AI Agents               | a link to the group, see [AI Agent access](ai-agent-access#give-a-resource-group-its-ai-agents) |
 
+![The Resources tab of a Resource Group, listing resources of seven kinds from two Environments](images/resource-group-resources-tab.png)
+
 Each row gives the name, the kind and the Environment it lives in, and links to the resource's own page
 where it has one. The **⋮** menu on a row has **Go to details** and **Remove from Resource Group**;
 removing one takes the group's access to it away and can be undone by adding it back.
@@ -100,8 +102,11 @@ depends on the kind:
   Organization admin or owner. Without both, the type reads **(needs RBAC and an org admin)**. A private
   AI Agent can't be linked, and shows as **Private**.
 
+![The Add resource modal with an Environment and a type chosen, two resources already added](images/resource-group-add-resource.png)
+
 A resource belongs to one Resource Group at a time, so adding one that is already in another group moves
-it. The picker says which group that is before you pick it.
+it. The picker says which group that is before you pick it, and one already in this group is checked and
+tagged **Added**.
 
 Workflows and Workflow Templates can also be filtered on a Resource Group from their own Overview panels:
 
