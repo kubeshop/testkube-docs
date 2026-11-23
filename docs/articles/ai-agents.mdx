@@ -135,18 +135,20 @@ Your organization's own agents come first. When an Environment has both kinds, t
 under **Custom Agents** and **Testkube Agents**, custom first, and sorts each group by name. With only
 one kind there are no group headings.
 
-A picker starts on:
+Where a picker starts depends on which one it is.
 
-1. The AI Agent you last picked in this Environment, if it is still offered. That choice is remembered
-   per browser, as a convenience rather than a setting, so it doesn't follow you to another machine and
-   isn't shared with your team.
-2. Otherwise the first custom AI Agent by name.
-3. Otherwise **Testkube Helper**.
+In AI Assist, in a chat and in the command palette, it starts on the AI Agent you last picked in this
+Environment, if it is still offered; otherwise on the first custom AI Agent by name; otherwise on
+**Testkube Helper**. The last pick is remembered per browser, as a convenience rather than a setting, so
+it doesn't follow you to another machine and isn't shared with your team.
 
-**AI Analyze** is the exception. It starts on the built-in agent written for the job, **Troubleshoot**
-when you troubleshoot a failed execution and **Analyze & Report** when you ask for a report, because
-the prompt it sends is written for that agent's tools. It falls back to the rules above only when that
-agent isn't offered. You can still pick a different AI Agent in the options panel before starting.
+**AI Analyze** instead starts on the built-in agent written for the job, **Troubleshoot** when you
+troubleshoot a failed execution and **Analyze & Report** when you ask for a report, because the prompt
+it sends is written for that agent's tools. If that agent isn't offered it falls back to the first
+custom AI Agent, then to **Testkube Helper**; it never reuses your last pick. You can still choose a
+different AI Agent in the options panel before starting.
+
+An **AI Agent Trigger** starts on nothing: its form has no AI Agent until you pick one.
 
 ## LLM and Model Selection
 
