@@ -108,6 +108,7 @@ A resource belongs to one Resource Group at a time, so adding one that is alread
 it. The picker says which group that is before you pick it, and one already in this group is checked and
 tagged **Added**.
 
-Workflows and Workflow Templates can also be filtered on a Resource Group from their own Overview panels:
+The Workflows and Workflow Templates lists can also be narrowed to one Resource Group, from
+**Add a filter** on each list:
 
-![Workflows Resource Group Filter](images/workflows-resource-group-filter.png)
+![The Add a filter dropdown on Test Workflows, with the Resource Group submenu open](images/workflows-resource-group-filter.png)
