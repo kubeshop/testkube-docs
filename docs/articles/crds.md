@@ -23,8 +23,7 @@ The Control Plane resources a runner with the GitOps capability can sync have gr
 [Syncing Control Plane Resources](/articles/gitops-overview#syncing-control-plane-resources)):
 
 - `insights.testkube.io/v1alpha1` - `Board`
-- `ai.testkube.io/v1alpha1` - `MCPServer`, `LLMProvider` and `AIAgent`
-- `testbundles.testkube.io/v1alpha1` - `TestBundle`
+- `ai.testkube.io/v1alpha1` - `MCPServer`, `LLMProvider`, `Skill` and `AIAgent`
 
 The current CRD definitions can be found in the [kubeshop/testkube](https://github.com/kubeshop/testkube) repository.
 

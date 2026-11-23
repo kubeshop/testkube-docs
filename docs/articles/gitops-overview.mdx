@@ -1,5 +1,5 @@
 ---
-description: How Testkube fits GitOps, covering the Runner GitOps capability that syncs CRDs to the Control Plane (including Boards, AI resources and Test Bundles), resource ownership, pausing sync, Kubernetes Event Triggers and ArgoCD or Flux practices.
+description: How Testkube fits GitOps, covering the Runner GitOps capability that syncs CRDs to the Control Plane (including Boards, AI resources and Skills), resource ownership, pausing sync, Kubernetes Event Triggers and ArgoCD or Flux practices.
 ---
 
 # GitOps with Testkube
@@ -182,17 +182,17 @@ need to remove or update it there (via the Dashboard or API) before syncs will b
 A runner with the GitOps capability can also sync the resources that live only in the Control Plane, so they can be managed in Git
 next to your Test Workflows:
 
-| Kind          | API version                        | Control Plane resource                                          |
-| ------------- | ---------------------------------- | --------------------------------------------------------------- |
-| `Board`       | `insights.testkube.io/v1alpha1`    | [Insights Board](/articles/test-insights)                       |
-| `MCPServer`   | `ai.testkube.io/v1alpha1`          | [MCP server for AI Agents](/articles/mcp-servers-for-ai-agents) |
-| `LLMProvider` | `ai.testkube.io/v1alpha1`          | [LLM provider](/articles/ai-configuration)                      |
-| `AIAgent`     | `ai.testkube.io/v1alpha1`          | [AI Agent](/articles/ai-agents)                                 |
-| `TestBundle`  | `testbundles.testkube.io/v1alpha1` | [Test Bundle](/articles/ai-test-creation-test-bundles)          |
+| Kind          | API version                     | Control Plane resource                                          |
+| ------------- | ------------------------------- | --------------------------------------------------------------- |
+| `Board`       | `insights.testkube.io/v1alpha1` | [Insights Board](/articles/test-insights)                       |
+| `MCPServer`   | `ai.testkube.io/v1alpha1`       | [MCP server for AI Agents](/articles/mcp-servers-for-ai-agents) |
+| `LLMProvider` | `ai.testkube.io/v1alpha1`       | [LLM provider](/articles/ai-configuration)                      |
+| `Skill`       | `ai.testkube.io/v1alpha1`       | A Skill of the Environment's library, which AI Agents share     |
+| `AIAgent`     | `ai.testkube.io/v1alpha1`       | [AI Agent](/articles/ai-agents)                                 |
 
 This sync is off by default. Turn it on with the Helm value shown in
 [Enable a Runner with the GitOps capability via Helm](#enable-gitops-agent-via-helm). It grants the runner read access to
-these custom resources, whose CRDs the Testkube charts install.
+these custom resources, whose CRDs the Testkube charts install, and to the ConfigMaps a Skill reads its `SKILL.md` from.
 
 ```yaml
 apiVersion: insights.testkube.io/v1alpha1
@@ -222,7 +222,7 @@ These resources follow the rules above, with these differences:
   everything else. A kind whose CRD is not installed, or that the runner may not read, is skipped with a warning in the runner's log.
 - **They are read-only while a runner owns them.** With [GitOps Resource Ownership](#gitops-resource-ownership) enabled, a resource a
   runner owns can't be changed in the Dashboard, through the MCP tools or with `testkube apply`. For an AI Agent this includes its
-  roles, resource groups and Skills, and for a Test Bundle its Attached Context, Skills and AI Agents. Change it in Git instead.
+  roles, resource groups and own Skills. Change it in Git instead.
 - **Boards are shared across the Organization.** Unlike the other kinds, which belong to the Environment the runner is connected to,
   a Board belongs to the Organization, and its `metadata.name` is the Board's slug, not its display name (`spec.displayName`).
   Runners connected to different Environments of one Organization therefore sync to the same Board when their custom resources
@@ -236,14 +236,14 @@ These resources follow the rules above, with these differences:
   AI Agent can still be open only to some roles or Resource Groups (`spec.access.roles` and `spec.access.resourceGroups`), which
   the runner syncs from Git like the rest of it, see [AI Agent access](/articles/ai-agent-access). A runner refuses to sync over a
   user's private Board or AI Agent of the same name: rename one of them, or ask its creator to make it no longer private.
-- **References are resolved in order.** MCP servers sync before the AI Agents that use them, and AI Agents before the Test Bundles
-  that name them. A resource that names one the Control Plane does not have yet is retried until it arrives.
+- **References are resolved in order.** MCP servers and Skills sync before the AI Agents that use them. A resource that names one
+  the Control Plane does not have yet is retried until it arrives.
+- **A resource in use is deleted last.** Deleting the custom resource of an MCP server or a Skill that AI Agents still use is
+  refused by the Control Plane and retried, so it goes through once Git also drops their link to it.
+- **A Skill can be read from a `SKILL.md`.** With `skillFrom.configMapKeyRef`, the runner reads the Skill from a ConfigMap in its
+  namespace and syncs it again when the ConfigMap changes, see [Skills](/articles/control-plane-resources#skills).
 - **Only what the runner synced is deleted.** Deleting the custom resource deletes the Control Plane resource only if a runner owns
   it or synced it last. One that no runner owns and that was changed in the Dashboard since is left as it is.
-
-:::warning
-Deleting a `TestBundle` custom resource deletes the Test Bundle as the Dashboard does: its chats end, together with their sandbox.
-:::
 
 ### Enable a Runner with the GitOps capability via Helm {#enable-gitops-agent-via-helm}
 
@@ -265,8 +265,8 @@ gitops:
   enabled: true
 ```
 
-To also sync the [Control Plane resources](#syncing-control-plane-resources) (Boards, MCP servers, LLM providers, AI Agents
-and Test Bundles), add the value below. It is off by default. Turning it on doesn't change how the runner syncs its other resources,
+To also sync the [Control Plane resources](#syncing-control-plane-resources) (Boards, MCP servers, LLM providers, Skills and AI
+Agents), add the value below. It is off by default. Turning it on doesn't change how the runner syncs its other resources,
 and needs no Secret.
 
 For the full `testkube` chart:

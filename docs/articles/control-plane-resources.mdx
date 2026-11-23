@@ -1,10 +1,10 @@
 ---
-description: Manage Insights Boards, AI Agents, MCP servers, LLM providers and Test Bundles as code, with testkube apply, get and delete, the REST API, or a runner with the GitOps capability, and how GitOps ownership keeps them in line with Git.
+description: Manage Insights Boards, AI Agents, MCP servers, LLM providers and Skills as code, with testkube apply, get and delete, the REST API, or a runner with the GitOps capability, and how GitOps ownership keeps them in line with Git.
 ---
 
 # Control Plane Resources as Code
 
-Some Testkube resources live only in the Control Plane: Insights Boards, AI Agents, MCP servers, LLM providers and Test Bundles.
+Some Testkube resources live only in the Control Plane: Insights Boards, AI Agents, MCP servers, LLM providers and Skills.
 You can declare each of them in a Kubernetes-style YAML manifest and manage it as code in three ways:
 
 - with the [Testkube CLI](#cli): `testkube apply`, `testkube get` and `testkube delete`;
@@ -16,25 +16,23 @@ All three use the same manifests and the same validation, so a manifest the CLI 
 
 ## Resource Kinds
 
-| Kind          | API version                        | CLI name      | Scope        | Control Plane resource                                          |
-| ------------- | ---------------------------------- | ------------- | ------------ | --------------------------------------------------------------- |
-| `Board`       | `insights.testkube.io/v1alpha1`    | `board`       | Organization | [Insights Board](/articles/test-insights)                       |
-| `LLMProvider` | `ai.testkube.io/v1alpha1`          | `llmprovider` | Environment  | [LLM provider](/articles/ai-configuration)                      |
-| `MCPServer`   | `ai.testkube.io/v1alpha1`          | `mcpserver`   | Environment  | [MCP server for AI Agents](/articles/mcp-servers-for-ai-agents) |
-| `AIAgent`     | `ai.testkube.io/v1alpha1`          | `aiagent`     | Environment  | [AI Agent](/articles/ai-agents)                                 |
-| `TestBundle`  | `testbundles.testkube.io/v1alpha1` | `testbundle`  | Environment  | [Test Bundle](/articles/ai-test-creation-test-bundles)          |
+| Kind          | API version                     | CLI name      | Scope        | Control Plane resource                                          |
+| ------------- | ------------------------------- | ------------- | ------------ | --------------------------------------------------------------- |
+| `Board`       | `insights.testkube.io/v1alpha1` | `board`       | Organization | [Insights Board](/articles/test-insights)                       |
+| `LLMProvider` | `ai.testkube.io/v1alpha1`       | `llmprovider` | Environment  | [LLM provider](/articles/ai-configuration)                      |
+| `MCPServer`   | `ai.testkube.io/v1alpha1`       | `mcpserver`   | Environment  | [MCP server for AI Agents](/articles/mcp-servers-for-ai-agents) |
+| `Skill`       | `ai.testkube.io/v1alpha1`       | `skill`       | Environment  | A Skill of the Environment's library, which AI Agents share     |
+| `AIAgent`     | `ai.testkube.io/v1alpha1`       | `aiagent`     | Environment  | [AI Agent](/articles/ai-agents)                                 |
 
 A Board belongs to the Organization and is shared by all its Environments. The other kinds belong to one Environment.
 
 `metadata.name` is the resource's name in the Control Plane (its slug), not its display name, which is `spec.displayName`.
 It never changes: renaming the manifest creates a new resource. For a resource made in the Dashboard, `testkube get` shows the name it was given.
-
-A runner with the GitOps capability syncs custom resources, whose names Kubernetes limits to lowercase letters, digits, `-` and `.`.
-A Test Bundle made in the Dashboard can have a `_` in its name: you can still apply it with the CLI or the REST API, but not sync it
-as a custom resource.
+A Skill has no display name: its `metadata.name` is the Skill's name.
 
 :::note
-On a self-hosted Control Plane, AI Agents, MCP servers, LLM providers and Test Bundles need PostgreSQL as its database.
+On a self-hosted Control Plane, AI Agents, MCP servers, LLM providers and Skills need PostgreSQL as its database. A Control Plane
+that doesn't serve Skills yet refuses them and still takes the other kinds.
 :::
 
 ## Manifests
@@ -62,7 +60,20 @@ spec:
         duration: week
 ```
 
-An AI Agent that uses an MCP server, declared together in one file. Each kind is applied after the kinds it refers to, so the order in the file doesn't matter:
+An LLM provider whose key is read from an Environment Credential:
+
+```yaml
+apiVersion: ai.testkube.io/v1alpha1
+kind: LLMProvider
+metadata:
+  name: openai
+spec:
+  provider: openai
+  apiKey: '{{ credential("openai-key") }}'
+```
+
+An AI Agent that uses an MCP server and a Skill of the library, declared together in one file. Each kind is applied after the kinds
+it refers to, so the order in the file doesn't matter:
 
 ```yaml
 apiVersion: ai.testkube.io/v1alpha1
@@ -81,10 +92,17 @@ spec:
           autoApproved: true
     - name: github
       signIn: shared_key
-      credentialReference: secret://github-mcp-token
+      headers:
+        Authorization: 'Bearer {{ credential("github-mcp-token") }}'
       tools:
         create_issue:
           enabled: true
+  skills:
+    - name: issue-format
+      description: Use when opening an issue.
+      content: 'Title issues "Flaky: <workflow>" and link the execution.'
+  skillRefs:
+    - name: flaky-triage
   access:
     roles: [run]
 ---
@@ -95,46 +113,86 @@ metadata:
 spec:
   displayName: GitHub
   url: https://api.githubcopilot.com/mcp/
-```
-
-A Test Bundle whose tests are read from Git and that may delegate to the AI Agent above:
-
-```yaml
-apiVersion: testbundles.testkube.io/v1alpha1
-kind: TestBundle
+---
+apiVersion: ai.testkube.io/v1alpha1
+kind: Skill
 metadata:
-  name: checkout-api
+  name: flaky-triage
 spec:
-  displayName: Checkout API
-  gitSource:
-    uri: https://github.com/acme/checkout.git
-    revision: main
-    path: tests
-  skills:
-    - name: k6-load-testing
-      description: Use when writing or debugging k6 load tests in this repository.
-      content: k6 scripts live in tests/load. Fail the run when p95 latency is above 500 ms.
-  contexts:
-    - title: Checkout API conventions
-      content: Every endpoint answers JSON and errors follow RFC 9457.
-  aiAgents:
-    - flaky-test-triager
+  description: Use when an execution failed only some of the time.
+  content: |
+    Compare the last ten executions of the workflow before calling a test flaky.
+  testkube:
+    alwaysInclude: true
 ```
 
 The easiest way to write a manifest is to build the resource in the Dashboard and export it with `testkube get <kind> <name> -o yaml`.
 
-### Lists, Skills and Credentials
+### Lists and References
 
-- **Lists replace what is stored.** An AI Agent's or a Test Bundle's `skills`, and a Test Bundle's `contexts`, are replaced as a whole:
-  an entry you leave out is deleted, and an empty list (`skills: []`) removes them all. If you leave the field out entirely, what is
-  stored is kept, so an older manifest doesn't delete Skills added in the Dashboard.
+- **Lists replace what is stored.** An AI Agent's `mcpServers`, `skills` and `skillRefs` are each replaced as a whole: an entry you
+  leave out is removed, and an empty list (`skills: []`) removes them all. If you leave the field out entirely, what is stored is
+  kept, so an older manifest doesn't remove links or Skills added in the Dashboard.
 - **The built-in Testkube MCP server** is named `testkube`. An AI Agent that doesn't list it keeps its stored link to it.
 - **AI Agent access** is changed only when the manifest declares `spec.access`. Roles and Resource Groups work as described in
   [AI Agent access](/articles/ai-agent-access).
-- **Credentials.** A `credentialReference` names an Environment Credential (`secret://<name>`, or `vault://<path>` for an LLM
-  provider), which keeps a key out of Git. An export shows every LLM provider header and query parameter value redacted; applying the
-  export back keeps the stored values.
-- **Deleting a Test Bundle** deletes it as the Dashboard does: its chats end, together with their sandbox.
+- **Privacy isn't part of a manifest.** Whether an AI Agent is private stays a Dashboard setting: applying a manifest keeps the
+  stored setting, and a new AI Agent isn't private.
+- **An MCP server in use can't be deleted.** Deleting an MCP server that AI Agents still link to is refused with a `409` that names
+  them. Remove it from their `mcpServers` first.
+
+### Skills
+
+An AI Agent has two kinds of Skills:
+
+- **Its own Skills**, in `spec.skills`. They belong to the agent and are deleted with it.
+- **Skills of a library**, which several AI Agents share, referred to by name in `spec.skillRefs`. A reference's `scope` is
+  `environment` (the default), for a `Skill` of the Environment's library, or `organization`, for a Skill of the Organization's
+  library, which is managed in the Dashboard and can't be declared.
+
+A Skill follows the [Agent Skills](https://agentskills.io/specification) `SKILL.md` frontmatter key for key: `metadata.name` is its
+`name`, `spec` holds `description`, `license`, `compatibility`, `metadata` and `allowed-tools`, and `spec.content` is the Markdown
+body. Settings of Testkube's own are under `spec.testkube`:
+
+- `alwaysInclude` puts the content in every prompt, instead of letting the agent read it when it needs it.
+- `addToNewTestBundles` adds the Skill to every Test Bundle created after it.
+
+A name appears once across an AI Agent's `skills` and `skillRefs`, and a reference must name a Skill that exists. Removing a
+reference never deletes the Skill, and deleting a Skill that an AI Agent refers to is refused with a `409` that names the agent.
+
+A runner with the GitOps capability can also read a Skill, or an AI Agent's own Skill, from a real `SKILL.md` kept in a ConfigMap
+in its namespace, so the file in Git is the source:
+
+```yaml
+apiVersion: ai.testkube.io/v1alpha1
+kind: Skill
+metadata:
+  name: k6-load-testing
+spec:
+  skillFrom:
+    configMapKeyRef:
+      name: k6-load-testing-skill
+      key: SKILL.md
+  testkube:
+    alwaysInclude: true
+```
+
+The `SKILL.md` then gives every field but `spec.testkube`, and its `name` must be the Skill's. `testkube apply` and the REST API can't
+read a ConfigMap, so they take a Skill only inline.
+
+### Credentials
+
+A manifest reads an Environment Credential as `{{ credential("name") }}`, the way a Test Workflow does, which keeps a key out of Git:
+
+- An LLM provider's `apiKey` is exactly one such expression.
+- An AI Agent's `shared_key` MCP server link may mix one into a header, such as `'Bearer {{ credential("github-mcp-token") }}'`.
+  A link that leaves `headers` out keeps the key it has, such as one set in the Dashboard.
+
+The credential must exist in the Environment: an apply that names a missing one is refused. Only Environment Credentials are read,
+so a Vault path or a Kubernetes Secret is refused.
+
+An LLM provider's extra headers and query parameters are taken as written. An export shows every one of their values redacted, and
+applying the export back keeps the stored values.
 
 ### Status
 
@@ -176,9 +234,10 @@ testkube apply -f a.yaml -f b.yaml        # -f can be repeated
 `testkube apply` creates a resource that doesn't exist and replaces one that does. A file can hold several documents.
 
 - Every document is validated locally first. If any is invalid, nothing is sent.
-- Resources are sent in dependency order: MCP servers and LLM providers, then AI Agents, then Test Bundles.
+- Resources are sent in dependency order: MCP servers, LLM providers and Skills, then AI Agents.
 - A failed resource doesn't stop the others. All failures are reported together at the end, and the command exits with an error.
-- `--dry-run` only validates. With `-o yaml` (or `-o json`) it prints the objects as they would be sent, defaults filled in.
+- `--dry-run` only validates, without contacting the Control Plane, so it can't tell that a credential or a referenced resource is
+  missing. With `-o yaml` (or `-o json`) it prints the objects as they would be sent, defaults filled in.
 - `-o yaml` or `-o json` without `--dry-run` prints the resources as stored.
 
 Applying needs the same role as making the change in the Dashboard.
@@ -196,7 +255,7 @@ With `-o yaml` or `-o json` the output is in the form `testkube apply` takes, so
 ### Delete
 
 ```sh
-testkube delete testbundle checkout-api
+testkube delete skill flaky-triage
 testkube delete mcpserver github --ignore-not-found
 ```
 
@@ -218,7 +277,7 @@ PUT    /organizations/{org}/environments/{env}/resources/{resource}/{name}
 DELETE /organizations/{org}/environments/{env}/resources/{resource}/{name}
 ```
 
-`{resource}` is the plural kind: `boards`, `llmproviders`, `mcpservers`, `aiagents` or `testbundles`. Boards are addressed under the
+`{resource}` is the plural kind: `boards`, `llmproviders`, `mcpservers`, `skills` or `aiagents`. Boards are addressed under the
 Organization and the other kinds under an Environment; the other path refuses them.
 
 ```sh
@@ -237,11 +296,11 @@ curl -X PUT \
 
 Errors are [problem details](https://www.rfc-editor.org/rfc/rfc9457) (`application/problem+json`):
 
-| Status | Meaning                                                                                                        |
-| ------ | -------------------------------------------------------------------------------------------------------------- |
-| `404`  | The resource doesn't exist, or you can't see it.                                                               |
-| `409`  | A runner owns the resource (error code `managed-by-gitops`), or its name is taken by a resource you can't see. |
-| `422`  | The manifest is invalid. The problem's `errors` list every invalid field.                                      |
+| Status | Meaning                                                                                                                                                                                 |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `404`  | The resource doesn't exist, or you can't see it.                                                                                                                                        |
+| `409`  | A runner owns the resource (error code `managed-by-gitops`), its name is taken by a resource you can't see, or a delete is refused because AI Agents still use the MCP server or Skill. |
+| `422`  | The manifest is invalid, or names a credential or resource that doesn't exist. The problem's `errors` list every invalid field.                                                         |
 
 ## GitOps Sync
 
@@ -314,8 +373,8 @@ While a runner owns a resource, it can only be changed in Git:
   This resource is managed by the GitOps Runner gitops-checkout, so it can only be changed in Git.
   ```
 
-- For an AI Agent this includes its roles, Resource Groups and Skills. For a Test Bundle it includes its Attached Context, Skills and
-  AI Agents. A shared Skill linked to either is not part of it and stays editable.
+- For an AI Agent this includes its roles, Resource Groups and own Skills. A Skill of a library it refers to is not part of it: a
+  `Skill` is locked only if a runner owns it too, and the Organization's Skills stay editable.
 - Other runners can't change or delete it either. Their sync is refused as an ownership conflict, which the runner logs for that
   custom resource and doesn't retry until the custom resource changes.
 
