@@ -6,7 +6,8 @@
 //
 // The existing pages carry thousands of Vale alerts, so linting whole files would fail every
 // pull request on text it did not touch. The diff is taken from the merge base to the working
-// tree, so uncommitted edits count too. Exits 1 when an added line has an error-level alert.
+// tree, so uncommitted edits count too, and every line of an untracked page counts as added.
+// Exits 1 when an added line has an error-level alert.
 import { execFileSync, spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
@@ -62,6 +63,21 @@ for (const line of diff.split("\n")) {
     for (let n = start; n < start + count; n++) added.get(file).add(n);
   }
 }
+// git diff leaves out files that are not tracked yet, such as a new page before git add,
+// so every line of an untracked page counts as added.
+const untracked = git(
+  "ls-files",
+  "--others",
+  "--exclude-standard",
+  "--",
+  "docs/*.md",
+  "docs/*.mdx"
+);
+for (const path of untracked.split("\n")) {
+  if (!path || GENERATED.some((dir) => path.startsWith(dir))) continue;
+  const count = readFileSync(path, "utf8").split("\n").length;
+  added.set(path, new Set(Array.from({ length: count }, (_, i) => i + 1)));
+}
 for (const [path, lines] of added) if (lines.size === 0) added.delete(path);
 
 if (added.size === 0) {
@@ -85,21 +101,63 @@ if (vale.error || vale.status === null || vale.status > 1) {
   process.exit(2);
 }
 
-// Vale skips inline code in the body of a page, but Vale.Terms still reports a term inside
-// backticks in the frontmatter, such as the command in "description: Run `testkube upgrade`".
-// True when the alert starts inside a backtick pair on a frontmatter line.
+// The 1-based numbers of the lines that hold MDX import and export statements, outside code
+// fences. A statement runs from a line that starts with "import " or "export " until its
+// brackets balance, so a multi-line export such as "export const X = () => (" is covered whole.
+const esmLines = (lines, from) => {
+  const esm = new Set();
+  let fence = null;
+  let depth = 0;
+  let inStatement = false;
+  for (let i = from; i < lines.length; i++) {
+    const line = lines[i];
+    const marker = /^\s*(`{3,}|~{3,})/.exec(line)?.[1];
+    if (!inStatement && marker) {
+      if (fence === null) fence = marker;
+      else if (marker[0] === fence[0] && marker.length >= fence.length)
+        fence = null;
+      continue;
+    }
+    if (fence !== null) continue;
+    if (!inStatement && !/^(import|export)\s/.test(line)) continue;
+    inStatement = true;
+    esm.add(i + 1);
+    for (const ch of line) {
+      if ("([{".includes(ch)) depth++;
+      else if (")]}".includes(ch)) depth--;
+    }
+    if (depth <= 0) {
+      inStatement = false;
+      depth = 0;
+    }
+  }
+  return esm;
+};
+
 const sources = new Map();
-const inFrontmatterCode = (path, alert) => {
+const source = (path) => {
   if (!sources.has(path)) {
     const lines = readFileSync(path, "utf8").split("\n");
     const end = lines[0] === "---" ? lines.indexOf("---", 1) : -1;
-    sources.set(path, { lines, end });
+    sources.set(path, { lines, end, esm: esmLines(lines, end + 1) });
   }
-  const { lines, end } = sources.get(path);
+  return sources.get(path);
+};
+
+// Vale skips inline code in the body of a page, but Vale.Terms still reports a term inside
+// backticks in the frontmatter, such as the command in "description: Run `testkube upgrade`".
+// True when the alert starts inside a backtick pair on a frontmatter line.
+const inFrontmatterCode = (path, alert) => {
+  const { lines, end } = source(path);
   if (alert.Line > end) return false;
   const before = lines[alert.Line - 1].slice(0, alert.Span[0] - 1);
   return (before.match(/`/g) ?? []).length % 2 === 1;
 };
+
+// Vale lints an MDX import or export that follows frontmatter as prose, so the file name in
+// 'import Pytest from "../../workflows/simple-pytest-workflow.md";' fails Vale.Terms. True
+// when the alert is on a line of an import or export statement.
+const inEsm = (path, alert) => source(path).esm.has(alert.Line);
 
 let errors = 0;
 let shown = 0;
@@ -107,7 +165,7 @@ for (const [path, alerts] of Object.entries(JSON.parse(vale.stdout || "{}"))) {
   const lines = added.get(path.split("\\").join("/"));
   for (const a of alerts) {
     if (!lines?.has(a.Line) || a.Severity === "suggestion") continue;
-    if (inFrontmatterCode(path, a)) continue;
+    if (inFrontmatterCode(path, a) || inEsm(path, a)) continue;
     if (a.Severity === "error") errors++;
     shown++;
     console.log(
