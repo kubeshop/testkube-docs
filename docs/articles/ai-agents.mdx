@@ -1,5 +1,5 @@
 ---
-description: Concepts behind AI Agents, including the four default agents, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
+description: Concepts behind AI Agents, including the four default agents, hiding agents per Environment, which agent a picker offers, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
 ---
 
 # Testkube AI Agents
@@ -45,6 +45,10 @@ Every Testkube environment comes with four pre-configured agents ready to use im
 
 These agents are automatically provisioned and kept up to date. They cannot be deleted but can be
 supplemented with custom agents tailored to your needs.
+
+Each Environment decides which of them it offers. An admin can hide any AI Agent, built-in or custom,
+in one Environment, so an Environment only shows the agents that fit its purpose. See
+[Show or hide an AI Agent in an Environment](/articles/ai-agent-access#show-or-hide-an-ai-agent-in-an-environment).
 
 ## Agent Templates
 
@@ -120,6 +124,28 @@ from interactive support and contextual recommendations.
 
 Both styles can leverage the same MCP Servers and tools — the difference lies in how the agent is triggered
 and how it interacts with users or systems.
+
+## Which AI Agent a Picker Offers
+
+Every AI Agent picker, in AI Assist, in a chat, on AI Analyze and on an AI Agent Trigger, draws from
+the same AI Agents: the ones the Environment shows and your [access](/articles/ai-agent-access) allows.
+
+Your organization's own agents come first. When an Environment has both kinds, the picker groups them
+under **Custom Agents** and **Testkube Agents**, custom first, and sorts each group by name. With only
+one kind there are no group headings.
+
+A picker starts on:
+
+1. The AI Agent you last picked in this Environment, if it is still offered. That choice is remembered
+   per browser, as a convenience rather than a setting, so it doesn't follow you to another machine and
+   isn't shared with your team.
+2. Otherwise the first custom AI Agent by name.
+3. Otherwise **Testkube Helper**.
+
+**AI Analyze** is the exception. It starts on the built-in agent written for the job, **Troubleshoot**
+when you troubleshoot a failed execution and **Analyze & Report** when you ask for a report, because
+the prompt it sends is written for that agent's tools. It falls back to the rules above only when that
+agent isn't offered. You can still pick a different AI Agent in the options panel before starting.
 
 ## LLM and Model Selection
 
