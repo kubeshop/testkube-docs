@@ -4,7 +4,7 @@ description: The kinds of metrics AI evaluation tools produce, how Testkube inge
 
 # AI Testing Metrics
 
-AI evaluation tools such as Promptfoo, DeepEval, Inspect AI, Ragas and the LM Evaluation Harness measure the quality
+AI evaluation tools such as Promptfoo, DeepEval, Inspect AI, Ragas, the LM Evaluation Harness and Harbor measure the quality
 of LLM applications and models. Each of them writes its results in its own format, so Testkube needs a common format
 to chart them. This page explains what these tools measure, how Testkube ingests and charts their metrics, and how the
 [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser) converts the output of each tool
@@ -22,6 +22,7 @@ into a few groups:
 | LLM-as-a-judge quality scores | A score, usually between 0 and 1, that a second model assigns to an answer for a quality such as relevancy, correctness, or the absence of hallucination. | DeepEval answer relevancy, G-Eval and hallucination metrics                          |
 | RAG metrics                   | How well a retrieval-augmented generation (RAG) pipeline grounds its answers in the retrieved context, and how relevant that context is.                  | Ragas faithfulness, answer relevancy, context precision, and context recall          |
 | Benchmark scores              | How a model performs on a standardized dataset of tasks, often with the standard error of the score.                                                      | LM Evaluation Harness exact match on `gsm8k`; Inspect AI accuracy and standard error |
+| Agent task rewards            | How often an AI agent completes a task in a sandbox, as scored by a test script that checks the result of its work.                                       | Harbor mean reward and pass rate                                                     |
 | Cost and efficiency           | What a run costs and how long it takes.                                                                                                                   | Token counts, cost of the judge model calls, evaluation duration                     |
 
 A single run of an evaluation tells you little on its own. The value comes from following these metrics over time, so
@@ -103,13 +104,14 @@ Testkube, so you can also run it in other CI or observability pipelines.
 
 ### Supported Tools and Metrics
 
-| Tool                                                                         | Parser argument | Default input                         | Measurement      | Fields                                                                                                        | Structural tags                     |
-| ---------------------------------------------------------------------------- | --------------- | ------------------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
-| [Promptfoo](https://www.promptfoo.dev/)                                      | `promptfoo`     | `results.json`                        | `promptfoo_eval` | `successes`, `failures`, `errors`, `pass_rate`, `total_tokens`, `duration_ms`                                 | none                                |
-| [DeepEval](https://deepeval.com/)                                            | `deepeval`      | `test_run_*.json`                     | `deepeval`       | Per metric: `mean_score`, `tests`, `passed`, `failed`, `errors`, `cost`. Rollup: `passed`, `failed`, `errors` | `metric`, on the per-metric records |
-| [Inspect AI](https://inspect.aisi.org.uk/)                                   | `inspect-ai`    | `logs/*.json`                         | `inspect_eval`   | One field per scorer metric, such as `accuracy` and `stderr`                                                  | none                                |
-| [Ragas](https://docs.ragas.io/)                                              | `ragas`         | `results/ragas_results.json`          | `ragas_eval`     | The mean of every numeric column of the results, such as `faithfulness` and `answer_relevancy`                | none                                |
-| [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness) | `lm-eval`       | `results/**/*.json`, `results/*.json` | `lm_eval`        | One field per harness metric, such as `exact_match`; standard errors are skipped                              | `task`, `filter`                    |
+| Tool                                                                         | Parser argument | Default input                         | Measurement      | Fields                                                                                                                                                                              | Structural tags                     |
+| ---------------------------------------------------------------------------- | --------------- | ------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| [Promptfoo](https://www.promptfoo.dev/)                                      | `promptfoo`     | `results.json`                        | `promptfoo_eval` | `successes`, `failures`, `errors`, `pass_rate`, `total_tokens`, `duration_ms`                                                                                                       | none                                |
+| [DeepEval](https://deepeval.com/)                                            | `deepeval`      | `test_run_*.json`                     | `deepeval`       | Per metric: `mean_score`, `tests`, `passed`, `failed`, `errors`, `cost`. Rollup: `passed`, `failed`, `errors`                                                                       | `metric`, on the per-metric records |
+| [Inspect AI](https://inspect.aisi.org.uk/)                                   | `inspect-ai`    | `logs/*.json`                         | `inspect_eval`   | One field per scorer metric, such as `accuracy` and `stderr`                                                                                                                        | none                                |
+| [Ragas](https://docs.ragas.io/)                                              | `ragas`         | `results/ragas_results.json`          | `ragas_eval`     | The mean of every numeric column of the results, such as `faithfulness` and `answer_relevancy`                                                                                      | none                                |
+| [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness) | `lm-eval`       | `results/**/*.json`, `results/*.json` | `lm_eval`        | One field per harness metric, such as `exact_match`; standard errors are skipped                                                                                                    | `task`, `filter`                    |
+| [Harbor](https://github.com/harbor-framework/harbor)                         | `harbor`        | `jobs/*/*/result.json`                | `harbor_eval`    | `trials`, `passed`, `failed`, `errors`, `pass_rate`, `mean_reward`, `input_tokens`, `output_tokens`, `cache_tokens`, `total_tokens`, `cost_usd`, `duration_ms`, `agent_duration_ms` | `agent`, `model`, `dataset`         |
 
 A few details per tool:
 
@@ -123,6 +125,10 @@ A few details per tool:
   [Ragas example](ragas-basic) writes it, and averages each metric over the samples.
 - **LM Evaluation Harness:** the parser writes one record per task and filter, so that `gsm8k` with the `strict-match`
   and `flexible-extract` filters gives two series.
+- **Harbor:** the parser reads the `result.json` file of each trial of a Harbor job and writes one record per agent,
+  model and dataset. A trial that ended with an error before it earned a reward counts as `0` in `mean_reward`, and the
+  token and cost fields are left out for agents that report none, such as `oracle`. Harbor keeps each job in its own
+  folder under `jobs`; pass `--latest` to report only the newest job if that folder holds earlier ones.
 
 Structural tags are part of the identity of a series and are always added. Any other tag comes from the `--tag` option.
 
@@ -194,3 +200,4 @@ Each of these examples runs an evaluation tool in a Workflow and exports its met
 - [Inspect AI](inspect-ai-basic) - Runs an Inspect AI evaluation with an accuracy quality gate.
 - [Ragas](ragas-basic) - Evaluates a RAG pipeline with faithfulness and relevancy metrics.
 - [LM Evaluation Harness](lm-eval-basic) - Runs a slice of the `gsm8k` benchmark and exports one series per task.
+- [Harbor](harbor-basic) - Evaluates an AI agent on Harbor tasks and exports its mean reward, pass rate, token usage and cost.
