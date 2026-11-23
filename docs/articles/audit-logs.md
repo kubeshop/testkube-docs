@@ -100,6 +100,10 @@ Recording an AI Agent's tool call is best effort. The call has already run by th
 - **CSV**
 - **JSON**
 
+The export carries whatever the list is narrowed to, search and every filter included, so one AI
+Agent's or one MCP Server's trail can be taken out on its own. Clear the filters first to export
+everything.
+
 This makes it easy to integrate the audit log events with other reporting or analysis tools.
 
 ![Export Audit Logs](../img/audit-log-export.png "Export Audit Logs")
