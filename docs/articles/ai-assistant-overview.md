@@ -61,7 +61,7 @@ When adding a new Chat in Docked mode you get the same selection of previous Cha
 Use the dropdowns at the top of the AI Assistant panel to choose which AI Agent and LLM model to use
 for the conversation:
 
-- **AI Agent** — Select any of the [default agents](/articles/ai-agents#predefined-guidance-ai-agents)
+- **AI Agent** — Select any of the [default agents](/articles/ai-agents#default-ai-agents)
   (Testkube Helper, Troubleshoot, Design & Optimize, Analyze & Report) or any
   [custom agent](/articles/defining-ai-agents) you have created.
 - **Model** — Choose from the available LLM models (platform models and any
