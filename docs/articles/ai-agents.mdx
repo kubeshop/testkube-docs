@@ -1,5 +1,5 @@
 ---
-description: Concepts behind AI Agents, including the four default agents, hiding agents per Environment, which agent a picker offers, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
+description: Concepts behind AI Agents, including the five default agents, hiding agents per Environment, which agent a picker offers, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
 ---
 
 # Testkube AI Agents
@@ -34,14 +34,15 @@ See [Example Agents](/articles/ai-agent-examples-overview) for ready-to-use agen
 
 ## Default AI Agents
 
-Every Testkube environment comes with four pre-configured agents ready to use immediately:
+Every Testkube environment comes with five pre-configured agents ready to use immediately:
 
-| Agent                 | Purpose                                                                                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Testkube Helper**   | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment.                       |
-| **Troubleshoot**      | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes.                  |
-| **Design & Optimize** | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
-| **Analyze & Report**  | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports.                                               |
+| Agent                       | Purpose                                                                                                                                                  |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Testkube Helper**         | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment.                       |
+| **Troubleshoot**            | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes.                  |
+| **Design & Optimize**       | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
+| **Analyze & Report**        | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports.                                               |
+| **Git Integration Summary** | Writes the short execution summary the Git integration posts back on a pull or merge request, from the workflows that ran and their failure signals.     |
 
 These agents are automatically provisioned and kept up to date. They cannot be deleted but can be
 supplemented with custom agents tailored to your needs.

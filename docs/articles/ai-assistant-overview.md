@@ -62,7 +62,7 @@ Use the dropdowns at the top of the AI Assistant panel to choose which AI Agent 
 for the conversation:
 
 - **AI Agent** — Select any of the [default agents](/articles/ai-agents#default-ai-agents)
-  (Testkube Helper, Troubleshoot, Design & Optimize, Analyze & Report) or any
+  (Testkube Helper, Troubleshoot, Design & Optimize, Analyze & Report, Git Integration Summary) or any
   [custom agent](/articles/defining-ai-agents) you have created.
 - **Model** — Choose from the available LLM models (platform models and any
   [custom models](/articles/ai-models) you have configured).
