@@ -1402,6 +1402,11 @@ const sidebars = {
               id: "articles/examples/kubectl-basic",
             },
             {
+              type: "doc",
+              label: "kube-burner",
+              id: "articles/examples/kube-burner-basic",
+            },
+            {
               type: "link",
               label: "Testing Hardware Components",
               href: "https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube",
