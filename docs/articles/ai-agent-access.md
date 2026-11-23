@@ -74,6 +74,8 @@ Adding a public AI Agent to a Resource Group limits it to that group. Everyone e
 
 The same tab lists every AI Agent already in the group, alongside the Workflows, Triggers and Webhooks it holds. See [Listing Resources in a Resource Group](resource-groups#listing-resources-in-a-resource-group).
 
+![The Resources tab of a Resource Group, with an AI Agent among its resources](images/resource-group-resources-tab.png)
+
 Members of the group can then use those AI Agents and see their shared chats, as long as they also have a role in the AI Agent's Environment: Read to see it, Run to chat with it. To take one away, use the AI Agent's **⋮** menu and choose **Remove from Resource Group**. Only Organization admins and owners can change this list.
 
 ## Review access across an Environment
