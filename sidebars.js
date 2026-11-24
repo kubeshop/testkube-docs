@@ -910,6 +910,16 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Identity Provider Sign-in",
+                  id: "articles/ai-identity-provider-sign-in",
+                },
+                {
+                  type: "doc",
+                  label: "PingFederate Recipe",
+                  id: "articles/ai-identity-provider-pingfederate",
+                },
+                {
+                  type: "doc",
                   label: "Configuring AI Models",
                   id: "articles/ai-models",
                 },
