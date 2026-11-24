@@ -76,6 +76,51 @@ This shows the JUnit Case count per day over the last month, broken down by test
 shows the individual numbers for each day, clicking on one of these numbers will list the corresponding Workflow
 executions, allowing you to further drill down into each segment - [Read More](/articles/functional-metrics-in-insights).
 
+### 4. Test Case History
+
+The history shows how a test case did in each of the Test Workflow's recent Executions, so you can tell a flaky
+test case, one that passes and fails without a change, from one that started failing and stays failed.
+
+There are two ways to open it, both from the JUnit report of an Execution:
+
+- **From a test case.** In the **JUnit Reports** tab of an Execution, a test case whose test health is below 1, because it didn't pass
+  every time, shows **History** next to **View Insights**. The history then starts with that test case.
+- **From the summary.** The summary at the top of the **JUnit Reports** tab, with the counts of passed, failed and
+  skipped tests, has a **History** button. It shows the Test Workflow's flakiest test cases, without picking one.
+
+![History on the JUnit summary and on test cases that are not always passing](images/junit-test-case-history-button.png)
+
+The history reads the last **10**, **20** or **50** Executions of the Test Workflow; select the number at the top.
+**20** is the default.
+
+- **This test case** shows the test case you opened it from, as one strip.
+- **Flakiest test cases in this Test Workflow** lists the other test cases, the ones that flipped most first. A flip
+  is a change between passing and failing from one Execution to the next. Each row shows its number of flips;
+  hover over its name to see its package, test suite and class.
+
+Each strip has one cell per Execution, oldest on the left:
+
+| Cell          | Meaning                                                    |
+| ------------- | ---------------------------------------------------------- |
+| **Passed**    | The test case passed in that Execution                     |
+| **Failed**    | The test case failed                                       |
+| **Errored**   | The test case errored. It has the same color as **Failed** |
+| **Skipped**   | The test case was skipped                                  |
+| **No result** | The Execution has no result for this test case             |
+
+Hover over a cell to see its result and when the Execution ran. The Execution you opened the history from has a
+white outline. Select a cell to open that Execution; a **No result** cell can't be opened.
+
+![The test case history opened from the JUnit summary](images/junit-test-case-history.png)
+
+A test case with the same name in another package or test suite is a different test case, so it has its own row.
+
+:::note
+The history needs [Test Insights](/articles/test-insights) to be on, and a Testkube control plane that uses
+PostgreSQL. When the Test Workflow has no JUnit results in the selected Executions, the history says so; run it to
+start one.
+:::
+
 ## Benefits of JUnit Report Visualization
 
 The enhanced visualization of JUnit reports in Testkube offers several advantages:
