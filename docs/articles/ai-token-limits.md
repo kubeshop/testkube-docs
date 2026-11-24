@@ -28,7 +28,7 @@ Each level counts different usage:
 
 Every limit that applies to a request is checked, and the first one that's reached blocks it. For example, a Member with room left is still blocked when the AI Agent they chat with has reached its limit. Chats an API token starts itself, such as AI Triggers, have no Member limit: only the AI Agent, Environment and Organization limits apply.
 
-Sandbox specialist runs count toward limits like chats do.
+Sandbox specialist runs count toward limits like chats do, and so do the judges of [evals](ai-agent-evals#token-usage): their tokens count toward the Member whose chat was judged, the AI Agent, the Environment and the Organization.
 
 A limit has three settings:
 

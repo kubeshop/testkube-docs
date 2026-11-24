@@ -919,6 +919,11 @@ const sidebars = {
                   id: "articles/ai-triggers",
                 },
                 {
+                  type: "doc",
+                  label: "Evals",
+                  id: "articles/ai-agent-evals",
+                },
+                {
                   type: "category",
                   label: "Example Agents",
                   items: [
