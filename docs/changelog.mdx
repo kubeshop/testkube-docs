@@ -45,6 +45,7 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 
 - With PostgreSQL, a query for executions by tags now matches only executions that have every requested tag, where it used to match executions that had any one of them.
 - nginx2root vulnerability fix for the the UI image.
+- Removed the github.com/docker/docker dependency from the Agent, which fixes CVE-2026-34040, CVE-2026-41567, CVE-2026-42306, CVE-2026-41568 and CVE-2026-33997. The CLI now runs docker logs --follow to stream Docker agent logs instead.
 
 ### Helm Chart
 - Upgrade of PostgreSQL version from 18.3 to 18.7
