@@ -32,6 +32,11 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 - **Leave values out:** **is not** and **does not contain** on Workflow names, labels, tags, actors and test case fields, for example to take expected failures off a failure board. [Read more](/articles/test-insights#leaving-values-out).
 - **Test case history:** Open **History** on a test case in an Execution's JUnit report to see how it did in the last 10, 20 or 50 Executions, with the Test Workflow's flakiest test cases ranked by how often they flipped between passing and failing. Select a result to open that Execution. [Read more](/articles/test-workflows-reports#4-test-case-history).
 
+### Resources as Code
+
+- **Control Plane resources as code:** Manage Boards, MCP Servers, LLM Providers, Skills and AI Agents as YAML manifests with `testkube apply`, `testkube get` and `testkube delete`, or through the REST API. [Read more](/articles/control-plane-resources).
+- **GitOps sync of Control Plane resources:** A Runner with the GitOps capability can sync these resources from custom resources in its cluster, with the same ownership and pausing as Test Workflows. Turn it on with `gitops.controlPlaneResources.enabled` in the Runner chart. [Read more](/articles/gitops-overview#syncing-control-plane-resources).
+
 ### Organization
 
 - **Resource Group contents:** The Resource Group page has a **Resources** tab listing everything that belongs to the group. [Read more](/articles/resource-groups).
