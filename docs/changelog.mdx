@@ -41,6 +41,10 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 
 - **Resource Group contents:** The Resource Group page has a **Resources** tab listing everything that belongs to the group. [Read more](/articles/resource-groups).
 
+### Fixes
+
+- With PostgreSQL, a query for executions by tags now matches only executions that have every requested tag, where it used to match executions that had any one of them.
+
 ## Patch Release v2.15.1 (2026-11-12)
 
 Control Plane is available in Helm chart `v2.338.1` and the Runner is available in Helm chart `v2.15.2`.
