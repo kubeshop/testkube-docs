@@ -6,7 +6,7 @@ description: How the Executions page of the Dashboard lists every Execution in a
 
 The **Executions** dashboard is the central repository for all Executions that run in your **Environment**. Since insight specific to Executions is contained in a single location,
 the dashboard allows you to troubleshoot issues more quickly. The dashboard also allows you to **Search** and **Add a filter** – collectively enabling you to create Custom Views.
-These views allow you to quickly identify Executions based on filters such as **Workflow Labels**, **Execution Tags**, **Status**, **Health**, and **Runners**. For additional information,
+These views allow you to quickly identify Executions based on [filters](#filtering-executions) such as **Workflow Labels**, **Execution Tags**, **Status**, **Health**, and **Runners**. For additional information,
 read [Custom Views](../articles/testkube-dashboard-custom-views.md). Leveraging the **Executions** dashboard ensures less clicks through less pages to access the information you need.
 This increased efficiency also extends itself to an improved user experience.
 
@@ -34,6 +34,31 @@ Test Execution **Status** symbols:
 - A red warning sign (exclamation mark enclosed in a triangle) indicates an aborted Execution.
 
 You can select an Execution to examine its details, view logs, and troubleshoot issues.
+
+## Filtering Executions
+
+Select **Add a filter** to narrow the list. Filters are kept in the URL, so a filtered list can be shared as a link or
+saved as a [Custom View](../articles/testkube-dashboard-custom-views.md).
+
+| Filter                          | What it matches                                                                                                                                |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Workflow Labels**             | A label of the Workflow, as `key=value`                                                                                                        |
+| **Execution Tags**              | An [execution tag](../articles/execution-tags.md), as `key=value`                                                                              |
+| **Status**                      | The status of the Execution, such as passed, failed or aborted                                                                                 |
+| **Health**                      | The [health](../articles/workflow-health.mdx) of the Workflow, from **Perfect** to **Critical**                                                |
+| **Failure type**                | The kind of [failure](../articles/test-workflows-failure-reasons.md), such as a step failure or an infrastructure stop                         |
+| **Runner**                      | The Runner Agent that ran the Execution                                                                                                        |
+| **Actor type**                  | What started the Execution: **User / API Key**, **Cron**, **Test trigger**, **Workflow**, **TestWorkflowExecution CRD** or **Git Integration** |
+| **Actor name**                  | The name of the user, schedule, trigger or Workflow that started the Execution. Type the whole name                                            |
+| **Duration at least (seconds)** | Executions that ran at least this many seconds                                                                                                 |
+| **Duration at most (seconds)**  | Executions that ran at most this many seconds                                                                                                  |
+| **Date Range**                  | Executions from the last hour, 4 hours, 24 hours, or a custom range                                                                            |
+
+The label and tag values are sorted alphabetically, so a custom label or tag is easy to find. **Actor name** and the
+two duration filters take a typed value: press Enter, or leave the field, to apply it. Use both duration filters to
+find the Executions within a range, for example those that ran between 10 and 30 minutes.
+
+![Executions filters](../articles/images/testkube-dashboard-executions-filters.png)
 
 ## Timeline View
 
