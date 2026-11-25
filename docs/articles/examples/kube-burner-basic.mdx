@@ -4,6 +4,7 @@ description: Example Test Workflow that runs a kube-burner pod density test agai
 
 import KubeBurnerWorkflow from "../../workflows/kube-burner-workflow.md";
 import KubeBurnerRbac from "../../workflows/kube-burner-rbac.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # Basic kube-burner Example
 
@@ -99,6 +100,8 @@ Testkube uploads the artifacts whether the execution passes or fails:
 ## Custom metrics in Insights
 
 The JSON files in the artifacts are kube-burner's own format. To chart the results across executions, the `Convert metrics to line protocol` step turns them into [custom metrics](/articles/custom-metrics-in-insights): it writes InfluxDB Line Protocol to `metrics/kube-burner.lp`, and Testkube ingests the file when it uploads the artifacts. The upload logs a `Processing InfluxDB line protocol report: metrics/kube-burner.lp` line when it detects the file.
+
+<StandaloneMetricsNote />
 
 The script writes one record per pod condition, with the condition and the job name as tags, and one record for the job:
 

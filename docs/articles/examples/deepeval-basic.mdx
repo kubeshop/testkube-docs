@@ -3,7 +3,6 @@ description: Example Test Workflow that runs the same DeepEval test suite agains
 ---
 
 import ParallelDeepEval from "../../workflows/parallel-deepeval-workflow.md";
-import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # DeepEval Example - Comparing Models in Parallel
 
@@ -42,4 +41,10 @@ artifacts. Testkube ingests the `metrics.lp` files as [custom metrics](/articles
 the `deepeval` measurement, with the mean score, test counts and cost of each metric tagged by model, so you can
 compare the models side by side in Insights.
 
-<StandaloneMetricsNote />
+:::note Standalone agent
+
+This Workflow does not run on the [standalone agent](/articles/install/standalone-agent#agent-limitations-in-standalone-mode): it uses
+`parallel` with a `matrix`, which require the Testkube Control Plane, as do the `credential()` expression and the
+ingestion of custom metrics.
+
+:::
