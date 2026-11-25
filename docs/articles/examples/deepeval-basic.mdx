@@ -40,3 +40,11 @@ After execution, each parallel worker is shown separately in the execution view 
 artifacts. Testkube ingests the `metrics.lp` files as [custom metrics](/articles/custom-metrics-in-insights) under
 the `deepeval` measurement, with the mean score, test counts and cost of each metric tagged by model, so you can
 compare the models side by side in Insights.
+
+:::note Standalone agent
+
+This Workflow does not run on the [standalone agent](/articles/install/standalone-agent#agent-limitations-in-standalone-mode): it uses
+`parallel` with a `matrix`, which require the Testkube Control Plane, as do the `credential()` expression and the
+ingestion of custom metrics.
+
+:::

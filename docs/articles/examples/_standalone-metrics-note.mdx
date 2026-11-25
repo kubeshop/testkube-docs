@@ -1,0 +1,8 @@
+:::note Standalone agent
+
+Ingesting [custom metrics](/articles/custom-metrics-in-insights) requires the Testkube Control Plane. With the
+[standalone agent](/articles/install/standalone-agent#agent-limitations-in-standalone-mode), the Workflow still runs and the line protocol file is saved as
+an artifact, but the metrics are not ingested: the step that uploads the artifacts logs a warning that this is not
+supported in the standalone version.
+
+:::

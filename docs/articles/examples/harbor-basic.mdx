@@ -3,6 +3,7 @@ description: Example Test Workflow that runs Harbor agent evaluation tasks again
 ---
 
 import SimpleHarbor from "../../workflows/simple-harbor-workflow.md";
+import StandaloneAgentNote from "./_standalone-agent-note.mdx";
 
 # Basic Harbor Example
 
@@ -48,6 +49,8 @@ under the Artifacts tab of the execution has the `result.json` summary of the jo
 [custom metrics](/articles/custom-metrics-in-insights) under the `harbor_eval` measurement, so you can follow the
 mean reward, pass rate, token usage and cost of each agent and model across executions in Insights; see
 [AI Testing Metrics](ai-metrics) for the full list of fields and how to chart them.
+
+<StandaloneAgentNote />
 
 ## Running the Docker daemon
 

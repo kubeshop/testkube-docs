@@ -1385,6 +1385,11 @@ const sidebars = {
               label: "Harbor",
               id: "articles/examples/harbor-basic",
             },
+            {
+              type: "doc",
+              label: "kagent Agents",
+              id: "articles/examples/kagent-promptfoo",
+            },
           ],
         },
         {

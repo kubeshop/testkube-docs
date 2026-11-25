@@ -221,3 +221,4 @@ Kargo
 Entra
 JWT[s]?
 URN[s]?
+kagent
