@@ -17,6 +17,12 @@ The MCP Server performs actions on behalf of users or services using authenticat
 
 This means the MCP Server operates within your existing security boundaries - it cannot access resources the user or API token doesn't have permission for.
 
+Each tool call is authorized like the API call it makes. Connecting to the hosted endpoint needs read access to the environment. Running and aborting executions and changing their tags needs the Run role, and creating or updating workflows and workflow templates needs Write.
+
+:::warning Changes run without a confirmation step
+The hosted endpoint has no approval step of its own. Tools that change something, such as `create_workflow`, `update_workflow`, `run_workflow`, `abort_workflow_execution` and `update_execution_tags`, run as soon as your AI tool calls them. Rely on your AI tool's own tool approval settings, and on the role of the user or API token, to control what an agent can change.
+:::
+
 ## Authentication Methods
 
 ### OAuth (Recommended for Individual Users)
@@ -33,9 +39,10 @@ The hosted MCP endpoint supports OAuth authentication via the [MCP authorization
 **How it works:**
 
 1. Your MCP client discovers the OAuth metadata at `/.well-known/oauth-protected-resource`
-2. The client registers itself (via CIMD or DCR) and redirects you to log in
-3. After login, the gateway issues a short-lived access token and refresh token
-4. The client automatically refreshes tokens as needed
+2. The client registers itself (via CIMD or DCR) and opens a consent page in the Testkube Dashboard
+3. You sign in to the Dashboard, if you aren't already, and approve the client
+4. Testkube issues the client an access token, valid for one hour, and a refresh token, valid for seven days
+5. The client automatically refreshes tokens as needed
 
 ```json
 {
@@ -56,12 +63,10 @@ No `headers` or `Authorization` needed — the client handles everything.
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "testkube": {
+      "type": "http",
       "url": "https://api.testkube.io/organizations/{org_id}/environments/{env_id}/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN"
       }

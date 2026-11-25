@@ -1,5 +1,5 @@
 ---
-description: What the Testkube MCP Server lets AI tools do, the hosted, CLI and Docker setup options, and the full list of MCP tools for workflows, executions, artifacts, queries and Insights boards.
+description: What the Testkube MCP Server lets AI tools do, the hosted, CLI and Docker setup options, and the full list of MCP tools for workflows, executions, artifacts, queries, Insights metrics and Insights boards.
 ---
 
 # Testkube MCP Server
@@ -140,6 +140,15 @@ The MCP server provides tools for comprehensive Testkube management:
 - `get_workflow_schema` - Get the YAML schema for TestWorkflow definitions
 - `get_execution_schema` - Get the YAML schema for TestWorkflowExecution data
 
+### Insights Metrics
+
+Read the [Granular Metrics](/articles/test-insights#granular-metrics) that Testkube extracts from k6, JMeter, Artillery, JUnit and InfluxDB reports. These tools only cover the MCP session's environment. Granular metrics need PostgreSQL as the Testkube database, and on a Control Plane too old to serve them, the tools are listed but return an error when called.
+
+- `list_insight_series` - Find the metric series that exist, with the `seriesId` and metric key of each, filtered by workflow, report source, metric key or identity (such as a test case or a k6 request)
+- `list_insight_metric_keys` - List the distinct metric keys, such as `http_req_duration_p95_ms` or `test_duration_ms`
+- `get_insight_metric_series` - Get a metric as a time series, for a metric key (`measure`) or for chosen `seriesId` values, optionally broken down (`segment`) by workflow, status or an identity field. It covers the last 7 days unless you pass `startDate` and `endDate`. Besides metric keys, `measure` accepts `latency_p95_ms`, `throughput_rps` and `errors_rate`, which combine performance metrics across tools
+- `list_insight_executions` - List the executions behind a metric, most recent first, with the same filters as `get_insight_metric_series`
+
 ### Insights Boards
 
 Create, view and update [Insights boards](/articles/test-insights). Boards belong to the organization rather than to one environment, and a report narrows itself to environments through its own filters.
@@ -190,6 +199,10 @@ Show me test execution trends for the past week and identify failing patterns
 
 ```text
 Analyze the logs of execution "api-tests-123" and suggest fixes
+```
+
+```text
+How has the p95 latency of my k6 tests changed over the last two weeks, and which executions had the worst values?
 ```
 
 ```text
