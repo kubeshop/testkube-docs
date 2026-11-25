@@ -12,6 +12,7 @@ This panel has three tabs:
 
 - **AI Agents**: allows you to create and manage the AI Agents in your Testkube Environment.
 - **Connected MCP Servers**: allows you to connect to MCP Servers that your AI Agents can use to perform their tasks - [Read More](mcp-servers-for-ai-agents).
+- **Skills**: allows you to write guidance once and share it with your AI Agents and Test Bundles - [Read More](skills-for-ai-agents).
 - **Models**: allows you to view platform models and add custom models for use in AI Chats - [Read More](ai-models).
 
 ## Creating a new AI Agent
@@ -38,6 +39,7 @@ fields:
 - **Description** - a short description of what your AI Agent does.
 - **Instructions** - the prompt that your AI Agent will use to perform its task, read more about [AI Agent Instructions]
 - **MCP Server Setting**s - allows you to configure which MCP Server(s)/tool(s) your AI Agent has access to.
+- **Skills** - guidance your AI Agent follows, its own or shared from the Environment and Organization, read more about [Skills](#skills).
 - **Access** - who can use the AI Agent and see its shared chats, read more about [AI Agent access](#ai-agent-access).
 - **Delete** - deletes the AI Agent.
 
@@ -61,6 +63,14 @@ A couple of general guidelines:
 :::tip
 Check out the [Types of AI Agents](/articles/ai-agents#types-of-ai-agents) for more details on the different types of AI Agents and their use cases.
 :::
+
+### Skills
+
+Skills give an AI Agent guidance it follows, such as test conventions or business rules, without making its instructions
+longer. In the AI Agent's **Skills** section, select **Add Skill** to write a Skill only this AI Agent uses, or **Add from
+library** to add Environment and Organization Skills that other AI Agents and Test Bundles share. The AI reads a Skill
+when a task needs it, or in every chat when it is set to **Always**. Built-in AI Agents can't have Skills. Read more in
+[Skills for AI Agents and Test Bundles](skills-for-ai-agents).
 
 ### Configuring MCP Servers
 
