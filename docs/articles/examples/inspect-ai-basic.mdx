@@ -3,6 +3,7 @@ description: Example Test Workflow that runs an inline Inspect AI evaluation aga
 ---
 
 import SimpleInspectAi from "../../workflows/simple-inspect-ai-workflow.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # Basic Inspect AI Example
 
@@ -37,3 +38,5 @@ After execution, the evaluation output and quality-gate result are shown in the 
 Inspect JSON logs are available under the Artifacts tab of the execution. Testkube ingests the `eval.lp` file as
 [custom metrics](/articles/custom-metrics-in-insights) under the `inspect_eval` measurement, so you can follow the
 accuracy of each model across executions in Insights.
+
+<StandaloneMetricsNote />

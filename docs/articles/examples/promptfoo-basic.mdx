@@ -3,6 +3,7 @@ description: Example Test Workflow that runs the Promptfoo getting-started evalu
 ---
 
 import SimplePromptfoo from "../../workflows/simple-promptfoo-workflow.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # Basic Promptfoo Example
 
@@ -33,3 +34,5 @@ After execution, the JSON and HTML reports are available under the Artifacts tab
 and the evaluation output is shown in the Log Output tab. Testkube ingests the `results.lp` file as
 [custom metrics](/articles/custom-metrics-in-insights) under the `promptfoo_eval` measurement, so you can chart the
 pass rate and token usage across executions in Insights.
+
+<StandaloneMetricsNote />

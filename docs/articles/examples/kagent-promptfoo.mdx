@@ -3,6 +3,7 @@ description: Example Test Workflow that evaluates a kagent agent over the A2A pr
 ---
 
 import SimpleKagentPromptfoo from "../../workflows/simple-kagent-promptfoo-workflow.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # Testing a kagent Agent with Promptfoo
 
@@ -105,6 +106,8 @@ agent arrived at a reply. Testkube ingests the `results.lp` file as
 [custom metrics](/articles/custom-metrics-in-insights) under the `promptfoo_eval` measurement, so you can follow the
 pass rate and token usage of the agent across executions in Insights; see [AI Testing Metrics](ai-metrics) for how to
 chart them.
+
+<StandaloneMetricsNote />
 
 ## Writing your own test cases
 

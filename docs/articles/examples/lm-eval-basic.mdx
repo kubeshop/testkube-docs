@@ -3,6 +3,7 @@ description: Example Test Workflow that runs a slice of the `gsm8k` benchmark wi
 ---
 
 import SimpleLmEval from "../../workflows/simple-lm-eval-workflow.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
 
 # Basic LM Evaluation Harness Example
 
@@ -34,3 +35,5 @@ After execution, the benchmark scores are shown in the Log Output tab, and the r
 under the Artifacts tab of the execution. Testkube ingests the `metrics.lp` file as
 [custom metrics](/articles/custom-metrics-in-insights) under the `lm_eval` measurement, so you can follow the
 benchmark scores of each model across executions in Insights.
+
+<StandaloneMetricsNote />
