@@ -987,6 +987,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Available Tools",
+                  id: "articles/mcp-tools",
+                },
+                {
+                  type: "doc",
                   label: "Hosted Endpoint",
                   id: "articles/mcp-hosted",
                 },
