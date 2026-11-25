@@ -18,6 +18,7 @@ To call Testkube from a GitLab CI job, see [Testkube GitLab CI](/articles/gitlab
 
 - A Testkube environment with a connected [Runner](/articles/agents-overview).
 - A Testkube organization Admin or Owner to set up the GitLab connection, and an environment Admin to manage the repository integration.
+- For self-hosted Testkube, set `global.features.gitIntegration: true` in your Control Plane Helm values. The default Helm values hide **GitLab Repositories** in the dashboard.
 - The **Maintainer** or **Owner** role in GitLab to create a project webhook. Group webhooks require the group **Owner** role. See [GitLab webhook prerequisites](https://docs.gitlab.com/user/project/integrations/webhooks/#create-a-webhook).
 
 :::warning Version requirements
