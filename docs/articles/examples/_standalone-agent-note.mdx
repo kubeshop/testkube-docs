@@ -6,7 +6,7 @@ Two features this example uses require the Testkube Control Plane. With the
 - The `credential()` expression is not available, and an execution is aborted when it resolves one. Read the API key
   from a Kubernetes Secret instead, as described in
   [Using Secrets with Environment Parameters](/articles/test-workflows-examples-configuration#using-secrets-with-environment-parameters).
-- Custom metrics are not ingested. The Workflow still runs and the line protocol file is saved as an artifact, but the
+- [Custom metrics](/articles/custom-metrics-in-insights) are not ingested. The Workflow still runs and the line protocol file is saved as an artifact, but the
   step that uploads the artifacts logs a warning that this is not supported in the standalone version.
 
 :::
