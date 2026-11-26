@@ -24,15 +24,15 @@ The search box above the list finds events by the name or ID of the resource the
 
 An added filter becomes a chip next to the dropdown. Click the chip to change its value, pick the same value again to clear that one filter, or use **Clear filters** to remove all of them at once.
 
-| Filter          | What it narrows to                                                                                                                                                               |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Date**        | **Today**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **Custom range** to pick a first and last day. A range always covers whole days.                              |
-| **Event type**  | One kind of event, for example **Environment Deleted** or **Test Workflow Executed**.                                                                                            |
+| Filter          | What it narrows to                                                                                                                                                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Date**        | **Today**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **Custom range** to pick a first and last day. A range always covers whole days.                                                                                                          |
+| **Event type**  | One kind of event, for example **Environment Deleted** or **Test Workflow Executed**.                                                                                                                                                                        |
 | **Source**      | Where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent**, **MCP**, **A2A** or **AI Agent**. A call made with an API token through MCP has the **MCP** source, and a tool an AI Agent called on an MCP Server has the **AI Agent** source. |
-| **Environment** | One environment of the organization.                                                                                                                                             |
-| **Actor**       | The user or service that started the event.                                                                                                                                      |
-| **AI Agent**    | Everything one AI Agent did, including every tool it called.                                                                                                                     |
-| **MCP Server**  | Everything that went out to one MCP Server, whichever AI Agent called it.                                                                                                        |
+| **Environment** | One environment of the organization.                                                                                                                                                                                                                         |
+| **Actor**       | The user or service that started the event.                                                                                                                                                                                                                  |
+| **AI Agent**    | Everything one AI Agent did, including every tool it called.                                                                                                                                                                                                 |
+| **MCP Server**  | Everything that went out to one MCP Server, whichever AI Agent called it.                                                                                                                                                                                    |
 
 **AI Agent** and **MCP Server** need an **Environment** picked first, and their labels say so until you pick one. Both belong to an environment, so there is no list to choose from before that.
 
