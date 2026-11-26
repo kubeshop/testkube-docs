@@ -1,5 +1,5 @@
 ---
-description: Concepts behind AI Agents, including the four default agents, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
+description: Concepts behind AI Agents, including the five default agents, hiding agents per Environment, which agent a picker offers, the Dashboard agent templates, task-focused versus guidance agents, and example use cases for QA and DevOps teams.
 ---
 
 # Testkube AI Agents
@@ -34,17 +34,22 @@ See [Example Agents](/articles/ai-agent-examples-overview) for ready-to-use agen
 
 ## Default AI Agents
 
-Every Testkube environment comes with four pre-configured agents ready to use immediately:
+Every Testkube environment comes with five pre-configured agents ready to use immediately:
 
-| Agent                 | Purpose                                                                                                                                                  |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Testkube Helper**   | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment.                       |
-| **Troubleshoot**      | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes.                  |
-| **Design & Optimize** | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
-| **Analyze & Report**  | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports.                                               |
+| Agent                       | Purpose                                                                                                                                                  |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Testkube Helper**         | General-purpose assistant with access to all Testkube MCP tools. Ask it anything about your workflows, executions, or environment.                       |
+| **Troubleshoot**            | Specialized in analyzing failed executions — examines logs, artifacts, and execution history to identify root causes and suggest fixes.                  |
+| **Design & Optimize**       | Helps create new Test Workflows and optimize existing ones — generates workflow definitions, suggests improvements, and applies changes (with approval). |
+| **Analyze & Report**        | Summarizes execution trends, workflow health, and metrics across your environment into actionable reports.                                               |
+| **Git Integration Summary** | Writes the short execution summary the Git integration posts back on a pull or merge request, from the workflows that ran and their failure signals.     |
 
 These agents are automatically provisioned and kept up to date. They cannot be deleted but can be
 supplemented with custom agents tailored to your needs.
+
+Each Environment decides which of them it offers. An admin can hide any AI Agent, built-in or custom,
+in one Environment, so an Environment only shows the agents that fit its purpose. See
+[Show or hide an AI Agent in an Environment](/articles/ai-agent-access#show-or-hide-an-ai-agent-in-an-environment).
 
 ## Agent Templates
 
@@ -121,6 +126,30 @@ from interactive support and contextual recommendations.
 Both styles can leverage the same MCP Servers and tools — the difference lies in how the agent is triggered
 and how it interacts with users or systems.
 
+## Which AI Agent a Picker Offers
+
+Every AI Agent picker, in AI Assist, in a chat, on AI Analyze and on an AI Agent Trigger, draws from
+the same AI Agents: the ones the Environment shows and your [access](/articles/ai-agent-access) allows.
+
+Your organization's own agents come first. When an Environment has both kinds, the picker groups them
+under **Custom Agents** and **Testkube Agents**, custom first, and sorts each group by name. With only
+one kind there are no group headings.
+
+Where a picker starts depends on which one it is.
+
+In AI Assist, in a chat and in the command palette, it starts on the AI Agent you last picked in this
+Environment, if it is still offered; otherwise on the first custom AI Agent by name; otherwise on
+**Testkube Helper**. The last pick is remembered per browser, as a convenience rather than a setting, so
+it doesn't follow you to another machine and isn't shared with your team.
+
+**AI Analyze** instead starts on the built-in agent written for the job, **Troubleshoot** when you
+troubleshoot a failed execution and **Analyze & Report** when you ask for a report, because the prompt
+it sends is written for that agent's tools. If that agent isn't offered it falls back to the first
+custom AI Agent, then to **Testkube Helper**; it never reuses your last pick. You can still choose a
+different AI Agent in the options panel before starting.
+
+An **AI Agent Trigger** starts on nothing: its form has no AI Agent until you pick one.
+
 ## LLM and Model Selection
 
 AI Agents use the LLM configured for your Testkube environment by default. You can also
@@ -134,6 +163,7 @@ See [Default LLM and Model](/articles/ai-configuration#default-llm-and-model) fo
 - [Defining AI Agents](/articles/defining-ai-agents) — Create custom agents with tailored prompts and MCP tool access
 - [AI Agent Chats](/articles/using-ai-agents) — Manage chats, view tool calls, and handle approval requests
 - [AI Agent Triggers](/articles/ai-triggers) — Automate agent execution on workflow events or schedules
+- [Evals for AI Agents](/articles/ai-agent-evals) — Judge an agent's answers, and warn about or disable it when its turns keep failing
 - [Connected MCP Servers](/articles/mcp-servers-for-ai-agents) — Integrate external tools (GitHub, Slack, Jira, etc.)
 - [Configuring AI Models](/articles/ai-models) — Add custom models
 - [Example Agents](/articles/ai-agent-examples-overview) — Ready-to-use agent configurations for QA and DevOps

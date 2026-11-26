@@ -449,5 +449,41 @@ spec:
     - shell: "tree /usr/bin"
 ```
 
+### Retry the Whole Workflow After Infrastructure Failures
+
+This template gives every Workflow that uses it the same [Workflow `retry`](/articles/test-workflows-rerun#retrying-a-workflow-automatically):
+up to two retries when the cluster takes the pod away, for example on spot or preemptible nodes.
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflowTemplate
+metadata:
+  name: retry-on-infrastructure
+spec:
+  execution:
+    retry:
+      count: 2
+      on: [infrastructure]
+```
+
+Use it at the top level, since `execution` belongs to the whole Workflow:
+
+```yaml
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: nightly-smoke
+spec:
+  use:
+    - name: retry-on-infrastructure
+  steps:
+    - name: Check the service
+      run:
+        image: curlimages/curl:8.11.1
+        shell: curl -f https://testkube.io
+```
+
+A Workflow that sets its own `execution.retry` keeps it: the Workflow's value takes precedence over the template's.
+
 [inlining]: /articles/test-workflow-templates#understand-inlining
 [capture-logs]: /articles/tw-capture-logs

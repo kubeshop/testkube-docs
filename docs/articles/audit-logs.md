@@ -28,7 +28,7 @@ An added filter becomes a chip next to the dropdown. Click the chip to change it
 | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Date**        | **Today**, **Last 7 days**, **Last 30 days**, **Last 90 days**, or **Custom range** to pick a first and last day. A range always covers whole days.                              |
 | **Event type**  | One kind of event, for example **Environment Deleted** or **Test Workflow Executed**.                                                                                            |
-| **Source**      | Where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent**, **MCP**, **A2A** or **AI Agent**. A call made with an API token through MCP has the **MCP** source. |
+| **Source**      | Where the event came from: **UI**, **CLI**, **API Token**, **GitOps Agent**, **MCP**, **A2A** or **AI Agent**. A call made with an API token through MCP has the **MCP** source, and a tool an AI Agent called on an MCP Server has the **AI Agent** source. |
 | **Environment** | One environment of the organization.                                                                                                                                             |
 | **Actor**       | The user or service that started the event.                                                                                                                                      |
 | **AI Agent**    | Everything one AI Agent did, including every tool it called.                                                                                                                     |
@@ -69,29 +69,73 @@ Every event recorded while serving one of these calls has the **MCP** source, in
 
 ![Audit log filtered to the MCP source](images/audit-log-mcp.png "Audit log filtered to the MCP source")
 
-### Calls an AI Agent makes
+## AI Agent tool calls
 
-These are recorded as part of [MCP Servers for AI Agents](/articles/mcp-servers-for-ai-agents). An installation with that feature turned off records only the calls that arrive at its own MCP endpoint. Each one records:
+The section above covers calls that come **in** through an Environment's MCP endpoint. An
+[AI Agent](/articles/ai-agents) also calls **out**, to the [MCP Servers](/articles/mcp-servers-for-ai-agents)
+it was given. Those calls are recorded as **MCP Tool Called** events too, with the **AI Agent** source. An
+installation with MCP Servers for AI Agents turned off records only the calls that arrive at its
+own MCP endpoint.
 
-- The tool, the MCP Server it went out to, and the AI Agent that called it.
-- Whether the call completed, failed, or came back cut short, and a reason from a fixed set of categories.
-- How long it took and when it started, as the AI Agent measured them.
-- How the run started: from the dashboard, through the API, from a trigger, from a Git integration, through the MCP endpoint, or from another agent.
-- How the AI Agent signed in to the server: with no sign-in, with the agent's own key, as the person who asked, or through the identity provider.
-- The chat the call belongs to, and an identifier for the call itself.
-- The names of the call's arguments, never their values.
+### What a record contains
 
-The event is attributed to the AI Agent, not to a person. How the run started and which identity the AI Agent presented are recorded next to it, and both show in the row, so an unattended run on the agent's own key reads differently from a chat where the agent acted as the person asking.
+- The **tool** that was called and the **MCP Server** it reached, including the built-in Testkube one.
+- The **AI Agent** that called it.
+- The **identity whose token was presented**, which is the actor of the event. For a run nobody
+  started, such as an AI Trigger, that is the trigger's own token rather than a person.
+- Whether it **succeeded, failed or was cut short**, how long it took, and the reason when it failed.
+- **How the run started**: from the dashboard, the API, a trigger, a Git integration, MCP or A2A.
+- **What was presented to the MCP Server**: no sign-in, the agent's own key, the person who asked,
+  or your [identity provider](/articles/ai-identity-provider-sign-in).
+- The **argument key names**, so a reviewer can see the shape of the call.
 
-**Argument values and results are never recorded for these calls.** Testkube does not know a third-party MCP Server's tools in advance, so there is no list of fields it could keep safely, and anything a server puts in an argument may be a credential or customer data. The argument names say what shape the call had without carrying the payload, and the failure reason is one of a fixed set for the same reason: a tool's own error text can echo its arguments back. An investigation that needs the values goes to your own tracing backend, and only if a trace destination was configured with content included before the call ran.
+In the list, a row reads **Executed MCP Tool** followed by the tool, the MCP Server and the AI Agent,
+and ends with how the run started and what was presented, for example _run from the dashboard through
+the identity provider_. Use **Open details** on the row for the full record.
 
-A tool the AI Agent carries itself, rather than one from an MCP Server, is recorded with no MCP Server. It still shows under the **AI Agent** filter; it is the **MCP Server** filter that does not reach it.
+A tool the AI Agent carries itself, rather than one from an MCP Server, is recorded with no MCP
+Server. It still shows under the **AI Agent** filter; it is the **MCP Server** filter that does not
+reach it.
 
 ![The Audit log filtered to one AI Agent](images/audit-log-ai-agent.png "The Audit log filtered to one AI Agent")
 
-### When a chat's trail is incomplete
+### What it deliberately omits, and why
 
-Recording an AI Agent's tool call is best effort. The call has already run by the time its record is written, and a write that fails never fails the call. A chat that lost a record is marked as incomplete, on the `auditTrailIncomplete` field of the chat in the API, so a chat without the mark lost nothing that Testkube knows of. The dashboard does not show the mark, so read it from the API when completeness is the question. What is missing from an incomplete trail is the record of one or more tool calls, never a call that did not happen.
+**Argument values and the result body are not recorded.** For an MCP Server you connected, Testkube
+does not know its tools, so it cannot decide in advance which of their arguments are safe to keep.
+Recording the argument **key names** gives a reviewer the shape of a call without its contents.
+
+This is also what keeps the trail readable by administrators without opening up the AI chats
+themselves: the trail says **that** a tool was called, never what was said.
+
+### When a trail is known to be incomplete
+
+Recording a tool call is best effort, so that auditing never stops an agent from working. When a
+record could not be written, the chat is marked, and every event of that chat then says
+**this chat's trail has known gaps**, in the list, through the API and in the export.
+
+Treat it as it reads. A chat without the mark is one where no gap is known, which is not the same as
+a chat where one is impossible.
+
+### Who may read it
+
+Only **Organization Owners**, **Admins** and **Billers**, the same people who can already read the
+rest of the Audit Log. Configuring an AI Agent is an Environment permission, so somebody can create
+an agent and give it MCP Servers without being able to read its trail. An AI Agent's page carries an
+**Audit log** link, filtered to that agent, and it is shown only to people who can follow it.
+
+### Reading it outside the dashboard
+
+`GET /organizations/{id}/audit` and `/audit/export` take `aiAgentId` and `mcpServerId`, so
+"everything this agent did" is a query rather than a separate report. The CSV export carries the
+same fields, with the incomplete-trail mark in a `trail_incomplete` column.
+
+### What the trail does not answer
+
+The trail answers what ran, where, under whose authority, and how slowly. It does not answer which
+**arguments** caused a failure, because it does not keep them. That belongs to the trace Testkube
+forwards to your own observability backend, which comes from the same instrumentation point. Use the
+trail for who and whether, and the trace for why.
 
 ## Exporting Audit Logs
 

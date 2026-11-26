@@ -12,6 +12,7 @@ AI governance gives Organization admins and owners control over how AI is used i
 - **[Token limits and pauses](ai-token-limits).** How many AI tokens a Member, an AI Agent, an Environment or the Organization can use, and stopping AI at any of those levels.
 - **[Token usage](ai-usage#ai-token-usage).** How many AI tokens were used, split by AI Agent, Member, model or Environment.
 - **[AI tracing](ai-tracing).** OpenTelemetry traces of every AI turn, sent to your own observability tool.
+- **[Evals](ai-agent-evals).** Judging the answers of an AI Agent, and disabling it when too many of its turns fail. An AI Agent disabled this way shows as paused, and resuming it re-enables it. Evals are set on each AI Agent by Environment admins.
 - **[Audit log](audit-logs#ai-and-mcp-events).** Every tool call, both the ones made through MCP and the ones an AI Agent makes to its MCP Servers.
 
 Most of it lives on one page: **Organization Management** → **AI Governance**. Only Organization admins and owners see that page. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
