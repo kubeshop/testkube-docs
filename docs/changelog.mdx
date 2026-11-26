@@ -14,7 +14,7 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 ## Release v2.16.0 (2026-11-XX)
 
-> Evals for AI Agents, MCP Servers that act as the person who chats, an audit trail of every AI Agent tool call, and more ways to group and filter Insights.
+> Skills shared across AI Agents and Test Bundles, evals for AI Agents, MCP Servers that act as the person who chats, an audit trail of every AI Agent tool call, and more ways to group and filter Insights.
 
 Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available in Helm chart `v2.16.X`.
 
@@ -24,6 +24,13 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 - **Sign in to MCP Servers as the person:** An MCP Server can receive the identity of the person who chats, exchanged with your identity provider, so the server acts with that person's own permissions. Set the identity provider for the organization or for one Environment, and test it from the dashboard. Runs with nobody present, such as AI Triggers, use a service identity, and a refused sign-in is reported in the chat instead of the MCP Server silently going missing. [Read more](/articles/ai-identity-provider-sign-in).
 - **Audit trail of AI Agent tool calls:** Every tool an AI Agent calls through an MCP Server is recorded in the Audit log as the AI Agent acting for the person, not as that person. Filter the Audit log by AI Agent and MCP Server, see each call in the chat that made it, and see when a chat's trail is known to be incomplete. The Audit log filters now use the same search and **Add a filter** bar as the rest of the dashboard. [Read more](/articles/audit-logs).
 - **Hide AI Agents per Environment:** Admins can hide an AI Agent, including a built-in one, from an Environment. AI Assist and the other AI Agent pickers list custom AI Agents first and preselect the last one used. [Read more](/articles/ai-agent-access).
+
+### Skills
+
+- **Skills for AI Agents and Test Bundles:** Write guidance the AI follows, such as test conventions or business rules, as a Skill with a name, a description and its content, following the Agent Skills format. The AI sees each Skill's name and description and reads the content when a task needs it, or in every chat when the Skill is set to **Always**. Built-in AI Agents can't have Skills. [Read more](/articles/skills-for-ai-agents).
+- **Share Skills across AI Agents and Test Bundles:** Organization admins write Skills for every Environment in **AI & Governance**, and Environment admins write Skills for their Environment in **AI Settings**. Add them to any AI Agent or Test Bundle with **Add from library**; editing a shared Skill changes it everywhere it is used. [Read more](/articles/skills-for-ai-agents#add-a-skill-to-an-ai-agent-or-test-bundle).
+- **Skills for new Test Bundles:** Environment admins pick the Skills every new Test Bundle starts with, in **AI Settings** → **Test Catalog**. [Read more](/articles/skills-for-ai-agents#skills-for-new-test-bundles).
+- **A page for each Skill:** Open a shared Skill to edit it and see where it lives, and use **Used by** to see every AI Agent and Test Bundle that uses it before you change it. [Read more](/articles/skills-for-ai-agents#a-skills-page).
 
 ### Insights
 

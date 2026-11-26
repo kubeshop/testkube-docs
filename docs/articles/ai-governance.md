@@ -41,6 +41,7 @@ The page has one tab per area. **Access**, **Models** and **Limits** start from 
 | Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                           | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
 | Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here. | [Token limits and pauses](ai-token-limits#review-all-limits)           |
 | Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                    | [Model access](ai-model-access#review-models-across-an-environment)    |
+| Skills  | The Organization's Skills, which AI Agents and Test Bundles in every Environment can use. Select a Skill to see where it's used. | [Skills](skills-for-ai-agents)                                         |
 | Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                | [AI tracing](ai-tracing)                                               |
 | Audit   | Opens the Audit log filtered to the **MCP** source.                                                                              | [Audit log](audit-logs#sharing-a-filtered-view)                        |
 
@@ -51,6 +52,7 @@ The page has one tab per area. **Access**, **Models** and **Limits** start from 
 ## Who can do what
 
 - **Organization admins and owners** can open the AI Governance page and change everything on it.
+- **Every member** can see the Organization's Skills; only Organization admins and owners can change them.
 - **Environment admins** can set token limits and pauses for their Environment and its AI Agents, from **AI Settings**. They can use every AI Agent, but can't change AI Agent access or model access.
 - **The creator of an AI Agent** can make it public or private.
 
@@ -59,4 +61,5 @@ The page has one tab per area. **Access**, **Models** and **Limits** start from 
 - [Testkube AI Overview](testkube-ai-overview)
 - [AI usage, seats, and limits](ai-usage)
 - [AI Agents](ai-agents)
+- [Skills for AI Agents and Test Bundles](skills-for-ai-agents)
 - [Testkube AI Configuration Reference](ai-configuration)

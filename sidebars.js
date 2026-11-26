@@ -910,6 +910,11 @@ const sidebars = {
                 },
                 {
                   type: "doc",
+                  label: "Skills",
+                  id: "articles/skills-for-ai-agents",
+                },
+                {
+                  type: "doc",
                   label: "Identity Provider Sign-in",
                   id: "articles/ai-identity-provider-sign-in",
                 },
