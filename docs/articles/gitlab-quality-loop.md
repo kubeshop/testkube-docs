@@ -1,12 +1,12 @@
 ---
-title: GitLab Integration
+title: Advanced GitLab integration
 description: Run Test Workflows on GitLab merge requests and post results and AI summaries back to GitLab.
 slug: /articles/gitlab-integration
 ---
 
 <!-- Before publishing, confirm production Cloud availability and update the version requirements to the first supported stable self-hosted release. -->
 
-# GitLab Integration
+# Advanced GitLab integration
 
 Connect a GitLab project to a Testkube environment to run Test Workflows on merge requests. Testkube posts commit statuses and updates a merge request comment with results, links to executions, and an optional AI summary.
 
@@ -29,7 +29,7 @@ Generated workflows and workflows using `authType: gitlab` require a Control Pla
 
 Open **Organization Management > Git integrations > GitLab** and select **Connect GitLab**.
 
-1. Choose **OAuth**, enter your GitLab instance URL, select **Enable Testkube**, and copy the **Callback URL**.
+1. Choose **OAuth**, enter your GitLab instance URL, select **Enable Advanced GitLab integration**, and copy the **Callback URL**.
 2. In GitLab, create a [confidential OAuth application](https://docs.gitlab.com/integration/oauth_provider/) with that redirect URI and the `api`, `read_api`, and `write_repository` scopes.
 3. Enter the **Application ID** and **Client secret** in Testkube. Select **Connect with OAuth** and authorize the application.
 4. Under **Repositories**, turn on **Repository access** for your project.
@@ -91,9 +91,9 @@ Under **AI Configuration**, enable AI analysis and select an agent and model. Ch
 
 ![AI Configuration showing the agent, model, and analysis conditions](../img/gitlab-quality-loop/ai-configuration.jpg)
 
-### Enable or disable the GitLab integration
+### Enable or disable Advanced GitLab integration
 
-Use **General** to disable the GitLab integration. This stops new runs and cancels active ones. You can enable it again when at least one workflow is connected.
+Use **General > Disable Advanced GitLab integration** to disable the integration. This stops new runs and cancels active ones. You can enable it again when at least one workflow is connected.
 
 ## Generated workflows
 
