@@ -114,14 +114,13 @@ Members of the group can then use those AI Agents and see their shared chats, as
 
 ## Review access across an Environment
 
-**Organization Management** → **AI Governance** → **Access** lists the AI Agents of one Environment and who can use each one. Only Organization admins and owners can open it.
+**Organization Management** → **AI & Governance** → **Agent Access** lists every AI Agent, with its Environment, and who can use it. Only Organization admins and owners can open it.
 
-- **Environment** picks the Environment. The first one by name is selected when the page opens.
-- **Search by name**, **Filter by access**, and **Filter by Resource Group** narrow the list.
+- **Search by name**, and **Add a filter** for **Environment**, **Access** or **Resource Group**, narrow the list.
 - **Who can use it** shows the access, for example `Roles: Run, Write` or `Resource Groups: Payments`.
 - The **⋮** menu on each AI Agent has **Edit access**, which opens the same choices as the Access card, and **Open AI Agent**.
 
-![AI Governance Access tab listing the AI Agents of an Environment and who can use each one](images/ai-governance-access.png)
+![AI & Governance Agent Access page listing AI Agents and who can use each one](images/ai-governance-access.png)
 
 ![The Edit access modal with two Resource Groups chosen](images/ai-governance-access-edit.png)
 
