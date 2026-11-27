@@ -173,9 +173,9 @@ const config = {
       },
 
       announcementBar: {
-        id: "testkube-2100-release",
+        id: "testkube-2160-release",
         content:
-          '<b>Testkube 2.15.0 is out! AI Governance, GitLab in AI Test Creation, an executions timeline, and much more! <a href="/changelog">Read More</a></b>',
+          '<b>Testkube 2.16.0 is out! Skills for AI Agents and Test Bundles, evals for AI Agents, A2A access, and much more! <a href="/changelog">Read More</a></b>',
         backgroundColor: "#8951ff",
         textColor: "#fff",
       },
