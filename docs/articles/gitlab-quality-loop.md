@@ -1,12 +1,12 @@
 ---
-title: GitLab Quality Loop
+title: GitLab Integration
 description: Run Test Workflows on GitLab merge requests and post results and AI summaries back to GitLab.
-slug: /articles/gitlab-quality-loop
+slug: /articles/gitlab-integration
 ---
 
 <!-- Before publishing, confirm production Cloud availability and update the version requirements to the first supported stable self-hosted release. -->
 
-# GitLab Quality Loop
+# GitLab Integration
 
 Connect a GitLab project to a Testkube environment to run Test Workflows on merge requests. Testkube posts commit statuses and updates a merge request comment with results, links to executions, and an optional AI summary.
 
@@ -29,7 +29,7 @@ Generated workflows and workflows using `authType: gitlab` require a Control Pla
 
 Open **Organization Management > Git integrations > GitLab** and select **Connect GitLab**.
 
-1. Choose **OAuth**, enter your GitLab instance URL, select **Enable Quality Loop**, and copy the **Callback URL**.
+1. Choose **OAuth**, enter your GitLab instance URL, select **Enable Testkube**, and copy the **Callback URL**.
 2. In GitLab, create a [confidential OAuth application](https://docs.gitlab.com/integration/oauth_provider/) with that redirect URI and the `api`, `read_api`, and `write_repository` scopes.
 3. Enter the **Application ID** and **Client secret** in Testkube. Select **Connect with OAuth** and authorize the application.
 4. Under **Repositories**, turn on **Repository access** for your project.
@@ -47,7 +47,7 @@ To add another workflow later, use **Connected Workflows > Add workflow**, as sh
 
 ![The workflow picker with an existing Test Workflow selected and the repository scan option below it](../img/gitlab-quality-loop/workflow-picker.jpg)
 
-To run an existing workflow against the merge request's head commit, declare a string `revision` parameter under `spec.config` and set `spec.content.git.revision` to `{{ config.revision }}`. Testkube supplies the commit SHA. Use `authType: gitlab` to let Quality Loop provide checkout credentials for the connected project.
+To run an existing workflow against the merge request's head commit, declare a string `revision` parameter under `spec.config` and set `spec.content.git.revision` to `{{ config.revision }}`. Testkube supplies the commit SHA. Use `authType: gitlab` to let Testkube provide checkout credentials for the connected project.
 
 ## Configure the webhook
 
@@ -75,8 +75,6 @@ Merge requests from forks and edits to existing comments do not trigger runs. Op
 
 Testkube posts a commit status and updates the merge request comment as workflows run. From the comment, open a workflow result to see its logs in Testkube. When AI analysis is available, use **Continue analysis in Testkube** to open the conversation.
 
-![A GitLab merge request comment showing passing workflows, a quality gate, and AI analysis](../img/gitlab-quality-loop/merge-request-results.jpg)
-
 ## Configuration
 
 ### Merge request feedback
@@ -93,11 +91,9 @@ Under **AI Configuration**, enable AI analysis and select an agent and model. Ch
 
 ![AI Configuration showing the agent, model, and analysis conditions](../img/gitlab-quality-loop/ai-configuration.jpg)
 
-### Enable or disable Quality Loop
+### Enable or disable the GitLab integration
 
-Use **General** to disable Quality Loop. This stops new runs and cancels active ones. You can enable it again when at least one workflow is connected.
-
-![General settings showing the connected GitLab project and the Disable Quality Loop action](../img/gitlab-quality-loop/general-settings.jpg)
+Use **General** to disable the GitLab integration. This stops new runs and cancels active ones. You can enable it again when at least one workflow is connected.
 
 ## Generated workflows
 
@@ -111,4 +107,4 @@ Rescanning replaces managed workflow definitions, including custom Runner target
 
 - **The project is missing from the picker.** Check that the GitLab connection has API write access and that the project is enabled under **Repositories**.
 - **The repository is awaiting a webhook.** Check the URL, token, and enabled events in GitLab's **Recent events**. Check **Event History** in Testkube for the resulting run.
-- **The checkout fails or uses the wrong commit.** Verify the Runner supports GitLab checkout and that the workflow uses `{{ config.revision }}`. Testkube supplies Quality Loop checkout credentials during integration runs.
+- **The checkout fails or uses the wrong commit.** Verify the Runner supports GitLab checkout and that the workflow uses `{{ config.revision }}`. Testkube supplies GitLab checkout credentials during integration runs.
