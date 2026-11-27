@@ -30,7 +30,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 - **Evals for AI Agents:** A judge model scores an AI Agent's answers for helpfulness, groundedness, context relevance and hallucination, and the **Evals** tab shows the results over time. Environment admins turn Evals on per AI Agent, and can warn about or pause an AI Agent whose answers keep failing. Judge tokens count toward token limits. [Read more](/articles/ai-agent-evals).
 - **MCP Servers act as the person who chats:** On self-hosted installs, set an MCP Server's **Sign-in** to **Through the identity provider**, so it works with that person's own permissions. Set the identity provider for the Organization or one Environment, and check it with **Test connection**. Runs with nobody present, such as AI Triggers, use your identity provider's service account. [Read more](/articles/ai-identity-provider-sign-in).
 - **Audit trail of AI Agent tool calls:** Every tool an AI Agent calls through an MCP Server is recorded in the Audit log as the AI Agent acting for the person, not as that person. Filter the Audit log by AI Agent and MCP Server, see each call in the chat that made it, and see when a chat's trail is known to be incomplete. The Audit log filters now use the same search and **Add a filter** bar as the rest of the dashboard. [Read more](/articles/audit-logs).
-- **Hide AI Agents per Environment:** Environment admins can hide an AI Agent, including a built-in one, from an Environment. AI Assist and the other AI Agent pickers list custom AI Agents first and preselect the last one used. [Read more](/articles/ai-agent-access).
+- **Hide AI Agents per Environment:** Environment admins can hide an AI Agent, including a built-in one, from an Environment. AI Assist and the other AI Agent pickers list custom AI Agents first and preselect the last one used, except AI Analyze. [Read more](/articles/ai-agent-access).
 
 ### Skills
 
@@ -41,7 +41,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 
 ### A2A
 
-- **AI Agents over A2A:** Other agents can chat with an AI Agent over the Agent2Agent (A2A) protocol: send it a message, stream the answer, and follow or cancel its tasks. Turn A2A on for the organization in **Product features**, then for each AI Agent in its **A2A** section, which shows the AI Agent's A2A URL. Chats started over A2A carry an **A2A** tag. A2A is off by default and needs PostgreSQL; on self-hosted installs, enable it with `testkube-cloud-api.api.features.a2aEnabled`.
+- **AI Agents over A2A:** Other agents can chat with an AI Agent over the Agent2Agent (A2A) protocol: send it a message, stream the answer, and follow or cancel its tasks. Turn A2A on for the organization in **Product Features**, then for each AI Agent in its **A2A** section, which shows the AI Agent's A2A URL. Chats started over A2A carry an **A2A** tag. A2A is off by default and needs PostgreSQL; on self-hosted installs, enable it with `testkube-cloud-api.api.features.a2aEnabled`.
 - **AI Test Creation over A2A:** Ask AI Test Creation to write tests from another agent. Name a Test Bundle or a repository, and Testkube writes and runs the tests and returns the Execution, with links to it and the chat. Questions go back to the caller; approvals and credential requests link to the dashboard. Creating a Test Bundle needs the Write role.
 - **Sign in with OAuth:** A2A clients can now sign in with OAuth, as MCP clients already can. A new consent page in the dashboard lets the person approve the client and pick the Organization, and every call then runs as that person, in that Organization only.
 
@@ -55,8 +55,8 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 
 ### AI Test Creation
 
-- **Create a Test Bundle from a repository or a Test Workflow:** Under **Or start from** in the Test Catalog, start a Test Bundle from a Git repository, a Test Workflow or from scratch. A guided dialog creates the bundle, starts its Sandbox, sets up the repository and context, and opens the first chat. If a step fails, retrying continues from that step.
-- The credentials Test Authoring creates no longer crowd the **Credentials** page and the credential pickers. Turn on **Show Test Catalog credentials** in **Environment Settings** → **Credentials** to see them. Secrets entered in a Test Bundle chat are saved with that Test Bundle's labels.
+- **Create a Test Bundle from a repository or a Test Workflow:** Under **Or start from** in the Test Catalog, start a Test Bundle from a **Git repository**, a **Test Workflow** or an **Empty Test Bundle**. A guided dialog creates the bundle, starts its Sandbox, sets up the repository and context, and opens the first chat. If a step fails, retrying continues from that step.
+- The credentials Test Authoring creates no longer crowd the **Credentials** page and the credential pickers. Turn on **Show Test Catalog credentials** in **Settings** → **Credentials** to see them. Secrets entered in a Test Bundle chat are labelled with their Test Bundle.
 
 ### Insights
 
@@ -74,7 +74,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 ### Organization
 
 - **Resource Group contents:** The Resource Group page has a **Resources** tab listing everything that belongs to the group. [Read more](/articles/resource-groups).
-- **Grouped Organization settings:** The Organization settings menu is grouped into **General**, **Environments**, **Members & Access**, **AI & Governance**, **Git integrations** and **Audit log & Events**. GitOps ownership, Runner token masking and Webhook URL masking moved from **Product features** to a new **Policies** page, and SCIM has its own **SCIM Provisioning** page. Old links redirect to the new pages.
+- **Grouped Organization settings:** The Organization settings menu is grouped into **General**, **Environments**, **Members & Access**, **AI & Governance**, **Git integrations** and **Audit log & Events**. GitOps ownership, Runner token masking and Webhook URL masking moved from **Product Features** to a new **Policies** page, and SCIM has its own **SCIM Provisioning** page. Old links redirect to the new pages.
 - Lists across the dashboard, such as Executions, Test Workflows, Members and the Audit log, use the same pagination.
 
 ### Security
