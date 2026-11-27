@@ -218,7 +218,7 @@ This tab allows you to configure Environment-level Product Features:
 
 ### MCP Server
 
-Allows you to enable/disable the MCP Server for your Environment and provides easy access to the MCP Server endpoint
+The **Testkube MCP Server** tab allows you to turn the MCP Server on or off for your Environment and provides easy access to the MCP Server endpoint
 with configuration examples for common IDEs - [Read More](/articles/mcp-hosted).
 
 ![MCP Server Settings](images/mcp-server-settings.png)

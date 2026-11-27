@@ -45,12 +45,10 @@ If you prefer using an API token (e.g., for shared or automated setups):
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "testkube": {
+      "type": "http",
       "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN_HERE"
       }
@@ -113,16 +111,13 @@ Cursor provides powerful AI assistance with built-in MCP support.
 
 ### Using the Hosted Endpoint (Recommended)
 
-Add the hosted endpoint configuration to your Cursor MCP settings:
+Add the hosted endpoint configuration to your Cursor MCP settings. Cursor signs in with OAuth when you leave out `headers`; to use an API token instead, keep them:
 
 ```json
 {
   "mcpServers": {
     "testkube": {
       "url": "https://api.testkube.io/organizations/tkcorg_YOUR_ORG_ID/environments/tkcenv_YOUR_ENV_ID/mcp",
-      "transport": {
-        "type": "sse"
-      },
       "headers": {
         "Authorization": "Bearer YOUR_API_TOKEN_HERE"
       }
