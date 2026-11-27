@@ -222,3 +222,5 @@ Entra
 JWT[s]?
 URN[s]?
 kagent
+podinfo
+(?i)vcluster

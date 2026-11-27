@@ -1,0 +1,310 @@
+---
+description: Example Test Workflows that create a vCluster virtual cluster in a temporary namespace, install a Helm chart into it, run tests against it and delete it, with the ServiceAccount they need and a scheduled cleanup.
+---
+
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
+
+# Provisioning an Environment with vCluster
+
+This example creates a [vCluster](https://www.vcluster.com/) virtual cluster in a temporary namespace, installs an
+application into the virtual cluster, runs a test Workflow against it and deletes the namespace again. It follows the
+pattern described in [Provisioning Test Environments](environment-provisioning), which also explains its limits.
+
+A virtual cluster has its own API server, so every environment gets its own CustomResourceDefinitions, cluster-scoped
+resources and namespaces, which a temporary namespace alone cannot give it. vCluster decides where the environment
+lives, not how the application gets into it: the example installs [podinfo](https://github.com/stefanprodan/podinfo)
+with Helm, in the same way as the [Helm example](environment-provisioning-helm), only against the virtual cluster.
+
+<RequiresCommercialWorkflows />
+
+## Prerequisites
+
+The provisioning and teardown Workflows need a ServiceAccount that is allowed to create namespaces and the resources
+of the vCluster chart. Use `kubectl` to apply the following configuration to the cluster where the Testkube Runner is
+running, and replace `testkube` with the namespace of your Runner.
+
+```yaml title="ServiceAccount for vCluster provisioning"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: vcluster-env-provisioner
+  namespace: testkube
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: vcluster-env-provisioner
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["create", "get", "list", "delete"]
+  # The resources of the vCluster chart, and the Secrets in which Helm stores the release
+  - apiGroups: [""]
+    resources: ["secrets", "services", "serviceaccounts", "configmaps"]
+    verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["statefulsets"]
+    verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  # The chart creates a Role for the virtual cluster. `escalate` and `bind` allow that
+  # without granting the rules of that Role to this ServiceAccount
+  - apiGroups: ["rbac.authorization.k8s.io"]
+    resources: ["roles", "rolebindings"]
+    verbs:
+      [
+        "create",
+        "get",
+        "list",
+        "watch",
+        "update",
+        "patch",
+        "delete",
+        "escalate",
+        "bind",
+      ]
+  # Read access for `helm --wait`
+  - apiGroups: [""]
+    resources: ["pods", "events"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: vcluster-env-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: vcluster-env-provisioner
+    namespace: testkube
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: vcluster-env-provisioner
+```
+
+This ServiceAccount needs no permissions on the resources of the application. The Workflow installs the application
+with the credentials of the virtual cluster, which are valid only inside it.
+
+:::warning
+The namespace does not exist when the permissions are granted, so they cannot be limited to it: this ServiceAccount
+can manage these resources in every namespace of the cluster, and `escalate` lets it create Roles with any rules. Use
+it only in the provisioning, teardown and cleanup Workflows.
+:::
+
+## The Provisioning Workflow
+
+```yaml title="Provisioning Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-vcluster-provision
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: vcluster-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Create namespace
+      shell: |
+        date +%s > /data/started
+        cat <<EOF | kubectl create -f -
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: {{ config.namespace }}
+          labels:
+            testkube.io/ephemeral-environment: "true"
+        EOF
+    - name: Create virtual cluster
+      shell: |
+        helm upgrade --install vcluster vcluster --repo https://charts.loft.sh --version 0.38.0 \
+          --namespace "{{ config.namespace }}" \
+          --set rbac.clusterRole.enabled=false \
+          --set exportKubeConfig.server=https://vcluster.{{ config.namespace }} \
+          --wait --timeout 5m
+        kubectl wait secret/vc-vcluster --namespace "{{ config.namespace }}" --for=create --timeout=2m
+        kubectl get secret vc-vcluster --namespace "{{ config.namespace }}" \
+          -o jsonpath='{.data.config}' | base64 -d > /data/kubeconfig
+        date +%s > /data/cluster
+    - name: Install chart into the virtual cluster
+      shell: |
+        export KUBECONFIG=/data/kubeconfig
+        helm upgrade --install podinfo oci://ghcr.io/stefanprodan/charts/podinfo \
+          --namespace default --wait --timeout 3m
+        date +%s > /data/installed
+        kubectl rollout status deployment/podinfo --namespace default --timeout 3m
+        date +%s > /data/ready
+    - name: Publish environment URL
+      shell: |
+        echo -n "http://podinfo-x-default-x-vcluster.{{ config.namespace }}.svc.cluster.local:9898" > /testkube/outputs/url
+    - name: Export provisioning metrics
+      shell: |
+        started=$(cat /data/started); cluster=$(cat /data/cluster)
+        installed=$(cat /data/installed); ready=$(cat /data/ready)
+        pods=$(kubectl get pods --namespace "{{ config.namespace }}" -o json | jq '.items | length')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/provisioning.lp <<EOF
+        environment_provisioning,provisioner=vcluster,app=podinfo cluster_seconds=$((cluster - started)),install_seconds=$((installed - cluster)),ready_wait_seconds=$((ready - installed)),total_seconds=$((ready - started)),pods=${pods}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+```
+
+- The `spec.config` property defines the `namespace` [configuration parameter](/articles/test-workflows-examples-configuration),
+  which the composite Workflow sets.
+- The `spec.pod.serviceAccountName` property selects the ServiceAccount from the prerequisites.
+- The `Create namespace` step creates the namespace that holds the virtual cluster, with the label that the
+  [cleanup Workflow](#the-cleanup-workflow) selects on.
+- The `Create virtual cluster` step installs the vCluster chart as the release `vcluster` and saves the kubeconfig of
+  the virtual cluster for the next step:
+  - `rbac.clusterRole.enabled=false` keeps the chart from creating a ClusterRole, so that everything it creates is in
+    the temporary namespace and the ServiceAccount needs no permissions on ClusterRoles.
+  - `exportKubeConfig.server` sets the address in the kubeconfig that vCluster writes to the `vc-vcluster` Secret.
+    The default, `https://localhost:8443`, only works through a port-forward.
+- The `Install chart into the virtual cluster` step points `helm` and `kubectl` at the virtual cluster with
+  `KUBECONFIG`. See the [Helm example](environment-provisioning-helm#the-provisioning-workflow) for why
+  `kubectl rollout status` follows `helm --wait`.
+- The `Publish environment URL` step writes the in-cluster URL of the application to `/testkube/outputs/url`, where
+  the composite Workflow reads it.
+- The `Export provisioning metrics` step writes how long the virtual cluster and the application took to a file in
+  [Influx Line Protocol](/articles/custom-metrics-in-insights) and uploads it as an artifact, from the timestamps
+  that the earlier steps saved in `/data`. See [Environment Metrics](environment-provisioning#environment-metrics).
+
+:::note
+The address in `exportKubeConfig.server` must be a name the certificate of the virtual cluster is valid for. That is
+`vcluster.<namespace>`, the name of the release and the namespace, but not `vcluster.<namespace>.svc`.
+:::
+
+### Reaching the application
+
+The test Workflows run in the cluster of the Runner, outside the virtual cluster. vCluster copies every Service of the
+virtual cluster to the temporary namespace under the name `<service>-x-<namespace>-x-<release>`. The `podinfo`
+Service in the `default` namespace of the virtual cluster `vcluster` is therefore reachable from a test Workflow as
+`podinfo-x-default-x-vcluster.<temporary namespace>.svc.cluster.local`.
+
+## The Teardown Workflow
+
+```yaml title="Teardown Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-vcluster-teardown
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: vcluster-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Export environment health metrics
+      optional: true
+      shell: |
+        restarts=$(kubectl get pods --namespace "{{ config.namespace }}" -o json \
+          | jq '[.items[].status.containerStatuses[]?.restartCount] | add // 0')
+        warnings=$(kubectl get events --namespace "{{ config.namespace }}" --field-selector type=Warning -o json \
+          | jq '.items | length')
+        age=$(kubectl get namespace "{{ config.namespace }}" -o json \
+          | jq 'now - (.metadata.creationTimestamp | fromdateiso8601) | floor')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/environment.lp <<EOF
+        environment_health,provisioner=vcluster,app=podinfo container_restarts=${restarts}i,warning_events=${warnings}i,lifetime_seconds=${age}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+    - name: Delete namespace
+      condition: always
+      shell: |
+        kubectl delete namespace "{{ config.namespace }}" --ignore-not-found --wait=false
+```
+
+The virtual cluster and everything installed into it live in the temporary namespace, so deleting the namespace
+removes the whole environment.
+
+The `Export environment health metrics` step runs first, while the environment still exists, and records how the
+application behaved during the tests ([Environment Metrics](environment-provisioning#environment-metrics)). It is
+`optional`, and the next step has `condition: always`, so that a failure to collect the metrics never keeps the
+environment from being removed.
+
+vCluster runs the Pods of the virtual cluster as Pods in the temporary namespace, which is why the metrics of the
+application can be read there.
+
+## The Composite Workflow
+
+The composite Workflow provisions the environment, runs the
+[test Workflow](environment-provisioning#the-test-workflow) against it and tears it down.
+
+```yaml title="Composite Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-vcluster-suite
+spec:
+  steps:
+    - name: Provision environment
+      execute:
+        workflows:
+          - name: env-vcluster-provision
+            as: env
+            config:
+              namespace: "env-{{ execution.id }}"
+    - name: Run tests
+      execute:
+        workflows:
+          - name: env-smoke-test
+            config:
+              url: '{{ execution("env").outputs.url }}'
+    - name: Tear down environment
+      condition: always
+      execute:
+        workflows:
+          - name: env-vcluster-teardown
+            config:
+              namespace: "env-{{ execution.id }}"
+```
+
+Run it like any other Workflow:
+
+```bash
+testkube run testworkflow env-vcluster-suite --watch
+```
+
+## The Cleanup Workflow
+
+An aborted execution of the composite Workflow does not run its teardown step
+([Cleaning Up after Aborted Executions](environment-provisioning#cleaning-up-after-aborted-executions)). This Workflow
+runs every hour and deletes the labeled namespaces that are older than `maxAgeSeconds`, and the virtual clusters with
+them.
+
+```yaml title="Cleanup Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-vcluster-cleanup
+spec:
+  events:
+    - cronjob:
+        cron: "0 * * * *"
+  config:
+    maxAgeSeconds:
+      type: integer
+      default: 3600
+  pod:
+    serviceAccountName: vcluster-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Delete expired environments
+      shell: |
+        kubectl get namespaces -l testkube.io/ephemeral-environment=true -o json \
+          | jq -r --argjson max {{ config.maxAgeSeconds }} \
+            '.items[] | select(now - (.metadata.creationTimestamp | fromdateiso8601) > $max) | .metadata.name' \
+          | xargs -r -n1 kubectl delete namespace --wait=false
+```
+
+This is the cleanup Workflow of the [Helm example](environment-provisioning-helm#the-cleanup-workflow) with another
+ServiceAccount. Both select on the same label, so one of them is enough when you use both examples.
