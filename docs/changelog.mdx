@@ -87,9 +87,9 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 
 ### Fixes
 
-- With PostgreSQL, a query for executions by tags now matches only executions that have every requested tag, where it used to match executions that had any one of them.
-- The `wait_for_executions` MCP tool now reports the ID, name and status of each Execution, where it used to leave them empty.
-- A new Test Bundle chat with no messages is no longer marked as failed after 20 minutes, where it used to show "Something went wrong".
+- With PostgreSQL, a query for executions by tags now matches executions that have every requested tag.
+- The `wait_for_executions` MCP tool now reports the ID, name and status of each Execution.
+- A new Test Bundle chat now stays ready until its first message.
 - Deleting a Test Workflow now removes only its own artifacts.
 - CLI commands in a cloud context no longer connect to the cluster in your local kubeconfig.
 - Running the standalone agent's MongoDB to PostgreSQL `convert` job again now updates executions that were still running at the first copy.
