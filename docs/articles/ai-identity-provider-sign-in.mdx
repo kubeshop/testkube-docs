@@ -15,13 +15,6 @@ provider to reach your Testkube installation's Dex on every call, which a Testku
 installation cannot offer across a customer boundary.
 :::
 
-:::info Turn it on first on 2.16
-On 2.16 this sign-in is off until the control plane is deployed with `global.features.aiObo`
-set to `true`, which passes `AI_OBO=true` to the API. Until then the **Identity provider** items
-described below are not in the menu, and **Through the identity provider** is not offered on an
-MCP Server. From 2.17 it is always on and there is nothing to set.
-:::
-
 ## Who does what
 
 Setting this up takes two different people, and the split is the point of this page.
