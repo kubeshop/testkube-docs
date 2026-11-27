@@ -706,6 +706,10 @@ const redirects = [
     from: "/articles/trial-limitations",
     to: "/articles/trial-limits",
   },
+  {
+    from: "/articles/gitlab-quality-loop",
+    to: "/articles/gitlab-integration",
+  },
 ];
 
 module.exports = redirects;
