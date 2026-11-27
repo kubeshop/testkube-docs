@@ -40,7 +40,7 @@ An added filter becomes a chip next to the dropdown. Click the chip to change it
 
 ### Sharing a filtered view
 
-The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP, and `?environmentId=<environment ID>&aiAgentId=<AI Agent ID>` opens one AI Agent's trail. **Organization Management**, **AI Governance**, **AI Audit Log** opens every tool call, both directions at once, by filtering on the **MCP Tool Called** event type. That item is only there for people who can see both AI Governance and the Audit log.
+The filters and the page you're on are kept in the URL, so a bookmarked or shared link opens the same view. For example, adding `?source=mcp` to the Audit log's address shows only the events that came through MCP, and `?environmentId=<environment ID>&aiAgentId=<AI Agent ID>` opens one AI Agent's trail. **Organization Management**, **AI & Governance**, **AI Audit Log** opens every tool call, both directions at once, by filtering on the **MCP Tool Called** event type. That item is only there for people who can see both AI & Governance and the Audit log.
 
 ## AI and MCP events
 
