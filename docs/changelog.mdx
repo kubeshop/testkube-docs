@@ -56,7 +56,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 ### AI Test Creation
 
 - **Create a Test Bundle from a repository or a Test Workflow:** Under **Or start from** in the Test Catalog, start a Test Bundle from a **Git repository**, a **Test Workflow** or an **Empty Test Bundle**. A guided dialog creates the bundle, starts its Sandbox, sets up the repository and context, and opens the first chat. If a step fails, retrying continues from that step.
-- The credentials Test Authoring creates no longer crowd the **Credentials** page and the credential pickers. Turn on **Show Test Catalog credentials** in **Settings** → **Credentials** to see them. Secrets entered in a Test Bundle chat are labelled with their Test Bundle.
+- The credentials AI Test Creation creates no longer crowd the **Credentials** page and the credential pickers. Turn on **Show Test Catalog credentials** in **Settings** → **Credentials** to see them. Secrets entered in a Test Bundle chat are labelled with their Test Bundle.
 
 ### Insights
 
@@ -81,7 +81,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 
 - The dashboard image now uses nginx 1.30.7, which fixes nginx2root (CVE-2026-123007, CVE-2026-123633, CVE-2026-123634, CVE-2026-121810, CVE-2026-113425) and CVE-2026-118899.
 - The CLI and the Control Plane no longer include the github.com/docker/docker library, which fixes CVE-2026-34040, CVE-2026-41567, CVE-2026-42306, CVE-2026-41568 and CVE-2026-33997. The CLI now streams Docker agent logs with `docker logs --follow`.
-- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images and an updated Test Authoring Sandbox image.
+- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images and an updated AI Test Creation Sandbox image.
 - Strengthened access checks across invites, Resource Groups, AI Triggers, GitHub App installations and teams.
 - Repository scans now handle credentials more safely.
 
