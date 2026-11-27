@@ -18,6 +18,12 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 
 Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available in Helm chart `v2.16.X`.
 
+### Upgrade notes
+
+- Self-hosted: Dex no longer gives tokens for an email and password, so scripts that log in this way stop working. To keep the previous behavior, set `dex.configTemplate.passwordGrant: true`.
+- The Control Plane API no longer accepts tokens in the `token` query parameter. Send them in the `Authorization` header.
+- The standalone MCP Server over HTTP now requires a `TK_MCP_SHTTP_AUTH_TOKEN` bearer token and listens only on `localhost`. Use `--shttp-host` to listen elsewhere.
+
 ### AI Governance
 
 - **Evals for AI Agents:** Judge an AI Agent's answers with a model. After each chat turn, checks score its helpfulness, groundedness, context relevance and hallucination, and the AI Agent's **Evals** tab shows how many turns passed, the score of each check over time, flagged hallucinations and every judged turn. Evals are off by default and are turned on per AI Agent by an Environment admin, who sets the share of turns judged, the pass mark, the hallucination flag mark and the judge model. A warning or disable threshold can warn about an AI Agent, or pause it, when too many of its turns fail. The judges' tokens count in token usage and toward token limits. [Read more](/articles/ai-agent-evals).
