@@ -1447,7 +1447,7 @@ const sidebars = {
             {
               type: "doc",
               label: "GitLab",
-              id: "articles/gitlab-quality-loop",
+              id: "articles/gitlab-integration",
             },
           ],
         },

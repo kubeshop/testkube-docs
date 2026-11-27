@@ -10,7 +10,7 @@ slug: /articles/gitlab-integration
 
 Connect a GitLab project to a Testkube environment to run Test Workflows on merge requests. Testkube posts commit statuses and updates a merge request comment with results, links to executions, and an optional AI summary.
 
-![GitLab Repositories in Testkube showing an enabled demo project, two workflows, and a received webhook delivery](../img/gitlab-quality-loop/overview.jpg)
+![GitLab Repositories in Testkube showing an enabled demo project, two workflows, and a received webhook delivery](../img/gitlab-integration/overview.jpg)
 
 To call Testkube from a GitLab CI job, see [Testkube GitLab CI](/articles/gitlab).
 
@@ -45,7 +45,7 @@ In your environment, open **Manage > Events & Triggers > GitLab Repositories** a
 
 To add another workflow later, use **Connected Workflows > Add workflow**, as shown below.
 
-![The workflow picker with an existing Test Workflow selected and the repository scan option below it](../img/gitlab-quality-loop/workflow-picker.jpg)
+![The workflow picker with an existing Test Workflow selected and the repository scan option below it](../img/gitlab-integration/workflow-picker.jpg)
 
 To run an existing workflow against the merge request's head commit, declare a string `revision` parameter under `spec.config` and set `spec.content.git.revision` to `{{ config.revision }}`. Testkube supplies the commit SHA. Use `authType: gitlab` to let Testkube provide checkout credentials for the connected project.
 
@@ -56,7 +56,7 @@ To run an existing workflow against the merge request's head commit, declare a s
 3. In GitLab, go to **Settings > Webhooks** and paste the Testkube URL and secret token. To use a [GitLab signing token](https://docs.gitlab.com/user/project/integrations/webhooks/#signing-tokens), provide that token under **Use an existing secret or signing token** when creating the webhook in Testkube.
 4. Enable **Merge request events** and **Comments** in GitLab, leave SSL verification enabled, and save.
 
-![Webhook settings showing the project webhook selection and the collapsed URL and secret section](../img/gitlab-quality-loop/webhook-settings.jpg)
+![Webhook settings showing the project webhook selection and the collapsed URL and secret section](../img/gitlab-integration/webhook-settings.jpg)
 
 Once Testkube receives a delivery, the repository list shows **Delivery received**.
 
@@ -69,7 +69,7 @@ Once Testkube receives a delivery, the repository list shows **Delivery received
 
 Merge requests from forks and edits to existing comments do not trigger runs. Open **Event History** and select an execution count to inspect the runs for that event.
 
-![Event History showing completed merge request and comment events with links to their executions](../img/gitlab-quality-loop/event-history.jpg)
+![Event History showing completed merge request and comment events with links to their executions](../img/gitlab-integration/event-history.jpg)
 
 ## Results on GitLab
 
@@ -83,13 +83,13 @@ Under **Content configuration**, choose **Condensed** for a short result with co
 
 **Run as silent executions** skips Testkube execution webhooks, insights, health, metrics, and CDEvents. GitLab still receives statuses and comments.
 
-![Content configuration showing Condensed and Detailed feedback and the silent executions checkbox](../img/gitlab-quality-loop/content-configuration.jpg)
+![Content configuration showing Condensed and Detailed feedback and the silent executions checkbox](../img/gitlab-integration/content-configuration.jpg)
 
 ### AI summary
 
 Under **AI Configuration**, enable AI analysis and select an agent and model. Choose **On fail or abort** to analyze unsuccessful runs or **Always** to include successful runs.
 
-![AI Configuration showing the agent, model, and analysis conditions](../img/gitlab-quality-loop/ai-configuration.jpg)
+![AI Configuration showing the agent, model, and analysis conditions](../img/gitlab-integration/ai-configuration.jpg)
 
 ### Enable or disable the GitLab integration
 
@@ -99,7 +99,7 @@ Use **General** to disable the GitLab integration. This stops new runs and cance
 
 Open **Connected Workflows** to see linked and generated workflows. To scan again, choose **Add workflow** and select the scan option.
 
-![Connected Workflows showing a linked workflow and a generated Node workflow](../img/gitlab-quality-loop/connected-workflows.jpg)
+![Connected Workflows showing a linked workflow and a generated Node workflow](../img/gitlab-integration/connected-workflows.jpg)
 
 Rescanning replaces managed workflow definitions, including custom Runner targeting. Set the workflow annotation `testkube.io/git-integration-managed: "false"` to preserve your edits on future scans.
 
