@@ -3,6 +3,7 @@ description: Example Test Workflow that evaluates a small RAG dataset with the R
 ---
 
 import SimpleRagas from "../../workflows/simple-ragas-workflow.md";
+import StandaloneAgentNote from "./_standalone-agent-note.mdx";
 
 # Basic Ragas Example
 
@@ -35,3 +36,5 @@ After execution, the metric scores are shown in the Log Output tab, and the `rag
 available under the Artifacts tab of the execution. Testkube ingests the `metrics.lp` file as
 [custom metrics](/articles/custom-metrics-in-insights) under the `ragas_eval` measurement, so you can follow the
 faithfulness and relevancy scores across executions in Insights.
+
+<StandaloneAgentNote />

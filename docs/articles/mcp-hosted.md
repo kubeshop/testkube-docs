@@ -215,7 +215,7 @@ testkube-cloud-api:
 To rotate the key, put the new key under `key` and the old one under `previous-key`. Sign-ins and clients sealed with the old key keep working while it's there.
 
 :::note
-Earlier versions signed MCP clients in through Dex, at `/mcp/auth/callback`. That redirect URI is no longer used, and you can remove it from your Dex configuration. Clients configured with the older `/mcp/auth/` endpoints keep working.
+Before 2.16.0, MCP clients signed in through Dex, at `/mcp/auth/callback`. That redirect URI is no longer used, and you can remove it from your Dex configuration. Clients configured with the older `/mcp/auth/` endpoints keep working.
 :::
 
 ### Step 3: Enable MCP per Environment

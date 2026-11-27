@@ -1,0 +1,135 @@
+---
+description: Example Test Workflow that evaluates a kagent agent over the A2A protocol with Promptfoo, asserts on its replies and tool calls, and exports the pass rate and token usage as custom metrics in Insights.
+---
+
+import SimpleKagentPromptfoo from "../../workflows/simple-kagent-promptfoo-workflow.md";
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
+
+# Testing a kagent Agent with Promptfoo
+
+[kagent](https://kagent.dev/) is an open source framework for running AI agents in Kubernetes. Every kagent agent is
+reachable inside the cluster over the [A2A (Agent2Agent) protocol](https://a2a-protocol.org/), so a Test Workflow can
+send it prompts and check both what it answers and which tools it called to get there. The Workflow below does that
+with [Promptfoo](https://www.promptfoo.dev/): it sends three questions to an agent, asserts on the replies and the
+tool calls, uploads the generated reports as artifacts and exports the results as metrics.
+
+:::note
+This example targets kagent 1.0, which serves A2A 1.0 at `/agents/<namespace>/<name>`. kagent 0.10.x serves an older
+version of the protocol at a different path; see [Testing kagent 0.10.x agents](#testing-kagent-010x-agents).
+:::
+
+## Prerequisites
+
+- [kagent 1.0](https://kagent.dev/docs/kagent/latest/setup/installation/) installed in the cluster where the Workflow
+  runs, so that the Workflow pod can reach the `kagent-controller` Service. A default kagent installation does not
+  authenticate callers inside the cluster.
+- An agent to test. The example uses the `k8s-helper` agent below, which can only read resources through two tools of
+  kagent's built-in `kagent-tool-server`. It uses the `kagent-default` Harness and the `default-model-config` that
+  `kagent install` creates; see [Your first agent](https://kagent.dev/docs/kagent/latest/get-started/your-first-agent/)
+  for how to define your own.
+
+```yaml title="k8s-helper agent"
+apiVersion: api.kagent.dev/v1alpha3
+kind: AgentTemplate
+metadata:
+  name: k8s-helper
+  namespace: kagent
+spec:
+  description: Answers questions about the resources in the cluster
+  modelConfig:
+    name: default-model-config
+  systemPrompt: |-
+    You are a concise assistant with read-only access to a Kubernetes cluster.
+    Use your tools to answer questions about what is running in the cluster.
+    You cannot change the cluster. When you are asked to, say so and do nothing else.
+  tools:
+    - mcp:
+        server:
+          kind: RemoteMCPServer
+          name: kagent-tool-server
+        tools:
+          - k8s_get_resources
+          - k8s_get_available_api_resources
+---
+apiVersion: api.kagent.dev/v1alpha3
+kind: Agent
+metadata:
+  name: k8s-helper
+  namespace: kagent
+spec:
+  template:
+    ref:
+      name: k8s-helper
+  harnessRef:
+    name: kagent-default
+```
+
+Wait until `kagent agent get k8s-helper` reports the agent as ready before you run the Workflow.
+
+## The Workflow
+
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.config` property defines the `agentUrl` [configuration parameter](/articles/test-workflows-examples-configuration),
+  the in-cluster A2A URL of the agent in the form
+  `http://kagent-controller.<kagent namespace>.svc:8083/agents/<agent namespace>/<agent name>`. Override it when you
+  run the Workflow to evaluate another agent.
+- The `spec.content.files` property defines the two files of the evaluation:
+  - `promptfooconfig.yaml` - the test cases. Each one sends a question to the agent and asserts on the result:
+    `icontains` and `not-icontains` check the text of the reply, and the `javascript` assertions check the tool calls.
+    The assertion under `defaultTest` applies to every test case and fails it if the agent called a tool outside its
+    read-only allow-list. The prompt is written as `{{ "{{question}}" }}` so that Testkube leaves the Promptfoo
+    variable in place.
+  - `kagent-provider.js` - a Promptfoo [custom provider](https://www.promptfoo.dev/docs/providers/custom-api/) that
+    sends each prompt to the agent as an A2A `SendMessage` JSON-RPC request. It returns the text of the task's artifacts
+    as the output, the `function_call` parts of the task history as `metadata.toolCalls`, and the token usage the agent
+    reports. A task that does not complete, for example because the model call fails or the agent asks the user a
+    question, is reported as an error with the state and status message of the task.
+- The `spec.container` property defines the working directory, Node.js image, and environment variables for the
+  Workflow. The evaluation calls no model itself, so the Workflow needs no API key; the agent uses the model
+  configured in kagent.
+- The **Run Promptfoo evaluation** step installs Promptfoo, runs the evaluation and writes both JSON and HTML reports.
+  The `--no-cache` argument makes Promptfoo call the agent for every test case, and the `cache` block keeps the npm
+  download cache between executions; see [Dependency Caching](/articles/test-workflows-dependency-cache).
+- The **Export metrics** step runs the [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser)
+  image, which converts the JSON results into a `results.lp` file with the successes, failures, errors, pass rate,
+  token count and duration of the evaluation.
+- The **Save report** step uploads the reports and the metrics file as artifacts; the `always` condition makes sure
+  they are uploaded even if the evaluation fails.
+
+<SimpleKagentPromptfoo />
+
+After execution, the evaluation output is shown in the Log Output tab, and the JSON and HTML reports are available
+under the Artifacts tab of the execution. The reports include the tool calls of every test case, which shows how the
+agent arrived at a reply. Testkube ingests the `results.lp` file as
+[custom metrics](/articles/custom-metrics-in-insights) under the `promptfoo_eval` measurement, so you can follow the
+pass rate and token usage of the agent across executions in Insights; see [AI Testing Metrics](ai-metrics) for how to
+chart them.
+
+<StandaloneMetricsNote />
+
+## Writing your own test cases
+
+- Assert on the tool calls with a `javascript` assertion. `context.providerResponse.metadata.toolCalls` is a list of
+  `{ name, args }` objects in the order the agent called them, so you can check that a tool was called, with which
+  arguments, or that a tool was not called.
+- Judge the quality of a reply with a model-graded assertion such as
+  [`llm-rubric`](https://www.promptfoo.dev/docs/configuration/expected-outputs/model-graded/llm-rubric/). These call a
+  model from the Workflow, so add the API key of the grading provider to `spec.container.env` with a
+  [credential](/articles/credential-management) expression, as the [Promptfoo example](promptfoo-basic) does.
+- An agent's replies vary between runs. Prefer assertions on facts and tool calls over exact wording, and use the
+  `--repeat` argument of `promptfoo eval` to run every test case several times when you want a pass rate and not a
+  single result.
+- To keep the evaluation with the agent's source, replace `spec.content.files` with a `spec.content.git` property that
+  points at the repository with your Promptfoo configuration.
+
+## Testing kagent 0.10.x agents
+
+kagent 0.10.x serves version 0.3 of the A2A protocol, so the provider needs these changes:
+
+- The URL of an agent is `http://kagent-controller.<kagent namespace>:8083/api/a2a/<agent namespace>/<agent name>/`.
+- The JSON-RPC method is `message/send`, the role of the message is `user`, and a text part is
+  `{ "kind": "text", "text": "..." }`. No `A2A-Version` header is needed.
+- The result is the task itself, its completed state is `completed`, and a tool call is a data part whose metadata
+  has a `kagent_type` or `adk_type` of `function_call`.

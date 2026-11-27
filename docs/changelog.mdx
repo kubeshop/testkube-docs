@@ -12,6 +12,89 @@ This is the changelog for the Testkube Control Plane, latest releases are on top
 - **Doc updates** focus on major changes to the documentation
   :::
 
+## Release v2.16.0 (2026-11-27)
+
+> Skills for AI Agents and Test Bundles, evals and an audit trail for AI Agents, A2A access, the Advanced GitLab Integration, Control Plane resources as code, and more ways to group and filter Insights.
+
+Control Plane is available in Helm chart `v2.339.0` and the Runner is available in Helm chart `v2.16.0`.
+
+### Upgrade notes
+
+- Self-hosted: Dex no longer gives tokens for a local user's email and password, so scripts that log in this way stop working. To keep the previous behavior, set `dex.configTemplate.passwordGrant: true`.
+- The Control Plane API no longer accepts tokens in the `token` query parameter. Send them in the `Authorization` header.
+- Resource Groups now also apply when a Test Workflow runs other Test Workflows with `execute:`: it can run Test Workflows in its own Resource Group or in none. To keep a suite that spans groups working, put the suite and its Test Workflows in the same Resource Group.
+- Self-hosted: Evals, MCP sign-in through your identity provider, Skills, AI resources as code, the Advanced GitLab Integration, Insights periods and filters, test case history and the Resource Group **Resources** tab run on PostgreSQL. MongoDB is deprecated, so plan your move with the [convert utility](/articles/convert).
+
+### AI Governance
+
+- **Evals for AI Agents:** A judge model scores an AI Agent's answers for helpfulness, groundedness, context relevance and hallucination, and the **Evals** tab shows the results over time. Environment admins turn Evals on per AI Agent, and can warn about or pause an AI Agent whose answers keep failing. Judge tokens count toward token limits. [Read more](/articles/ai-agent-evals).
+- **MCP Servers act as the person who chats:** On self-hosted installs, set an MCP Server's **Sign-in** to **Through the identity provider**, so it works with that person's own permissions. Set the identity provider for the Organization or one Environment, and check it with **Test connection**. Runs with nobody present, such as AI Triggers, use your identity provider's service account. [Read more](/articles/ai-identity-provider-sign-in).
+- **Audit trail of AI Agent tool calls:** Every tool an AI Agent calls through an MCP Server is recorded in the Audit log as the AI Agent acting for the person, not as that person. Filter the Audit log by AI Agent and MCP Server, see each call in the chat that made it, and see when a chat's trail is known to be incomplete. The Audit log filters now use the same search and **Add a filter** bar as the rest of the dashboard. [Read more](/articles/audit-logs).
+- **Hide AI Agents per Environment:** Environment admins can hide an AI Agent, including a built-in one, from an Environment. AI Assist and the other AI Agent pickers list custom AI Agents first and preselect the last one used, except AI Analyze. [Read more](/articles/ai-agent-access).
+
+### Skills
+
+- **Skills for AI Agents and Test Bundles:** Write guidance the AI follows, such as test conventions or business rules, as a Skill with a name, a description and its content, following the Agent Skills format. The AI sees each Skill's name and description and reads the content when a task needs it, or in every chat when the Skill is set to **Always**. Built-in AI Agents can't have Skills. [Read more](/articles/skills-for-ai-agents).
+- **Share Skills across AI Agents and Test Bundles:** Organization admins write Skills for every Environment in **AI & Governance**, and Environment admins write Skills for their Environment in **AI Settings**. Add them to any AI Agent or Test Bundle with **Add from library**; editing a shared Skill changes it everywhere it is used. [Read more](/articles/skills-for-ai-agents#add-a-skill-to-an-ai-agent-or-test-bundle).
+- **Skills for new Test Bundles:** Environment admins pick the Skills every new Test Bundle starts with, in **AI Settings** → **Test Catalog**. [Read more](/articles/skills-for-ai-agents#skills-for-new-test-bundles).
+- **A page for each Skill:** Open a shared Skill to edit it and see where it lives, and use **Used by** to see every AI Agent and Test Bundle that uses it before you change it. [Read more](/articles/skills-for-ai-agents#a-skills-page).
+
+### A2A
+
+- **AI Agents over A2A:** Other agents can chat with an AI Agent over the Agent2Agent (A2A) protocol: send it a message, stream the answer, and follow or cancel its tasks. Turn A2A on for the organization in **Product Features**, then for each AI Agent in its **A2A** section, which shows the AI Agent's A2A URL. Chats started over A2A carry an **A2A** tag. A2A is off by default and needs PostgreSQL; on self-hosted installs, enable it with `testkube-cloud-api.api.features.a2aEnabled`.
+- **AI Test Creation over A2A:** Ask AI Test Creation to write tests from another agent. Name a Test Bundle or a repository, and Testkube writes and runs the tests and returns the Execution, with links to it and the chat. Questions go back to the caller; approvals and credential requests link to the dashboard. Creating a Test Bundle needs the Write role.
+- **Sign in with OAuth:** A2A clients can now sign in with OAuth, as MCP clients already can. A new consent page in the dashboard lets the person approve the client and pick the Organization, and every call then runs as that person, in that Organization only.
+
+### Advanced GitLab Integration
+
+- **Advanced GitLab Integration:** Run Test Workflows on GitLab merge requests and see the results on the merge request, just as with GitHub. Connect a project in **GitLab Repositories**, link existing Test Workflows or scan the repository to generate them, and add a project or group webhook. Testkube posts a commit status and a merge request comment that links to each Execution.
+- **Rerun from a comment:** Comment `@testkube` on an open merge request to run its Test Workflows again, even when the commit hasn't changed. Only members with GitLab **Developer** access or higher can start a run, and **Event History** links each run to its merge request or comment.
+- **AI summary:** Add an AI summary to the merge request comment, for failed or aborted runs or for every run, with the AI Agent and model of your choice. **Continue analysis in Testkube** opens the analysis as a chat.
+- **Feedback settings:** Choose **Condensed** feedback for a short result, or **Detailed** for the phase breakdown, timings and the full AI summary. **Run as silent executions** keeps the runs out of Insights, metrics, CDEvents, webhooks and workflow health, while GitLab still gets statuses and comments.
+- Test Workflows can check out a GitLab project with `authType: gitlab`, which uses the GitLab integration's credentials to fetch the merge request's commit. This needs Runner 2.16.0 or later.
+
+### AI Test Creation
+
+- **Create a Test Bundle from a repository or a Test Workflow:** Under **Or start from** in the Test Catalog, start a Test Bundle from a **Git repository**, a **Test Workflow** or an **Empty Test Bundle**. A guided dialog creates the bundle, starts its Sandbox, sets up the repository and context, and opens the first chat. If a step fails, retrying continues from that step.
+- The credentials AI Test Creation creates no longer crowd the **Credentials** page and the credential pickers. Turn on **Show Test Catalog credentials** in **Settings** → **Credentials** to see them. Secrets entered in a Test Bundle chat are labelled with their Test Bundle.
+
+### Insights
+
+- **Aggregation period:** Pick a **Period** of day, week, month, quarter or year, so a year reads as twelve months instead of 52 weeks. **Auto** groups as before. [Read more](/articles/test-insights#aggregation-period).
+- **More filters:** Filter Insights by actor type, actor name, Runner and execution duration, and the Executions page by actor name and duration. Filter values are sorted alphabetically, so custom labels and tags are easy to find. [Read more](/articles/test-insights#filtering-an-analysis).
+- **Leave values out:** **is not** and **does not contain** on Test Workflow names, labels, tags, actors and test case fields, for example to take expected failures off a failure board. [Read more](/articles/test-insights#leaving-values-out).
+- **Test case history:** Open **History** on a test case in an Execution's JUnit report to see how it did in the last 10, 20 or 50 Executions, with the Test Workflow's flakiest test cases ranked by how often they flipped between passing and failing. Select a result to open that Execution. [Read more](/articles/test-workflows-reports#4-test-case-history).
+
+### Resources as Code
+
+- **Control Plane resources as code:** Manage Boards, MCP Servers, LLM Providers, Skills and AI Agents as YAML manifests with `testkube apply`, `testkube get` and `testkube delete`, or through the REST API. [Read more](/articles/control-plane-resources).
+- **GitOps sync of Control Plane resources:** A Runner with the GitOps capability can sync these resources from custom resources in its cluster, with the same ownership and pausing as Test Workflows. Turn it on with `gitops.controlPlaneResources.enabled` in the Runner chart, or `testkube-api.next.gitops.syncControlPlaneResources` in the standalone agent chart. [Read more](/articles/gitops-overview#syncing-control-plane-resources).
+- **A2A for AI Agents as code:** Set `spec.a2a.enabled` in an AI Agent manifest to serve it over A2A, and read its A2A URL from `status.a2a.url`.
+
+### Organization
+
+- **Resource Group contents:** The Resource Group page has a **Resources** tab listing everything that belongs to the group. [Read more](/articles/resource-groups).
+- **Grouped Organization settings:** The Organization settings menu is grouped into **General**, **Environments**, **Members & Access**, **AI & Governance**, **Git integrations** and **Audit log & Events**. GitOps ownership, Runner token masking and Webhook URL masking moved from **Product Features** to a new **Policies** page, and SCIM has its own **SCIM Provisioning** page. Old links redirect to the new pages.
+- Lists across the dashboard, such as Executions, Test Workflows, Members and the Audit log, use the same pagination.
+
+### Security
+
+- The dashboard image now uses nginx 1.30.7, which fixes nginx2root (CVE-2026-123007, CVE-2026-123633, CVE-2026-123634, CVE-2026-121810, CVE-2026-113425) and CVE-2026-118899.
+- The CLI and the Control Plane no longer include the github.com/docker/docker library, which fixes CVE-2026-34040, CVE-2026-41567, CVE-2026-42306, CVE-2026-41568 and CVE-2026-33997. The CLI now streams Docker agent logs with `docker logs --follow`.
+- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images and an updated AI Test Creation Sandbox image.
+- Strengthened access checks across invites, Resource Groups, AI Triggers, GitHub App installations and teams.
+- Repository scans now handle credentials more safely.
+
+### Fixes
+
+- With PostgreSQL, a query for executions by tags now matches executions that have every requested tag.
+- The `wait_for_executions` MCP tool now reports the ID, name and status of each Execution.
+- A new Test Bundle chat now stays ready until its first message.
+- Deleting a Test Workflow now removes only its own artifacts.
+- CLI commands in a cloud context no longer connect to the cluster in your local kubeconfig.
+- Running the standalone agent's MongoDB to PostgreSQL `convert` job again now updates executions that were still running at the first copy.
+- `parallel.parallelism` accepts an expression, such as `config.PARALLELISM`.
+
 ## Patch Release v2.15.3 (2026-11-24)
 
 Runner only. The Runner is available in Helm chart `v2.15.3`; the Control Plane stays on `v2.338.1`.

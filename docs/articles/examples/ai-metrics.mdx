@@ -2,6 +2,8 @@
 description: The kinds of metrics AI evaluation tools produce, how Testkube ingests them as custom metrics in Insights through InfluxDB line protocol, and the tools and metrics the `testkube-ai-metrics-parser` supports.
 ---
 
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
+
 # AI Testing Metrics
 
 AI evaluation tools such as Promptfoo, DeepEval, Inspect AI, Ragas, the LM Evaluation Harness and Harbor measure the quality
@@ -72,6 +74,8 @@ Custom metrics require Testkube Runner and Control Plane version `2.11.0` or lat
 Postgres. See [Custom Metrics with Influx Line Protocol](/articles/custom-metrics-in-insights) for the full line format,
 the supported field types, and troubleshooting.
 :::
+
+<StandaloneMetricsNote />
 
 ### Visualizing AI Metrics in Insights
 
