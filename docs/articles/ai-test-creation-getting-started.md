@@ -117,6 +117,7 @@ Review the updated files and execution results, including the existing tests. If
 ## Continue building coverage
 
 - Use **Settings** → **Attached Context** to add reusable project guidance, such as test conventions, business rules, and test data requirements.
+- Use **Settings** → **Skills** to add guidance shared with other Test Bundles and AI Agents. See [Skills for AI Agents and Test Bundles](/articles/skills-for-ai-agents).
 - Follow [Work with Test Bundles and multiple chats](/articles/ai-test-creation-test-bundles) to organize related tasks and understand what is shared between chats.
 - To work with existing tests, follow [Work with a GitHub repository](/articles/ai-test-creation-github) to import a repository, review changes, and open a pull request.
 - To configure or automate execution, use **Open Workflow** and see [scheduling](/articles/scheduling-tests), [GitHub Actions](/articles/github-actions), and the [Playwright workflow example](/articles/examples/playwright-basic).

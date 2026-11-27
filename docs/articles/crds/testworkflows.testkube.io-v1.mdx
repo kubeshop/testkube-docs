@@ -279,37 +279,6 @@ _Appears in:_
 | ------------------------------------------- | ----------- | ------- | ---------- |
 | `cronjob` _[CronJobConfig](#cronjobconfig)_ |             |         |            |
 
-### ExecutionRetryCause
-
-_Underlying type:_ _string_
-
-ExecutionRetryCause is a class of failure that an execution retry may answer.
-
-_Validation:_
-
-- Enum: [infrastructure timeout oom]
-
-_Appears in:_
-
-- [ExecutionRetryPolicy](#executionretrypolicy)
-
-| Field            | Description                                                                                                             |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `infrastructure` | ExecutionRetryCauseInfrastructure is the cluster taking the pod away: evicted, preempted, node-shutdown, unschedulable. |
-| `timeout`        | ExecutionRetryCauseTimeout is an execution-timeout stop.                                                                |
-| `oom`            | ExecutionRetryCauseOOM is an oom-killed stop.                                                                           |
-
-### ExecutionRetryPolicy
-
-_Appears in:_
-
-- [TestWorkflowExecutionSchema](#testworkflowexecutionschema)
-
-| Field                                                    | Description                                                                                                               | Default | Validation                                               |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------- |
-| `count` _integer_                                        | how many automatic retries follow a run that a person started or a schedule triggered; a manual rerun starts a new budget |         | Maximum: 10 <br />Minimum: 1 <br />Required: \{\} <br /> |
-| `on` _[ExecutionRetryCause](#executionretrycause) array_ | the causes that are retried (defaults to: infrastructure)                                                                 |         | Enum: [infrastructure timeout oom] <br />                |
-
 ### IndependentServiceSpec
 
 _Appears in:_
@@ -1107,12 +1076,11 @@ _Appears in:_
 - [TestWorkflowSpecBase](#testworkflowspecbase)
 - [TestWorkflowTemplateSpec](#testworkflowtemplatespec)
 
-| Field                                                   | Description                                                                                                                                                            | Default | Validation |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
-| `tags` _object (keys:string, values:string)_            | test workflow execution tags                                                                                                                                           |         |            |
-| `target` _[Target](#target)_                            | Targets helps decide on which runner the execution is scheduled.                                                                                                       |         |            |
-| `silent` _boolean_                                      | When true, SilentMode is activated for all executions (Webhooks, Insights, Health, Metrics, Cdevents all set to true).                                                 |         |            |
-| `retry` _[ExecutionRetryPolicy](#executionretrypolicy)_ | Retry reruns the whole workflow when the execution ends for a cause the policy lists.<br />It is not the step-level retry: that one reruns a step inside the same pod. |         |            |
+| Field                                        | Description                                                                                                            | Default | Validation |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------- | ---------- |
+| `tags` _object (keys:string, values:string)_ | test workflow execution tags                                                                                           |         |            |
+| `target` _[Target](#target)_                 | Targets helps decide on which runner the execution is scheduled.                                                       |         |            |
+| `silent` _boolean_                           | When true, SilentMode is activated for all executions (Webhooks, Insights, Health, Metrics, Cdevents all set to true). |         |            |
 
 ### TestWorkflowExecutionSpec
 

@@ -20,7 +20,7 @@ Each chat is a separate conversation within the bundle.
 
 Open **Test Catalog** and select the bundle you want to continue working on. The bundle reopens the last chat you worked in. Check the bundle name at the top of the page and the selected chat above the conversation.
 
-Select **Settings** (the gear icon) at the top of the bundle to review it. **General** holds the bundle's name and description, **Git repository** its repository and target branch, **AI Agents** the AI Agents that Test Authoring can hand tasks to, and **Attached Context** its shared guidance. Select **Back to Test Bundle** to return to the chat. Give the bundle a name that describes the project or test area, so you can find it again later.
+Select **Settings** (the gear icon) at the top of the bundle to review it. **General** holds the bundle's name and description, **Git repository** its repository and target branch, **AI Agents** the AI Agents that Test Authoring can hand tasks to, **Attached Context** its shared guidance, and **Skills** the Skills the AI follows when it works on the bundle. Select **Back to Test Bundle** to return to the chat. Give the bundle a name that describes the project or test area, so you can find it again later.
 
 ![Test Bundle Details showing the bundle name and description in Settings](../img/ai-test-creation-bundles-settings.png)
 
@@ -96,6 +96,14 @@ Switch to the other chat and open **Settings** → **Attached Context** again. T
 
 Attached Context supplies guidance. It does not copy test files or another chat's conversation into the selected chat.
 
+### Skills
+
+**Skills** also give guidance to every chat in the bundle. Use them for guidance you want to share with other Test Bundles
+and AI Agents: select **Settings** → **Skills**, then **Add from library** to add Environment and Organization Skills, or
+**Add Skill** to write one for this bundle only. The AI reads a Skill when a task needs it, or always when it is set to
+**Always**. A new bundle can already start with Skills an Environment admin picked. Read more in
+[Skills for AI Agents and Test Bundles](skills-for-ai-agents).
+
 ## 5. Review and run the selected chat's work
 
 When you are ready to implement a suggestion, continue in that chat and ask for the specific change. Review the result in the **Files** and **Changes** tabs, then run the tests and inspect **Log Output** and **Artifacts**.
@@ -118,7 +126,7 @@ For GitHub-backed work, select **Push changes** in the **Changes** tab of the ch
 | ---------------------------------------------- | ---------------------------------------------- |
 | Bundle name and description                    | Conversation and task-specific instructions    |
 | Configured GitHub repository and target branch | Working files and changes                      |
-| Attached Context entries                       | Publishing branch and commits                  |
+| Attached Context entries and Skills            | Publishing branch and commits                  |
 | Test Workflow                                  | The task you continue when selecting that chat |
 | AI Agents                                      |                                                |
 

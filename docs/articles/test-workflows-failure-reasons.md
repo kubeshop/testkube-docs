@@ -156,8 +156,6 @@ Some steps run a Testkube command and not your test: the clone of a repository, 
 
 A step with `retry` reports the number of attempts in `attempts`. A step that ran one time reports `1`. A workflow reads the count of another execution through `execution("ref").stepAttempts`.
 
-A [Workflow `retry`](/articles/test-workflows-rerun#retrying-a-workflow-automatically) is counted differently: it runs the whole Workflow again as a new execution, and that execution reports its place in the chain in `execution.lineage.attempt`. It retries only an execution stopped with one of the codes its `on` lists, such as `evicted`, `preempted`, `node-shutdown` or `unschedulable`.
-
 ## The Status Details of an Execution
 
 An execution that does not pass carries `result.statusDetails`. The object says which layer failed, names the cause with a code, and keeps the message that explains it. The runner or the control plane writes it once, when the execution ends.

@@ -15,13 +15,6 @@ provider to reach your Testkube installation's Dex on every call, which a Testku
 installation cannot offer across a customer boundary.
 :::
 
-:::info Turn it on first on 2.16
-On 2.16 this sign-in is off until the control plane is deployed with `global.features.aiObo`
-set to `true`, which passes `AI_OBO=true` to the API. Until then the **Identity provider** items
-described below are not in the menu, and **Through the identity provider** is not offered on an
-MCP Server. From 2.17 it is always on and there is nothing to set.
-:::
-
 ## Who does what
 
 Setting this up takes two different people, and the split is the point of this page.
@@ -29,7 +22,7 @@ Setting this up takes two different people, and the split is the point of this p
 | Who                             | What they do                                                                                                                                                                                 |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Identity admin**              | Registers Testkube at your identity provider, trusts Testkube's Dex as a token issuer, decides how a Testkube subject maps to one of your users, and gives the agent a principal of its own. |
-| **Testkube organization admin** | Enters the relationship under **Organization, AI Governance, Identity provider**, and sets one audience per MCP Server.                                                                      |
+| **Testkube organization admin** | Enters the relationship under **Organization Management → AI & Governance → Identity provider**, and sets one audience per MCP Server.                                                       |
 | **Testkube environment admin**  | Optional. Declares a different provider for one Environment, under its **AI Settings, Identity provider**, when that Environment should not exchange at the organization's.                  |
 | **Platform or QA engineer**     | Picks this sign-in on the AI Agent's MCP Server, once the two above are done.                                                                                                                |
 
@@ -152,7 +145,7 @@ that server and that server alone. A token minted for your build service is not 
 deployment service.
 
 In Testkube, the organization admin lists the audience each MCP Server expects, by MCP Server id,
-under **Organization, AI Governance, Identity provider**. At the provider, the registered client
+under **Organization Management → AI & Governance → Identity provider**. At the provider, the registered client
 needs permission to request a token for each of those audiences.
 
 ## One provider, or one per Environment
@@ -182,7 +175,7 @@ anything else, and AI Agents then report that no identity provider is set up.
    exchange tokens from it, decide how a subject maps to one of your users, give the client a
    service account for unattended runs, and allow it to request a token for each MCP Server's
    audience.
-2. **In Testkube**, open **Organization, AI Governance, Identity provider**, and fill the form
+2. **In Testkube**, open **Organization Management → AI & Governance → Identity provider**, and fill the form
    described below. Select **Test connection**: it asks your provider for a token as Testkube's
    own account, so a wrong secret or an unreachable endpoint shows up here rather than in
    somebody's chat. To give one Environment a provider of its own, do the same under that

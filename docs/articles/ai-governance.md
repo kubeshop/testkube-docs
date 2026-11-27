@@ -15,9 +15,9 @@ AI governance gives Organization admins and owners control over how AI is used i
 - **[Evals](ai-agent-evals).** Judging the answers of an AI Agent, and disabling it when too many of its turns fail. An AI Agent disabled this way shows as paused, and resuming it re-enables it. Evals are set on each AI Agent by Environment admins.
 - **[Audit log](audit-logs#ai-and-mcp-events).** Every tool call, both the ones made through MCP and the ones an AI Agent makes to its MCP Servers.
 
-Most of it lives on one page: **Organization Management** → **AI Governance**. Only Organization admins and owners see that page. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
+Most of it is in **Organization Management** under **AI & Governance**. Only Organization admins and owners see those pages, except **Skills**, which members and Org-wide read users can also open. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
 
-![AI Governance page on the Access tab](images/ai-governance-access.png)
+![AI & Governance Agent Access page](images/ai-governance-access.png)
 
 ## Availability
 
@@ -26,31 +26,34 @@ Most of it lives on one page: **Organization Management** → **AI Governance**.
 | AI Agent access and model access     | RBAC in your license                           |
 | Token limits, pauses and token usage | Nothing more                                   |
 | AI tracing                           | Nothing more                                   |
-| The **Audit** tab                    | Permission to see the Organization's Audit log |
+| **AI Audit Log**                     | Permission to see the Organization's Audit log |
 
-Without RBAC, every member who can chat can use every AI Agent and every model, and the **Access** tab says AI Agent access needs RBAC.
+Without RBAC, every member who can chat can use every AI Agent and every model, and **Agent Access** says AI Agent access needs RBAC.
 
-On a self-hosted control plane, AI governance needs PostgreSQL, and the **AI Governance** page doesn't show without it. See [AI Governance in the configuration reference](ai-configuration#ai-governance) for what a self-hosted install needs, including the MCP encryption key.
+On a self-hosted control plane, AI governance needs PostgreSQL, and the **AI & Governance** pages don't show without it. See [AI Governance in the configuration reference](ai-configuration#ai-governance) for what a self-hosted install needs, including the MCP encryption key.
 
-## The AI Governance page
+## The AI & Governance pages
 
-The page has one tab per area. **Access**, **Models** and **Limits** start from an **Environment** picker or filter, because AI Agents and models belong to an Environment.
+**Organization Management** groups these pages under **AI & Governance**. **Models**, **Agent Access** and **Token Limits** cover every Environment; filter by **Environment** to narrow them.
 
-| Tab     | What it shows                                                                                                                       | Read more                                                              |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| Access  | The AI Agents of one Environment and who can use each one. **Edit access** changes it.                                              | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
-| Limits  | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here.    | [Token limits and pauses](ai-token-limits#review-all-limits)           |
-| Models  | The models of one Environment, by provider. With RBAC, a model opens its details to see who is limited to it.                       | [Model access](ai-model-access#review-models-across-an-environment)    |
-| Tracing | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                   | [AI tracing](ai-tracing)                                               |
-| Audit   | Opens the Audit log filtered to the **MCP Tool Called** event type: every tool call, the ones an AI Agent made and the ones served. | [Audit log](audit-logs#ai-and-mcp-events)                              |
+| Page              | What it shows                                                                                                                                               | Read more                                                              |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Models            | Every model, with its provider and Environment. With RBAC, a model links to its details in that Environment's **AI Settings**, to see who is limited to it. | [Model access](ai-model-access#review-models-across-an-environment)    |
+| Skills            | The Organization's Skills, which AI Agents and Test Bundles in every Environment can use. Select a Skill to see where it's used.                            | [Skills](skills-for-ai-agents)                                         |
+| Agent Access      | Every AI Agent and who can use it. **Edit access** changes it.                                                                                              | [AI Agent access](ai-agent-access#review-access-across-an-environment) |
+| Token Limits      | Every token limit and pause in the Organization, with tokens used and when each resets. Add, edit, pause and resume limits here.                            | [Token limits and pauses](ai-token-limits#review-all-limits)           |
+| Identity provider | The identity provider MCP Servers use to act as the person who chats, with that person's own permissions.                                                   | [Identity provider sign-in](ai-identity-provider-sign-in)              |
+| Tracing           | Where the Organization's AI traces are sent: AWS CloudWatch or any OTLP endpoint.                                                                           | [AI tracing](ai-tracing)                                               |
+| AI Audit Log      | Opens the Audit log filtered to the **MCP Tool Called** event type: every tool call, the ones an AI Agent made and the ones served.                         | [Audit log](audit-logs#ai-and-mcp-events)                              |
 
-![AI Governance Limits tab](images/ai-governance-limits.png)
+![AI & Governance Token Limits page](images/ai-governance-limits.png)
 
-![AI Governance Models tab](images/ai-governance-models.png)
+![AI & Governance Models page](images/ai-governance-models.png)
 
 ## Who can do what
 
-- **Organization admins and owners** can open the AI Governance page and change everything on it.
+- **Organization admins and owners** can open the AI & Governance pages and change everything on them.
+- Members and Org-wide read users can see the Organization's Skills; only Organization admins and owners can change them.
 - **Environment admins** can set token limits and pauses for their Environment and its AI Agents, from **AI Settings**. They can use every AI Agent, but can't change AI Agent access or model access.
 - **The creator of an AI Agent** can make it public or private.
 
@@ -59,4 +62,5 @@ The page has one tab per area. **Access**, **Models** and **Limits** start from 
 - [Testkube AI Overview](testkube-ai-overview)
 - [AI usage, seats, and limits](ai-usage)
 - [AI Agents](ai-agents)
+- [Skills for AI Agents and Test Bundles](skills-for-ai-agents)
 - [Testkube AI Configuration Reference](ai-configuration)
