@@ -23,6 +23,7 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 - Self-hosted: Dex no longer gives tokens for an email and password, so scripts that log in this way stop working. To keep the previous behavior, set `dex.configTemplate.passwordGrant: true`.
 - The Control Plane API no longer accepts tokens in the `token` query parameter. Send them in the `Authorization` header.
 - The standalone MCP Server over HTTP now requires a `TK_MCP_SHTTP_AUTH_TOKEN` bearer token and listens only on `localhost`. Use `--shttp-host` to listen elsewhere.
+- Self-hosted: Evals, MCP sign-in through your identity provider, Skills, AI resources as code, the Advanced GitLab Integration, Insights periods and filters, test case history and the Resource Group **Resources** tab run on PostgreSQL. MongoDB is deprecated, so plan your move with the [convert utility](/articles/convert).
 
 ### AI Governance
 
