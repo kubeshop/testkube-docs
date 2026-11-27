@@ -81,16 +81,13 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 
 - The dashboard image now uses nginx 1.30.7, which fixes nginx2root (CVE-2026-123007, CVE-2026-123633, CVE-2026-123634, CVE-2026-121810, CVE-2026-113425) and CVE-2026-118899.
 - The CLI and the Control Plane no longer include the github.com/docker/docker library, which fixes CVE-2026-34040, CVE-2026-41567, CVE-2026-42306, CVE-2026-41568 and CVE-2026-33997. The CLI now streams Docker agent logs with `docker logs --follow`.
+- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images.
 
 ### Fixes
 
 - With PostgreSQL, a query for executions by tags now matches only executions that have every requested tag, where it used to match executions that had any one of them.
 - The `wait_for_executions` MCP tool now reports the ID, name and status of each Execution, where it used to leave them empty.
 - A new Test Bundle chat with no messages is no longer marked as failed after 20 minutes, where it used to show "Something went wrong".
-
-### Helm Chart
-
-- Upgrade of PostgreSQL version from 18.3 to 18.7
 
 ## Patch Release v2.15.1 (2026-11-12)
 
