@@ -1,5 +1,5 @@
 ---
-description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, AI, and infrastructure testing.
+description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, AI, and infrastructure testing, plus environment provisioning.
 ---
 
 # Testkube Examples and Guides
@@ -103,6 +103,15 @@ Tools for validating Kubernetes clusters and infrastructure:
 - [Validating Kubernetes Clusters](kubectl-basic) - Shows how to run kubectl commands from within Test Workflows for cluster operations and validation.
 - [kube-burner](kube-burner-basic) - Shows how to run kube-burner to load test a Kubernetes cluster and fail on pod latency thresholds.
 - [Testing Hardware Components](https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube) - Shows how to test hardware infrastructure in your Kubernetes Cluster (external).
+
+## Environment Provisioning
+
+Workflows that provision a temporary test environment, run other Workflows against it and tear it down again:
+
+- [Provisioning Test Environments](environment-provisioning) - Describes the pattern, its limits and the cleanup of orphaned environments.
+- [Helm](environment-provisioning-helm) - Shows how to install a Helm chart into a temporary namespace.
+- [ArgoCD](environment-provisioning-argocd) - Shows how to create an ArgoCD Application that deploys into a temporary namespace.
+- [vCluster](environment-provisioning-vcluster) - Shows how to create a virtual cluster in a temporary namespace and install a Helm chart into it.
 
 ## Tutorials
 

@@ -1,0 +1,312 @@
+---
+description: Example Test Workflows that create an ArgoCD Application to deploy into a temporary namespace, run tests against it and delete it, with the ServiceAccount they need and a scheduled cleanup of orphaned Applications.
+---
+
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
+
+# Provisioning an Environment with ArgoCD
+
+This example creates an [ArgoCD](https://argo-cd.readthedocs.io/) Application that deploys into a temporary namespace,
+runs a test Workflow against the deployed application and deletes the Application and the namespace again. It follows
+the pattern described in [Provisioning Test Environments](environment-provisioning), which also explains its limits.
+
+The Workflows do not deploy anything themselves. They create the Application with `kubectl` and wait for ArgoCD to
+sync it, so the environment is built from the same Git repository and by the same tool as your other environments.
+
+The example deploys [podinfo](https://github.com/stefanprodan/podinfo), a small web application. Replace the source
+of the Application and the published URL with those of your own application.
+
+:::tip
+To run Workflows when ArgoCD syncs an existing Application, see [Using Testkube with ArgoCD](/articles/argocd-integration).
+:::
+
+<RequiresCommercialWorkflows />
+
+## Prerequisites
+
+- ArgoCD is installed in the cluster where the Testkube Runner is running. The example expects it in the `argocd`
+  namespace.
+- The ArgoCD [Project](https://argo-cd.readthedocs.io/en/stable/user-guide/projects/) of the Application allows the
+  temporary namespaces as a destination. The example uses the `default` Project, which allows every namespace.
+- A ServiceAccount that is allowed to manage Applications and to delete namespaces. Use `kubectl` to apply the
+  following configuration, and replace `testkube` with the namespace of your Runner.
+
+```yaml title="ServiceAccount for ArgoCD provisioning"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-env-provisioner
+  namespace: testkube
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-env-provisioner
+  namespace: argocd
+rules:
+  - apiGroups: ["argoproj.io"]
+    resources: ["applications"]
+    verbs: ["create", "get", "list", "watch", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-env-provisioner
+  namespace: argocd
+subjects:
+  - kind: ServiceAccount
+    name: argocd-env-provisioner
+    namespace: testkube
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: argocd-env-provisioner
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: argocd-env-provisioner
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "delete"]
+  # Read access for the environment metrics
+  - apiGroups: [""]
+    resources: ["pods", "events"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: argocd-env-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: argocd-env-provisioner
+    namespace: testkube
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: argocd-env-provisioner
+```
+
+ArgoCD deploys the application, so this ServiceAccount needs no permissions to change the resources of the
+application. It only reads Pods and events, for the [environment metrics](environment-provisioning#environment-metrics). Whoever can create an Application can deploy whatever its Project allows, so restrict the Project to the
+repositories and namespaces these environments need.
+
+## The Provisioning Workflow
+
+```yaml title="Provisioning Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-argocd-provision
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: argocd-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Create Application
+      shell: |
+        date +%s > /data/started
+        cat <<EOF | kubectl create -f -
+        apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          name: {{ config.namespace }}
+          namespace: argocd
+          labels:
+            testkube.io/ephemeral-environment: "true"
+          finalizers:
+            - resources-finalizer.argocd.argoproj.io
+        spec:
+          project: default
+          source:
+            repoURL: https://github.com/stefanprodan/podinfo
+            targetRevision: master
+            path: kustomize
+          destination:
+            server: https://kubernetes.default.svc
+            namespace: {{ config.namespace }}
+          syncPolicy:
+            automated:
+              prune: true
+            syncOptions:
+              - CreateNamespace=true
+        EOF
+    - name: Wait for the Application
+      shell: |
+        kubectl wait application/{{ config.namespace }} --namespace argocd \
+          --for=jsonpath='{.status.sync.status}'=Synced --timeout=5m
+        date +%s > /data/installed
+        kubectl wait application/{{ config.namespace }} --namespace argocd \
+          --for=jsonpath='{.status.health.status}'=Healthy --timeout=5m
+        date +%s > /data/ready
+    - name: Publish environment URL
+      shell: |
+        echo -n "http://podinfo.{{ config.namespace }}.svc.cluster.local:9898" > /testkube/outputs/url
+    - name: Export provisioning metrics
+      shell: |
+        started=$(cat /data/started); installed=$(cat /data/installed); ready=$(cat /data/ready)
+        pods=$(kubectl get pods --namespace "{{ config.namespace }}" -o json | jq '.items | length')
+        resources=$(kubectl get application/{{ config.namespace }} --namespace argocd -o json \
+          | jq '.status.resources | length')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/provisioning.lp <<EOF
+        environment_provisioning,provisioner=argocd,app=podinfo install_seconds=$((installed - started)),ready_wait_seconds=$((ready - installed)),total_seconds=$((ready - started)),pods=${pods}i,resources=${resources}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+```
+
+- The `spec.config` property defines the `namespace` [configuration parameter](/articles/test-workflows-examples-configuration),
+  which the composite Workflow sets. The Application gets the same name as the namespace.
+- The `spec.pod.serviceAccountName` property selects the ServiceAccount from the prerequisites.
+- The `Create Application` step creates the Application:
+  - `syncPolicy.automated` makes ArgoCD sync it without a further command, and `CreateNamespace=true` makes ArgoCD
+    create the temporary namespace.
+  - The `resources-finalizer.argocd.argoproj.io` finalizer makes ArgoCD delete the deployed resources when the
+    Application is deleted.
+  - The label is what the [cleanup Workflow](#the-cleanup-workflow) selects on.
+- The `Wait for the Application` step waits until ArgoCD reports the Application as `Synced` and `Healthy`, and fails
+  the Workflow when that takes longer than the timeout.
+- The `Publish environment URL` step writes the in-cluster URL of the application to `/testkube/outputs/url`, where
+  the composite Workflow reads it.
+- The `Export provisioning metrics` step writes how long the provisioning took and how many resources the Application manages to a file in
+  [Influx Line Protocol](/articles/custom-metrics-in-insights) and uploads it as an artifact, from the timestamps
+  that the earlier steps saved in `/data`. See [Environment Metrics](environment-provisioning#environment-metrics).
+
+:::note
+If ArgoCD runs in another cluster than the Runner, `kubectl` cannot reach the Application. Use the
+[`argocd` CLI](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/) with an API token from a
+[secret](/articles/test-workflows-examples-configuration#using-secrets-with-environment-parameters) instead: `argocd app create`, `argocd app wait` and `argocd app delete`. This
+variant is not covered by the example.
+:::
+
+## The Teardown Workflow
+
+```yaml title="Teardown Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-argocd-teardown
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: argocd-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Export environment health metrics
+      optional: true
+      shell: |
+        restarts=$(kubectl get pods --namespace "{{ config.namespace }}" -o json \
+          | jq '[.items[].status.containerStatuses[]?.restartCount] | add // 0')
+        warnings=$(kubectl get events --namespace "{{ config.namespace }}" --field-selector type=Warning -o json \
+          | jq '.items | length')
+        age=$(kubectl get namespace "{{ config.namespace }}" -o json \
+          | jq 'now - (.metadata.creationTimestamp | fromdateiso8601) | floor')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/environment.lp <<EOF
+        environment_health,provisioner=argocd,app=podinfo container_restarts=${restarts}i,warning_events=${warnings}i,lifetime_seconds=${age}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+    - name: Delete Application and namespace
+      condition: always
+      shell: |
+        kubectl delete application/{{ config.namespace }} --namespace argocd --ignore-not-found --timeout=3m
+        kubectl delete namespace "{{ config.namespace }}" --ignore-not-found --wait=false
+```
+
+The order matters. Deleting the Application first lets ArgoCD remove the deployed resources through its finalizer.
+ArgoCD does not delete a namespace it created with `CreateNamespace=true`, which is why the second command does. If
+the namespace is deleted while the Application still exists, ArgoCD creates it again.
+
+The `Export environment health metrics` step runs first, while the environment still exists, and records how the
+application behaved during the tests ([Environment Metrics](environment-provisioning#environment-metrics)). It is
+`optional`, and the next step has `condition: always`, so that a failure to collect the metrics never keeps the
+environment from being removed.
+
+## The Composite Workflow
+
+The composite Workflow provisions the environment, runs the
+[test Workflow](environment-provisioning#the-test-workflow) against it and tears it down.
+
+```yaml title="Composite Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-argocd-suite
+spec:
+  steps:
+    - name: Provision environment
+      execute:
+        workflows:
+          - name: env-argocd-provision
+            as: env
+            config:
+              namespace: "env-{{ execution.id }}"
+    - name: Run tests
+      execute:
+        workflows:
+          - name: env-smoke-test
+            config:
+              url: '{{ execution("env").outputs.url }}'
+    - name: Tear down environment
+      condition: always
+      execute:
+        workflows:
+          - name: env-argocd-teardown
+            config:
+              namespace: "env-{{ execution.id }}"
+```
+
+Run it like any other Workflow:
+
+```bash
+testkube run testworkflow env-argocd-suite --watch
+```
+
+## The Cleanup Workflow
+
+An aborted execution of the composite Workflow does not run its teardown step
+([Cleaning Up after Aborted Executions](environment-provisioning#cleaning-up-after-aborted-executions)). This Workflow
+runs every hour and deletes the labeled Applications that are older than `maxAgeSeconds`, each followed by its
+namespace.
+
+```yaml title="Cleanup Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-argocd-cleanup
+spec:
+  events:
+    - cronjob:
+        cron: "0 * * * *"
+  config:
+    maxAgeSeconds:
+      type: integer
+      default: 3600
+  pod:
+    serviceAccountName: argocd-env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Delete expired environments
+      shell: |
+        kubectl get applications --namespace argocd -l testkube.io/ephemeral-environment=true -o json \
+          | jq -r --argjson max {{ config.maxAgeSeconds }} \
+            '.items[] | select(now - (.metadata.creationTimestamp | fromdateiso8601) > $max) | .metadata.name' \
+          | while read -r name; do
+              kubectl delete application "$name" --namespace argocd --timeout=3m
+              kubectl delete namespace "$name" --ignore-not-found --wait=false
+            done
+```

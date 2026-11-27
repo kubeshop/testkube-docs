@@ -1450,6 +1450,35 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "Environment Provisioning",
+          items: [
+            {
+              type: "doc",
+              label: "Overview",
+              id: "articles/examples/environment-provisioning",
+            },
+            {
+              type: "doc",
+              label: "Helm",
+              id: "articles/examples/environment-provisioning-helm",
+              className: "sidebar-commercial-category",
+            },
+            {
+              type: "doc",
+              label: "ArgoCD",
+              id: "articles/examples/environment-provisioning-argocd",
+              className: "sidebar-commercial-category",
+            },
+            {
+              type: "doc",
+              label: "vCluster",
+              id: "articles/examples/environment-provisioning-vcluster",
+              className: "sidebar-commercial-category",
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Tutorials",
           items: [
             {

@@ -1,0 +1,276 @@
+---
+description: Example Test Workflows that install a Helm chart into a temporary namespace, run tests against it and uninstall it, with the ServiceAccount they need and a scheduled cleanup of orphaned namespaces.
+---
+
+import RequiresCommercialWorkflows from "../_commercial-workflows-note.mdx";
+
+# Provisioning an Environment with Helm
+
+This example installs a Helm chart into a temporary namespace, runs a test Workflow against the installed application
+and removes the namespace again. It follows the pattern described in
+[Provisioning Test Environments](environment-provisioning), which also explains its limits.
+
+The example installs [podinfo](https://github.com/stefanprodan/podinfo), a small web application. Replace the chart,
+its values and the published URL with those of your own application.
+
+<RequiresCommercialWorkflows />
+
+## Prerequisites
+
+The provisioning and teardown Workflows need a ServiceAccount that is allowed to create namespaces and everything the
+chart installs. Use `kubectl` to apply the following configuration to the cluster where the Testkube Runner is running,
+and replace `testkube` with the namespace of your Runner.
+
+```yaml title="ServiceAccount for Helm provisioning"
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: env-provisioner
+  namespace: testkube
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: env-provisioner
+rules:
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["create", "get", "list", "delete"]
+  # The resources that the chart creates, and the Secrets in which Helm stores the release
+  - apiGroups: [""]
+    resources: ["secrets", "services", "serviceaccounts", "configmaps"]
+    verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["create", "get", "list", "watch", "update", "patch", "delete"]
+  # Read access for `helm --wait` and `kubectl rollout status`
+  - apiGroups: [""]
+    resources: ["pods", "events"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["replicasets"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: env-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: env-provisioner
+    namespace: testkube
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: env-provisioner
+```
+
+:::warning
+The namespace does not exist when the permissions are granted, so they cannot be limited to it: this ServiceAccount
+can manage these resources in every namespace of the cluster. List only the resources your chart creates, and use the
+ServiceAccount only in the provisioning, teardown and cleanup Workflows.
+:::
+
+## The Provisioning Workflow
+
+```yaml title="Provisioning Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-helm-provision
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Create namespace
+      shell: |
+        date +%s > /data/started
+        cat <<EOF | kubectl create -f -
+        apiVersion: v1
+        kind: Namespace
+        metadata:
+          name: {{ config.namespace }}
+          labels:
+            testkube.io/ephemeral-environment: "true"
+        EOF
+    - name: Install chart
+      shell: |
+        helm upgrade --install podinfo oci://ghcr.io/stefanprodan/charts/podinfo \
+          --namespace "{{ config.namespace }}" --wait --timeout 3m
+        date +%s > /data/installed
+        kubectl rollout status deployment/podinfo \
+          --namespace "{{ config.namespace }}" --timeout 3m
+        date +%s > /data/ready
+    - name: Publish environment URL
+      shell: |
+        echo -n "http://podinfo.{{ config.namespace }}.svc.cluster.local:9898" > /testkube/outputs/url
+    - name: Export provisioning metrics
+      shell: |
+        started=$(cat /data/started); installed=$(cat /data/installed); ready=$(cat /data/ready)
+        pods=$(kubectl get pods --namespace "{{ config.namespace }}" -o json | jq '.items | length')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/provisioning.lp <<EOF
+        environment_provisioning,provisioner=helm,app=podinfo install_seconds=$((installed - started)),ready_wait_seconds=$((ready - installed)),total_seconds=$((ready - started)),pods=${pods}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+```
+
+- The `spec.config` property defines the `namespace` [configuration parameter](/articles/test-workflows-examples-configuration),
+  which the composite Workflow sets.
+- The `spec.pod.serviceAccountName` property selects the ServiceAccount from the prerequisites.
+- The `spec.container` property sets the `alpine/k8s` image, which contains both `helm` and `kubectl`, for every step.
+- The `Create namespace` step creates the namespace with the label that the [cleanup Workflow](#the-cleanup-workflow)
+  selects on. `kubectl create` fails when the namespace exists, so an execution never installs into a namespace it
+  does not own.
+- The `Install chart` step installs the chart and waits until the application is ready.
+- The `Publish environment URL` step writes the in-cluster URL of the application to `/testkube/outputs/url`, where
+  the composite Workflow reads it.
+- The `Export provisioning metrics` step writes how long the provisioning took to a file in
+  [Influx Line Protocol](/articles/custom-metrics-in-insights) and uploads it as an artifact, from the timestamps
+  that the earlier steps saved in `/data`. See [Environment Metrics](environment-provisioning#environment-metrics).
+
+:::note
+`helm --wait` treats a Deployment as ready when `replicas` minus `maxUnavailable` Pods are ready. For a chart with one
+replica and `maxUnavailable: 1`, as podinfo has, that is zero Pods, and Helm returns before the application can serve
+requests. `kubectl rollout status` waits until every Pod is available.
+:::
+
+## The Teardown Workflow
+
+```yaml title="Teardown Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-helm-teardown
+spec:
+  config:
+    namespace:
+      type: string
+  pod:
+    serviceAccountName: env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Export environment health metrics
+      optional: true
+      shell: |
+        restarts=$(kubectl get pods --namespace "{{ config.namespace }}" -o json \
+          | jq '[.items[].status.containerStatuses[]?.restartCount] | add // 0')
+        warnings=$(kubectl get events --namespace "{{ config.namespace }}" --field-selector type=Warning -o json \
+          | jq '.items | length')
+        age=$(kubectl get namespace "{{ config.namespace }}" -o json \
+          | jq 'now - (.metadata.creationTimestamp | fromdateiso8601) | floor')
+        mkdir -p /data/artifacts
+        cat > /data/artifacts/environment.lp <<EOF
+        environment_health,provisioner=helm,app=podinfo container_restarts=${restarts}i,warning_events=${warnings}i,lifetime_seconds=${age}i
+        EOF
+      artifacts:
+        paths:
+          - /data/artifacts/*.lp
+    - name: Uninstall chart and delete namespace
+      condition: always
+      shell: |
+        helm uninstall podinfo --namespace "{{ config.namespace }}" --ignore-not-found --wait
+        kubectl delete namespace "{{ config.namespace }}" --ignore-not-found --wait=false
+```
+
+Both commands of the last step succeed when there is nothing to remove, so the teardown also passes after a provisioning that failed
+halfway.
+
+The `Export environment health metrics` step runs first, while the environment still exists, and records how the
+application behaved during the tests ([Environment Metrics](environment-provisioning#environment-metrics)). It is
+`optional`, and the next step has `condition: always`, so that a failure to collect the metrics never keeps the
+environment from being removed.
+
+## The Composite Workflow
+
+The composite Workflow provisions the environment, runs the
+[test Workflow](environment-provisioning#the-test-workflow) against it and tears it down.
+
+```yaml title="Composite Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-helm-suite
+spec:
+  steps:
+    - name: Provision environment
+      execute:
+        workflows:
+          - name: env-helm-provision
+            as: env
+            config:
+              namespace: "env-{{ execution.id }}"
+    - name: Run tests
+      execute:
+        workflows:
+          - name: env-smoke-test
+            config:
+              url: '{{ execution("env").outputs.url }}'
+    - name: Tear down environment
+      condition: always
+      execute:
+        workflows:
+          - name: env-helm-teardown
+            config:
+              namespace: "env-{{ execution.id }}"
+```
+
+Run it like any other Workflow:
+
+```bash
+testkube run testworkflow env-helm-suite --watch
+```
+
+The log of the execution shows the three executions it started and their results:
+
+```text
+env-helm-provision-1 • scheduled (6b09605798dc5b9460f360e8)
+env-helm-provision-1 • passed
+
+env-smoke-test-1 • scheduled (6b09606ff74794747cf17831)
+env-smoke-test-1 • passed
+
+env-helm-teardown-1 • scheduled (6b09607398dc5b9460f360f4)
+env-helm-teardown-1 • passed
+```
+
+## The Cleanup Workflow
+
+An aborted execution of the composite Workflow does not run its teardown step
+([Cleaning Up after Aborted Executions](environment-provisioning#cleaning-up-after-aborted-executions)). This Workflow
+runs every hour and deletes the labeled namespaces that are older than `maxAgeSeconds`. Deleting the namespace removes
+the Helm release with it.
+
+```yaml title="Cleanup Workflow"
+apiVersion: testworkflows.testkube.io/v1
+kind: TestWorkflow
+metadata:
+  name: env-helm-cleanup
+spec:
+  events:
+    - cronjob:
+        cron: "0 * * * *"
+  config:
+    maxAgeSeconds:
+      type: integer
+      default: 3600
+  pod:
+    serviceAccountName: env-provisioner
+  container:
+    image: alpine/k8s:1.32.3
+  steps:
+    - name: Delete expired environments
+      shell: |
+        kubectl get namespaces -l testkube.io/ephemeral-environment=true -o json \
+          | jq -r --argjson max {{ config.maxAgeSeconds }} \
+            '.items[] | select(now - (.metadata.creationTimestamp | fromdateiso8601) > $max) | .metadata.name' \
+          | xargs -r -n1 kubectl delete namespace --wait=false
+```

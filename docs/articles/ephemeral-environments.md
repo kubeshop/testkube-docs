@@ -9,6 +9,12 @@ clusters and/or namespace for pull-requests, local sandboxes, etc.
 
 Using Testkube to run tests in these ephemeral namespaces/clusters can be achieved using both multi and single-runner setups.
 
+:::tip
+A Test Workflow can also provision the ephemeral namespace or virtual cluster itself, run other Workflows against it
+and remove it again. See [Provisioning Test Environments](/articles/examples/environment-provisioning) for examples
+with Helm, ArgoCD and vCluster.
+:::
+
 ## Multi-runner Approach {#multi-agent-approach}
 
 With the addition of [runners](/articles/agents-overview#runner-agents) to Testkube, supporting ephemeral/short-lived
