@@ -195,8 +195,8 @@ Adding an analysis takes you to the Analysis editor where you can configure what
 ![The analysis editor](images/insights-analysis-editor.jpg)
 
 At the top you can see a Period Selector for selecting the last day, week, month, quarter or any custom period.
-The interval is automatically inferred depending on the size of the period.
-A period less than two days will have an hourly interval, then daily, and up to weekly when looking at a quarter.
+This sets which executions the analysis covers. How the Executions time series groups them over that range is
+a separate choice, the [Aggregation Period](#aggregation-period).
 
 More to the right, you can see the Analysis Selector: it defaults to **Executions** time series, but you can also
 select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fail Statistics** (all described below).
@@ -204,13 +204,71 @@ select **Executions Bar Chart**, **Efficiency Quadrant Analysis** and **Pass/Fai
 ![Chart Type selector](images/insights-select-analysis.png)
 
 Under the period and analysis selector, you will find your selected chart with its controls on the right side.
-The controls vary depending on the selected chart and include the ability to filter executions on **Workflow name**,
-**environment**, **status**, **labels**, and measure specific fields (such as test case name).
+The controls vary depending on the selected chart and include the [filters](#filtering-an-analysis) that narrow down
+which executions it counts.
+
+### Filtering an Analysis
+
+Select **+** next to **Filter** in the controls of an analysis to narrow it down. Each filter has an operator: click the
+operator to switch between the ones that filter offers.
 
 ![Test Insights Executions Filter](images/insights-executions-filter.png)
 
-:::tip
-Workflow name, labels, and measure identity fields, support multiple filter operators such as `IS` (exact match) and `CONTAINS` for partial matches. Just click on the operator to switch.
+| Filter                           | Operators                                              | What it matches                                                                                                    |
+| -------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| **Workflow Name**                | is, is not, contains, does not contain                 | The name of the Workflow                                                                                           |
+| **Environment**                  | is                                                     | The Environment the execution ran in                                                                               |
+| **Workflow Status**              | is                                                     | The result of the execution, such as passed, failed or aborted                                                     |
+| **Failure type**                 | is                                                     | The kind of [failure](/articles/test-workflows-failure-reasons), such as a step failure or an infrastructure stop  |
+| **Failure reason**               | is                                                     | The [reason code](/articles/test-workflows-failure-reasons#reason-codes) of the failure, within the selected types |
+| **Labels**                       | is, is not, where (contains, does not contain, exists) | A label of the Workflow, as `key=value`, or a key whose value contains some text                                   |
+| **Tags**                         | is, is not, contains, does not contain                 | An [execution tag](/articles/execution-tags), as `key=value`                                                       |
+| **Actor type**                   | is, is not                                             | What started the execution: a user or API key, a cron schedule, a test trigger, another Workflow, a CRD or Git     |
+| **Actor name**                   | is, is not, contains, does not contain                 | The name of the user, schedule, trigger or Workflow that started the execution                                     |
+| **Runner**                       | is                                                     | The Runner Agent that ran the execution                                                                            |
+| **Execution duration (seconds)** | at least, at most, between                             | How long the execution ran, in whole seconds. The bounds count as a match                                          |
+| Granular metric fields           | is, is not, contains, does not contain                 | The [identity fields](#segmentation-and-filtering) of the selected measure, such as Testcase or Testsuite          |
+
+A few rules apply to all of them:
+
+- **Values of one filter combine with OR, filters combine with AND.** Two Workflow names show executions of either
+  Workflow; a Workflow name and a label show executions that match both. Labels are the exception: two labels must
+  both be present.
+- **The lists of values are sorted alphabetically**, so a custom label, tag or actor name is easy to find.
+- **Actor type, Actor name and Runner are recorded from Testkube 2.16 on.** Executions that ended before that
+  have none, so these filters never match them.
+- **Pass/Fail Statistics offers fewer filters.** It has no Workflow Status, Failure type, Failure reason, Actor,
+  Runner or Execution duration filter.
+- **Some filters require Postgres.** On a Testkube deployment that uses MongoDB, the Actor type, Actor name, Runner
+  and Execution duration filters have no effect, and **is not** and **does not contain** are refused.
+
+### Leaving Values Out
+
+Use **is not** and **does not contain** to remove executions from an analysis rather than to select them. They are
+offered on Workflow Name, Labels, Tags, Actor type, Actor name and the granular metric fields.
+
+- **Excluded values always combine with AND.** Workflow Name **is not** `nightly-e2e` and `smoke-tests` leaves out
+  both Workflows. Next to an **is** on the same filter, the execution must match one included value and none of the
+  excluded ones.
+- **An execution without the key is kept.** Labels **is not** `team=payments` keeps executions whose Workflow has no
+  `team` label, as a Kubernetes label selector does. Pick only a key, such as `team`, to keep only the executions
+  that have no `team` label at all.
+- **An execution without an actor is kept** when you leave out an actor type or name.
+
+For example, a Workflow that is expected to fail can flood a failure board. If those Workflows carry the label
+`core-tests=expected-fail`, add a **Labels** filter, switch its operator to **is not** and pick
+`core-tests=expected-fail`. The board then shows only the failures worth looking at:
+
+![Labels filter with is not](images/insights-filter-label-is-not.png)
+
+To leave out every smoke-test Workflow by name, add a **Workflow Name** filter with **does not contain** and type
+`smoke`:
+
+![Workflow Name filter with does not contain](images/insights-filter-does-not-contain.png)
+
+:::note
+**Environment**, **Workflow Status**, **Failure type**, **Failure reason** and **Runner** have no **is not**: select
+the values you want to keep instead.
 :::
 
 ## Executions Time Series
@@ -244,6 +302,37 @@ The actual aggregate(s) available will depend on which Executions Measure you se
 :::
 
 ![Test Insights Executions Aggregate](images/insights-executions-aggregate.png)
+
+### Aggregation Period
+
+The **Period** control sets how the time series groups executions over time: each point or bar of the chart is one
+period. It sits between **Aggregate** and **Segment**.
+
+| Period             | Each point covers                                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **Auto** (default) | A size picked from the date range: an hour for a range under two days, then a day, up to a week for a quarter |
+| **Day**            | One calendar day                                                                                              |
+| **Week**           | One calendar week, starting on Monday                                                                         |
+| **Month**          | One calendar month                                                                                            |
+| **Quarter**        | One calendar quarter, such as Q1 2026                                                                         |
+| **Year**           | One calendar year                                                                                             |
+
+Use a longer period to read a trend over a long range. Over twelve months, **Auto** still draws a point per week and
+**Day** a point per day, which is hard to read; **Month** draws twelve. Combine it with a **Segment** to compare,
+for example, how many executions each testing tool ran per month.
+
+![Executions grouped by month](images/insights-aggregation-period.png)
+
+A few things to know:
+
+- **The periods follow the calendar in UTC.** The x-axis labels them in UTC, such as `Jan 26`, `Q1 2026` or `2026`.
+- **The first and last periods can be partial.** A range that starts on 15 March and is grouped by month starts with
+  half a month, so its first point counts fewer executions.
+- **The choice is saved with the analysis.** Analyses saved before this option existed use **Auto**.
+- **A range can hold at most 2000 periods.** A longer combination, such as **Day** over six years, is refused; pick a
+  longer period.
+- **It requires Postgres.** On a Testkube deployment that uses MongoDB, only **Auto** works; any other period is
+  refused.
 
 ### Executions Segment
 

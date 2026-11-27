@@ -28,7 +28,7 @@ Each level counts different usage:
 
 Every limit that applies to a request is checked, and the first one that's reached blocks it. For example, a Member with room left is still blocked when the AI Agent they chat with has reached its limit. Chats an API token starts itself, such as AI Triggers, have no Member limit: only the AI Agent, Environment and Organization limits apply.
 
-Sandbox specialist runs count toward limits like chats do.
+Sandbox specialist runs count toward limits like chats do, and so do the judges of [evals](ai-agent-evals#token-usage): their tokens count toward the Member whose chat was judged, the AI Agent, the Environment and the Organization.
 
 A limit has three settings:
 
@@ -68,7 +68,7 @@ Limits are set on the thing they limit:
 | Member       | **Organization Management** → **Members** → the Member → **Token Limit** card           |
 | AI Agent     | The Environment → **AI Settings** → **AI Agents** → the AI Agent → **Token Limit** card |
 | Environment  | The Environment → **AI Settings** → **Usage** → **Token Limit** card                    |
-| Organization | **Organization Management** → **AI Governance** → **Limits**                            |
+| Organization | **Organization Management** → **AI & Governance** → **Token Limits**                    |
 
 On a Token Limit card:
 
@@ -84,15 +84,15 @@ The card shows how much of the current window is used and when it resets. **Remo
 
 ## Review all limits
 
-**Organization Management** → **AI Governance** → **Limits** lists every limit and pause in the Organization. It's for Organization admins and owners.
+**Organization Management** → **AI & Governance** → **Token Limits** lists every limit and pause in the Organization. It's for Organization admins and owners.
 
 - Each row shows the name, type, limit, tokens used, status and when it resets.
-- **Search by name or email**, **Filter by type**, **Filter by status** (**Active**, **Near limit**, **Limit reached**, **Paused**) and **Filter by environment** narrow the list.
+- **Search by name or email**, and **Add a filter** for **Type**, **Status** (**Active**, **Near limit**, **Limit reached**, **Paused**) or **Environment**, narrow the list.
 - **Add limit** sets a limit for any type: pick the **Type**, then the Environment, AI Agent or Member, select **Continue**, and set the limit.
 - Each row's **⋮** menu has **Edit limit** (or **Add limit** when the row has no limit), **Pause AI requests** or **Resume AI requests**, and **Remove limit** when there is a limit.
 - The **⋮** next to **Add limit** pauses or resumes AI in the whole Organization.
 
-![AI Governance Limits tab listing limits of different types and statuses](images/ai-governance-limits.png)
+![AI & Governance Token Limits page listing limits of different types and statuses](images/ai-governance-limits.png)
 
 ![The Add token limit modal](images/ai-governance-limits-add.png)
 

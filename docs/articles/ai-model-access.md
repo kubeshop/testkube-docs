@@ -81,14 +81,13 @@ Use **Add AI Agents** and **Add members** to limit more of them to the model, or
 
 ## Review models across an Environment
 
-**Organization Management** → **AI Governance** → **Models** lists the models of one Environment. It's for Organization admins and owners.
+**Organization Management** → **AI & Governance** → **Models** lists every model, with its provider and Environment. It's for Organization admins and owners.
 
-- **Environment** picks the Environment.
-- **Provider** picks the model provider, starting with Testkube's own models.
+- **Search by name or ID**, and **Add a filter** for **Environment**, **Provider** or **Type**, narrow the list.
 - Each model shows its ID and type, and Testkube's default model is marked.
 - With RBAC in your license, select a model to open its details page and see who is limited to it.
 
-![AI Governance Models tab with an Environment and provider selected](images/ai-governance-models.png)
+![AI & Governance Models page listing models with their provider and Environment](images/ai-governance-models.png)
 
 ## Related
 
