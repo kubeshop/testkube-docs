@@ -82,6 +82,9 @@ NUnit
 xUnit
 Gradle
 Pytest
+Promptfoo
+DeepEval
+Ragas
 Okta
 HAProxy
 hostname[s]?
@@ -218,3 +221,4 @@ Kargo
 Entra
 JWT[s]?
 URN[s]?
+kagent

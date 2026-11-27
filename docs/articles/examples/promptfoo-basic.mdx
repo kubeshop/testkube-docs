@@ -1,0 +1,38 @@
+---
+description: Example Test Workflow that runs the Promptfoo getting-started evaluation, saves its JSON and HTML reports and exports its pass rate as custom metrics in Insights.
+---
+
+import SimplePromptfoo from "../../workflows/simple-promptfoo-workflow.md";
+import StandaloneAgentNote from "./_standalone-agent-note.mdx";
+
+# Basic Promptfoo Example
+
+[Promptfoo](https://www.promptfoo.dev/) is a popular open source tool for evaluating and red-teaming LLM
+applications using declarative test cases. The Workflow below runs the official Promptfoo
+[getting-started example](https://github.com/promptfoo/promptfoo/tree/main/examples/getting-started),
+uploads the generated reports as artifacts and exports the results as metrics.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content` property checks out the getting-started example from the Promptfoo GitHub repository,
+  pinned to the release tag that matches the Promptfoo version the Workflow runs.
+- The `spec.container` property defines the working directory, Node.js image, and environment variables for the Workflow;
+  the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression so the key
+  is never stored in the Workflow definition itself.
+- The **Run Promptfoo evaluation** step installs the same Promptfoo version, runs the evaluation and writes both JSON
+  and HTML reports. Its `cache` block keeps the npm download cache between executions, so later runs install Promptfoo
+  from the cache; see [Dependency Caching](/articles/test-workflows-dependency-cache).
+- The **Export metrics** step runs the [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser)
+  image, which converts the JSON results into a `results.lp` file with the successes, failures, errors, pass rate,
+  token count and duration of the evaluation.
+- The **Save report** step uploads the reports and the metrics file as artifacts; the `always` condition makes sure
+  they are uploaded even if the evaluation fails.
+
+<SimplePromptfoo />
+
+After execution, the JSON and HTML reports are available under the Artifacts tab of the execution,
+and the evaluation output is shown in the Log Output tab. Testkube ingests the `results.lp` file as
+[custom metrics](/articles/custom-metrics-in-insights) under the `promptfoo_eval` measurement, so you can chart the
+pass rate and token usage across executions in Insights.
+
+<StandaloneAgentNote />

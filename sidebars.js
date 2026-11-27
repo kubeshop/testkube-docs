@@ -1373,6 +1373,52 @@ const sidebars = {
         },
         {
           type: "category",
+          label: "AI Testing",
+          items: [
+            {
+              type: "doc",
+              label: "AI Testing Metrics",
+              id: "articles/examples/ai-metrics",
+            },
+            {
+              type: "doc",
+              label: "Promptfoo",
+              id: "articles/examples/promptfoo-basic",
+            },
+            {
+              type: "doc",
+              label: "DeepEval",
+              id: "articles/examples/deepeval-basic",
+            },
+            {
+              type: "doc",
+              label: "Inspect AI",
+              id: "articles/examples/inspect-ai-basic",
+            },
+            {
+              type: "doc",
+              label: "Ragas",
+              id: "articles/examples/ragas-basic",
+            },
+            {
+              type: "doc",
+              label: "LM Evaluation Harness",
+              id: "articles/examples/lm-eval-basic",
+            },
+            {
+              type: "doc",
+              label: "Harbor",
+              id: "articles/examples/harbor-basic",
+            },
+            {
+              type: "doc",
+              label: "kagent Agents",
+              id: "articles/examples/kagent-promptfoo",
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Infrastructure Testing",
           items: [
             {
@@ -1389,6 +1435,11 @@ const sidebars = {
               type: "doc",
               label: "Validating Kubernetes Clusters",
               id: "articles/examples/kubectl-basic",
+            },
+            {
+              type: "doc",
+              label: "kube-burner",
+              id: "articles/examples/kube-burner-basic",
             },
             {
               type: "link",

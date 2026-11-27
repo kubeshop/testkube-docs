@@ -1,0 +1,207 @@
+---
+description: The kinds of metrics AI evaluation tools produce, how Testkube ingests them as custom metrics in Insights through InfluxDB line protocol, and the tools and metrics the `testkube-ai-metrics-parser` supports.
+---
+
+import StandaloneMetricsNote from "./_standalone-metrics-note.mdx";
+
+# AI Testing Metrics
+
+AI evaluation tools such as Promptfoo, DeepEval, Inspect AI, Ragas, the LM Evaluation Harness and Harbor measure the quality
+of LLM applications and models. Each of them writes its results in its own format, so Testkube needs a common format
+to chart them. This page explains what these tools measure, how Testkube ingests and charts their metrics, and how the
+[`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser) converts the output of each tool
+for you.
+
+## What AI Evaluation Tools Measure
+
+A traditional functional test either passes or fails. The output of an LLM is not deterministic, and its quality is a
+matter of degree, so AI evaluation tools report scores alongside pass/fail results. Most of what they produce falls
+into a few groups:
+
+| Kind of metric                | What it tells you                                                                                                                                         | Examples                                                                             |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Assertion results             | How many test cases met their assertions or thresholds, and the resulting pass rate.                                                                      | Promptfoo successes, failures and pass rate; DeepEval passed and failed test cases   |
+| LLM-as-a-judge quality scores | A score, usually between 0 and 1, that a second model assigns to an answer for a quality such as relevancy, correctness, or the absence of hallucination. | DeepEval answer relevancy, G-Eval and hallucination metrics                          |
+| RAG metrics                   | How well a retrieval-augmented generation (RAG) pipeline grounds its answers in the retrieved context, and how relevant that context is.                  | Ragas faithfulness, answer relevancy, context precision, and context recall          |
+| Benchmark scores              | How a model performs on a standardized dataset of tasks, often with the standard error of the score.                                                      | LM Evaluation Harness exact match on `gsm8k`; Inspect AI accuracy and standard error |
+| Agent task rewards            | How often an AI agent completes a task in a sandbox, as scored by a test script that checks the result of its work.                                       | Harbor mean reward and pass rate                                                     |
+| Cost and efficiency           | What a run costs and how long it takes.                                                                                                                   | Token counts, cost of the judge model calls, evaluation duration                     |
+
+A single run of an evaluation tells you little on its own. The value comes from following these metrics over time, so
+you can:
+
+- Catch a regression when a prompt, a retrieval step, or the application code changes.
+- Compare models, or model versions, on the same evaluation before you switch.
+- Notice drift in a hosted model that changes behind the same name.
+- Track the cost and token usage of your evaluations as they grow.
+
+## Ingesting AI Metrics in Testkube
+
+Testkube ingests [custom metrics](/articles/custom-metrics-in-insights) from any Workflow step that writes them in
+[InfluxDB line protocol](https://docs.influxdata.com/influxdb/cloud/reference/syntax/line-protocol/), a simple text
+format with one record per line. Each record has a measurement name, optional tags and one or more numeric fields:
+
+```text
+measurement[,tag_key=tag_value...] field_key=value[,field_key=value...]
+```
+
+For example, a DeepEval run against `gpt-4o` can be summarized as:
+
+```text
+deepeval,metric=answer_relevancy,model=gpt-4o cost=0.019998,errors=0i,failed=0i,mean_score=1,passed=2i,tests=2i
+deepeval,model=gpt-4o errors=0i,failed=0i,passed=2i
+```
+
+To get these metrics into Testkube:
+
+1. Run the evaluation tool in a Workflow step, so that it writes its results to files in the working directory.
+2. Convert the results to line protocol and write them to a file with an `.lp` or `.influx` extension.
+3. Upload that file as an [artifact](/articles/test-workflows-artifacts). Testkube detects the line protocol during
+   the upload, registers the file as an `influx.line_protocol` report and ingests its numeric fields after the
+   execution completes.
+
+Testkube turns each field into a metric key, `{measurement}_{field}` in lower case, and each tag into an identity
+field that you can segment and filter by:
+
+| Line protocol record                                                  | Metric keys                                               | Identity fields                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------- | ----------------------------------------- |
+| `deepeval,metric=answer_relevancy,model=gpt-4o mean_score=1,tests=2i` | `deepeval_mean_score`, `deepeval_tests`                   | `metric=answer_relevancy`, `model=gpt-4o` |
+| `ragas_eval,model=gpt-4o-mini answer_relevancy=1,faithfulness=1`      | `ragas_eval_answer_relevancy`, `ragas_eval_faithfulness`  | `model=gpt-4o-mini`                       |
+| `promptfoo_eval pass_rate=1,total_tokens=125i`                        | `promptfoo_eval_pass_rate`, `promptfoo_eval_total_tokens` | none                                      |
+
+:::note
+Custom metrics require Testkube Runner and Control Plane version `2.11.0` or later and a Testkube deployment that uses
+Postgres. See [Custom Metrics with Influx Line Protocol](/articles/custom-metrics-in-insights) for the full line format,
+the supported field types, and troubleshooting.
+:::
+
+<StandaloneMetricsNote />
+
+### Visualizing AI Metrics in Insights
+
+Once a Workflow has run, its AI metrics appear in [Test Insights](/articles/test-insights) under the
+**Custom Report Metrics** group of granular metrics. To chart them:
+
+1. Create an [Executions Time Series](/articles/test-insights#executions-time-series) analysis.
+2. Select an AI metric, such as `promptfoo_eval_pass_rate` or `ragas_eval_faithfulness`, as the **Measure**.
+3. Pick an **Aggregate**. Insights defaults to **maximum** for rates and to **sum** for counts; **average** is
+   usually the most useful aggregate for a quality score when a Workflow runs several times in one time interval.
+4. Set the **Segment** to an identity field, such as `model`, to draw one line per model, or filter the analysis to a
+   single Workflow.
+
+Add the analyses you use most to an [Insights Board](/articles/test-insights#insights-boards), so that you can follow
+the quality of your AI application next to its other test results.
+
+:::tip
+Tag each record with the model, prompt version or dataset that the run used, and keep the number of distinct tag values
+small. Tags such as `model=gpt-4o` make it easy to compare runs, while unique values, such as a run ID, create a new
+series for every execution.
+:::
+
+## The AI Metrics Parser
+
+Writing line protocol by hand for each evaluation tool is tedious, so Testkube provides the
+[`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser). It is a small open source Go
+binary, published as the `docker.io/kubeshop/testkube-ai-metrics-parser` image, that reads the native output of the
+supported tools and writes an `.lp` file with a stable set of measurements, fields, and tags. It has no dependency on
+Testkube, so you can also run it in other CI or observability pipelines.
+
+### Supported Tools and Metrics
+
+| Tool                                                                         | Parser argument | Default input                         | Measurement      | Fields                                                                                                                                                                              | Structural tags                     |
+| ---------------------------------------------------------------------------- | --------------- | ------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| [Promptfoo](https://www.promptfoo.dev/)                                      | `promptfoo`     | `results.json`                        | `promptfoo_eval` | `successes`, `failures`, `errors`, `pass_rate`, `total_tokens`, `duration_ms`                                                                                                       | none                                |
+| [DeepEval](https://deepeval.com/)                                            | `deepeval`      | `test_run_*.json`                     | `deepeval`       | Per metric: `mean_score`, `tests`, `passed`, `failed`, `errors`, `cost`. Rollup: `passed`, `failed`, `errors`                                                                       | `metric`, on the per-metric records |
+| [Inspect AI](https://inspect.aisi.org.uk/)                                   | `inspect-ai`    | `logs/*.json`                         | `inspect_eval`   | One field per scorer metric, such as `accuracy` and `stderr`                                                                                                                        | none                                |
+| [Ragas](https://docs.ragas.io/)                                              | `ragas`         | `results/ragas_results.json`          | `ragas_eval`     | The mean of every numeric column of the results, such as `faithfulness` and `answer_relevancy`                                                                                      | none                                |
+| [LM Evaluation Harness](https://github.com/EleutherAI/lm-evaluation-harness) | `lm-eval`       | `results/**/*.json`, `results/*.json` | `lm_eval`        | One field per harness metric, such as `exact_match`; standard errors are skipped                                                                                                    | `task`, `filter`                    |
+| [Harbor](https://github.com/harbor-framework/harbor)                         | `harbor`        | `jobs/*/*/result.json`                | `harbor_eval`    | `trials`, `passed`, `failed`, `errors`, `pass_rate`, `mean_reward`, `input_tokens`, `output_tokens`, `cache_tokens`, `total_tokens`, `cost_usd`, `duration_ms`, `agent_duration_ms` | `agent`, `model`, `dataset`         |
+
+A few details per tool:
+
+- **Promptfoo:** the parser reads the `results.stats` summary of the file that `promptfoo eval -o results.json`
+  writes, and computes `pass_rate` from the success and failure counts.
+- **DeepEval:** set the `DEEPEVAL_RESULTS_FOLDER` environment variable so that `deepeval test run` exports its
+  `test_run_*.json` files. The parser writes one record per DeepEval metric, tagged with the metric name, plus a rollup
+  record without a `metric` tag for the overall pass/fail count.
+- **Inspect AI:** run `inspect eval` with `--log-format json`, so that it writes JSON logs the parser can read.
+- **Ragas:** the parser reads a JSON file with the per-sample results of a Ragas evaluation, as the
+  [Ragas example](ragas-basic) writes it, and averages each metric over the samples.
+- **LM Evaluation Harness:** the parser writes one record per task and filter, so that `gsm8k` with the `strict-match`
+  and `flexible-extract` filters gives two series.
+- **Harbor:** the parser reads the `result.json` file of each trial of a Harbor job and writes one record per agent,
+  model and dataset. A trial that ended with an error before it earned a reward counts as `0` in `mean_reward`, and the
+  token and cost fields are left out for agents that report none, such as `oracle`. Harbor keeps each job in its own
+  folder under `jobs`; pass `--latest` to report only the newest job if that folder holds earlier ones.
+
+Structural tags are part of the identity of a series and are always added. Any other tag comes from the `--tag` option.
+
+### Usage
+
+```text
+testkube-ai-metrics-parser <framework> [flags]
+```
+
+| Flag                  | Description                                                                    |
+| --------------------- | ------------------------------------------------------------------------------ |
+| `-i`, `--input`       | Input file or glob; repeatable. Defaults to the tool's default input.          |
+| `-o`, `--output`      | The `.lp` file to write. Defaults to `metrics.lp`.                             |
+| `-m`, `--measurement` | Override the measurement name.                                                 |
+| `--tag key=value`     | Add an identity tag to every record, such as `--tag model=gpt-4o`; repeatable. |
+| `--latest`            | Parse only the newest matching file instead of aggregating all of them.        |
+| `--fail-on-empty`     | Exit with an error if no metrics are found.                                    |
+| `--stdout`            | Also print the line protocol to the log.                                       |
+
+A single evaluation often writes several result files: DeepEval writes one file per test case, the LM Evaluation
+Harness one per task, and sharded runs one per shard. The parser folds every matching file into one set of metrics for
+the run. It sums counts such as `tests`, `total_tokens` and `cost`, averages scores over the examples behind them rather
+than per file, and computes `pass_rate` again from the summed counts. A file that cannot be parsed is skipped with a
+warning, so one truncated file does not lose the metrics of the rest.
+
+### Adding the Parser to a Workflow
+
+Run the evaluation on the image of its own tool, then add a step that runs the parser image on its output and a step
+that uploads the results and the metrics file. Steps share the working directory, so the parser sees the files that
+the evaluation wrote. The `always` condition makes sure the metrics are exported and uploaded even when the evaluation
+fails, which is when you most want to see its scores.
+
+```yaml title="ragas-metrics-steps.yaml"
+steps:
+  - name: Run Ragas evaluation
+    shell: python ragas_eval.py
+  - name: Export metrics
+    condition: always
+    container:
+      image: docker.io/kubeshop/testkube-ai-metrics-parser:latest
+    shell: testkube-ai-metrics-parser ragas -i results/ragas_results.json -o results/metrics.lp --tag model={{config.model}} --stdout
+  - name: Save results
+    condition: always
+    artifacts:
+      paths:
+        - results/*.json
+        - results/*.lp
+```
+
+When you run the same evaluation for several models in a `parallel` step with a `matrix`, run the parser inside each
+parallel worker and tag its output with the model, as in `--tag model={{matrix.model}}`. Each worker has its own file
+system, so a parser step after the parallel step would not see the results of the workers. The
+[DeepEval example](deepeval-basic) shows this.
+
+:::tip
+The `latest` tag of the parser image follows the `main` branch of its repository. To pin a build that does not change,
+use a `main-<commit>` tag of the image.
+:::
+
+To request support for another tool, or a new metric for a supported one, open an issue in the
+[`testkube-ai-metrics-parser` repository](https://github.com/kubeshop/testkube-ai-metrics-parser/issues).
+
+## Examples
+
+Each of these examples runs an evaluation tool in a Workflow and exports its metrics with the parser:
+
+- [Promptfoo](promptfoo-basic) - Runs a Promptfoo evaluation and exports its pass rate and token usage.
+- [DeepEval](deepeval-basic) - Runs a DeepEval test suite against several models in parallel and tags the metrics with each model.
+- [Inspect AI](inspect-ai-basic) - Runs an Inspect AI evaluation with an accuracy quality gate.
+- [Ragas](ragas-basic) - Evaluates a RAG pipeline with faithfulness and relevancy metrics.
+- [LM Evaluation Harness](lm-eval-basic) - Runs a slice of the `gsm8k` benchmark and exports one series per task.
+- [Harbor](harbor-basic) - Evaluates an AI agent on Harbor tasks and exports its mean reward, pass rate, token usage and cost.

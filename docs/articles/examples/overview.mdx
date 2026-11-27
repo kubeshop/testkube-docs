@@ -1,5 +1,5 @@
 ---
-description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, and infrastructure testing.
+description: Index of example Test Workflows by testing tool, grouped into load and performance, end-to-end and browser, API, unit and integration, AI, and infrastructure testing.
 ---
 
 # Testkube Examples and Guides
@@ -77,6 +77,23 @@ Frameworks for unit tests, integration tests, and BDD:
 - [TestContainers](test-containers-basic) - Shows how to configure a Workflow that uses TestContainers for container dependencies.
 - [Cucumber](https://testkube.io/learn/simplify-bdd-testing-for-distributed-java-applications-with-testkube) - Simplify BDD Testing for Distributed Java Applications (external)
 
+## AI Testing
+
+Tools for evaluating LLMs, prompts, RAG pipelines, and AI agents. Each example exports its scores with the
+[`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser), so they show up as
+[custom metrics in Insights](/articles/custom-metrics-in-insights) that you can chart across executions.
+These examples are about testing your own AI applications and models; to use AI to create and analyze tests in
+Testkube, see [Testkube AI](/articles/testkube-ai-overview).
+
+- [AI Testing Metrics](ai-metrics) - Explains the metrics AI evaluation tools produce, how Testkube ingests and charts them, and the tools the parser supports.
+- [Promptfoo](promptfoo-basic) - Shows how to run a Promptfoo evaluation and collect its JSON and HTML reports.
+- [DeepEval](deepeval-basic) - Shows how to run a DeepEval test suite against several models in parallel and compare their scores.
+- [Inspect AI](inspect-ai-basic) - Shows how to run an Inspect AI evaluation with an accuracy quality gate.
+- [Ragas](ragas-basic) - Shows how to evaluate a RAG pipeline with faithfulness and relevancy metrics.
+- [LM Evaluation Harness](lm-eval-basic) - Shows how to run an academic benchmark (`gsm8k`) against an OpenAI model.
+- [Harbor](harbor-basic) - Shows how to evaluate an AI agent on Harbor tasks with a mean reward quality gate.
+- [TestContainers with Ollama](test-containers-basic) - Shows how to test a local model served by Ollama, using TestContainers.
+
 ## Infrastructure Testing
 
 Tools for validating Kubernetes clusters and infrastructure:
@@ -84,6 +101,7 @@ Tools for validating Kubernetes clusters and infrastructure:
 - [Testkube Marketplace](marketplace) - Browse and deploy reusable, community-driven TestWorkflows for validating infrastructure components like databases, message brokers, networking, and more.
 - [Chainsaw](chainsaw-basic) - Shows how to run Chainsaw tests for Kubernetes operators and controllers.
 - [Validating Kubernetes Clusters](kubectl-basic) - Shows how to run kubectl commands from within Test Workflows for cluster operations and validation.
+- [kube-burner](kube-burner-basic) - Shows how to run kube-burner to load test a Kubernetes cluster and fail on pod latency thresholds.
 - [Testing Hardware Components](https://testkube.io/blog/implementing-kubernetes-native-hardware-testing-with-testkube) - Shows how to test hardware infrastructure in your Kubernetes Cluster (external).
 
 ## Tutorials

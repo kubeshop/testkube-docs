@@ -1,0 +1,50 @@
+---
+description: Example Test Workflow that runs the same DeepEval test suite against several OpenAI models in parallel with a matrix and exports each model's scores as custom metrics in Insights.
+---
+
+import ParallelDeepEval from "../../workflows/parallel-deepeval-workflow.md";
+
+# DeepEval Example - Comparing Models in Parallel
+
+[DeepEval](https://deepeval.com/) is an open source LLM evaluation framework that integrates with `pytest`,
+making it a natural fit for treating LLM evaluations as regular tests. The Workflow below runs the same
+DeepEval test suite against three different OpenAI models in parallel using a
+[matrix](/articles/test-workflows-matrix-and-sharding), and exports each model's results as metrics, so you
+can compare how the models perform against the same quality criteria.
+You can paste this directly into the YAML of an existing or new Workflow, just make sure to update the
+`name` and `namespace` for your environment if needed.
+
+- The `spec.content.files` property defines two inline files:
+  - `requirements.txt` - the Python packages the test suite needs.
+  - `test_answers.py` - a DeepEval test suite that asks the model under test two questions and scores each answer
+    with the `AnswerRelevancyMetric`.
+- The `spec.container` property defines the working directory, Python image, and environment variables for the
+  Workflow; the `OPENAI_API_KEY` is resolved using the [credential](/articles/credential-management) expression
+  so the key is never stored in the Workflow definition itself. `DEEPEVAL_RESULTS_FOLDER` makes DeepEval write a
+  JSON file with the results of each test.
+- The **Compare models** step uses `parallel.matrix` to fan out three workers - one per model - each with the
+  `MODEL_UNDER_TEST` environment variable set to the corresponding matrix value. The `transfer` property copies
+  the test files to each worker.
+- Each worker runs three steps of its own:
+  - **Run DeepEval** installs DeepEval and runs the test suite. Its `cache` block keeps the pip download cache between
+    executions, so later runs install the packages from the cache instead of downloading them again; see [Dependency Caching](/articles/test-workflows-dependency-cache).
+  - **Export metrics** runs the [`testkube-ai-metrics-parser`](https://github.com/kubeshop/testkube-ai-metrics-parser)
+    image, which converts the DeepEval results into a `metrics.lp` file tagged with the model name. It runs inside each
+    worker because every worker has its own filesystem.
+  - **Save results** uploads the results and the metrics file as artifacts; the `always` condition makes sure they
+    are uploaded even if a test fails.
+
+<ParallelDeepEval />
+
+After execution, each parallel worker is shown separately in the execution view with its own log output and
+artifacts. Testkube ingests the `metrics.lp` files as [custom metrics](/articles/custom-metrics-in-insights) under
+the `deepeval` measurement, with the mean score, test counts and cost of each metric tagged by model, so you can
+compare the models side by side in Insights.
+
+:::note Standalone agent
+
+This Workflow does not run on the [standalone agent](/articles/install/standalone-agent#agent-limitations-in-standalone-mode): it uses
+`parallel` with a `matrix`, which require the Testkube Control Plane, as do the `credential()` expression and the
+ingestion of custom metrics.
+
+:::

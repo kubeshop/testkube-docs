@@ -3,7 +3,7 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:8b618974432fe8e1c6e801d8890387f74a21feb654562906e513a2bf032ec3fa</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 13" src="https://img.shields.io/badge/high-13-e25d68"/> <img alt="medium: 9" src="https://img.shields.io/badge/medium-9-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>digest</td><td><code>sha256:8b618974432fe8e1c6e801d8890387f74a21feb654562906e513a2bf032ec3fa</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 1" src="https://img.shields.io/badge/critical-1-8b1924"/> <img alt="high: 13" src="https://img.shields.io/badge/high-13-e25d68"/> <img alt="medium: 10" src="https://img.shields.io/badge/medium-10-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/low-1-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
 <tr><td>platform</td><td>linux/amd64</td></tr>
 <tr><td>size</td><td>104 MB</td></tr>
 <tr><td>packages</td><td>271</td></tr>
@@ -21,98 +21,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.4-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.4-r0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.269%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.5.9-r0</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/libssl3@3.5.9-r0?arch=x86_64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-95691?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--95691" src="https://img.shields.io/badge/CVE--2026--95691-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-95692?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--95692" src="https://img.shields.io/badge/CVE--2026--95692-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.449%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-88823?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--88823" src="https://img.shields.io/badge/CVE--2026--88823-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-107496?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--107496" src="https://img.shields.io/badge/CVE--2026--107496-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-
-<a href="https://scout.docker.com/v/CVE-2026-88822?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="medium : CVE--2026--88822" src="https://img.shields.io/badge/CVE--2026--88822-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
-<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.378%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>24th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -133,8 +43,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.284%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -151,7 +61,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.449%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>40th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -168,7 +78,7 @@ hide_table_of_contents: true
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -184,8 +94,8 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.336%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>27th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -201,8 +111,98 @@ hide_table_of_contents: true
 <table>
 <tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
 <tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.259%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/H-4-e25d68"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>libssl3</strong> <code>3.5.9-r0</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/libssl3@3.5.9-r0?arch=x86_64&distro=alpine-3.24.3&upstream=openssl</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-95691?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--95691" src="https://img.shields.io/badge/CVE--2026--95691-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.285%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-95692?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--95692" src="https://img.shields.io/badge/CVE--2026--95692-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.449%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>31st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-88823?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--88823" src="https://img.shields.io/badge/CVE--2026--88823-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>12th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-107496?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="high : CVE--2026--107496" src="https://img.shields.io/badge/CVE--2026--107496-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.399%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>26th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-88822?s=alpine&n=openssl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C3.5.9-r1"><img alt="medium : CVE--2026--88822" src="https://img.shields.io/badge/CVE--2026--88822-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;3.5.9-r1</code></td></tr>
+<tr><td>Fixed version</td><td><code>3.5.9-r1</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.260%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -225,8 +225,8 @@ hide_table_of_contents: true
 <tr><td>Fixed version</td><td><code>4.1.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.489%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -319,7 +319,7 @@ Reported by Yuval Saggie and Mor Weinberger (powered by Echo Frontier)
 <tr><td>Fixed version</td><td><code>4.1.5</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.292%</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.359%</code></td></tr>
 <tr><td>EPSS Percentile</td><td><code>22nd percentile</code></td></tr>
 </table>
 
@@ -354,8 +354,8 @@ Thanks to Dohyun Kim (@<!-- -->azza999), Joshua Rogers of AISLE Research, and Su
 <tr><td>Fixed version</td><td><code>4.1.5</code></td></tr>
 <tr><td>CVSS Score</td><td><code>6.9</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>18th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.332%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -396,8 +396,8 @@ Thanks to Joshua Rogers of AISLE Research for reporting this problem.
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.409%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>36th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.508%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>37th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -415,8 +415,8 @@ Accumulate coalesced text in per-node byte slices during parsing and materialize
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.62.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.62.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.267%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>19th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.338%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>20th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -431,6 +431,28 @@ Continue walking the full ancestor chain and verify that every transition from a
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.6-r3</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl@1.2.6-r3?arch=x86_64&distro=alpine-3.24.3</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl-utils</strong> <code>1.2.6-r3</code> (apk)</summary>
 
 <small><code>pkg:apk/alpine/musl-utils@1.2.6-r3?arch=x86_64&distro=alpine-3.24.3&upstream=musl</code></small><br/>
@@ -439,8 +461,8 @@ Continue walking the full ancestor chain and verify that every transition from a
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -463,8 +485,8 @@ Continue walking the full ancestor chain and verify that every transition from a
 <tr><td>Fixed version</td><td><code>4.1.6</code></td></tr>
 <tr><td>CVSS Score</td><td><code>7.5</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.489%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.637%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>45th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -552,28 +574,6 @@ Reported by Yuval Saggie and Mor Weinberger (powered by Echo Frontier)
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.6-r3</code> (apk)</summary>
-
-<small><code>pkg:apk/alpine/musl@1.2.6-r3?arch=x86_64&distro=alpine-3.24.3</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.549%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 1" src="https://img.shields.io/badge/L-1-fce1a9"/> <!-- unspecified: 0 --><strong>github.com/aws/aws-sdk-go</strong> <code>1.55.8</code> (golang)</summary>
 
 <small><code>pkg:golang/github.com/aws/aws-sdk-go@1.55.8</code></small><br/>
@@ -583,7 +583,7 @@ Reported by Yuval Saggie and Mor Weinberger (powered by Echo Frontier)
 <tr><td>Affected range</td><td><code>>=0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.346%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>29th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>21st percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -600,360 +600,13 @@ A padding oracle vulnerability exists in the AWS S3 Crypto SDK for GoLang versio
 <tr><td>Affected range</td><td><code>>=0</code></td></tr>
 <tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
 <tr><td>EPSS Score</td><td><code>0.231%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>14th percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>8th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 A vulnerability in the in-band key negotiation exists in the AWS S3 Crypto SDK for GoLang versions prior to V2. An attacker with write access to the targeted bucket can change the encryption algorithm of an object in the bucket, which can then allow them to change AES-GCM to AES-CTR. Using this in combination with a decryption oracle can reveal the authentication key used by AES-GCM as decrypting the GMAC tag leaves the authentication key recoverable as an algebraic equation. It is recommended to update your SDK to V2 or later, and re-encrypt your files.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.45.0</code> (golang)</summary>
-
-<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.45.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.33.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.33.0<br/><1.47.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
-<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-## Summary
-
-The `AttributeValueLengthLimit` span/log-record limit can be bypassed entirely with attribute values that consist of valid U+FFFD (REPLACEMENT CHARACTER) runes. The counting-based truncation introduced by the fix for GHSA-p9f8-wvj8-2fg8 (commit `e016a78c9`, first released in v1.33.0) has an "optimistic" fast path that skips every U+FFFD without counting it and without falling back to the correct slow path. A value of 1000 U+FFFD runes (3000 bytes) is stored verbatim even with a limit of 5 characters (15 bytes). The same defect affects the attribute truncation paths in `go.opentelemetry.io/otel/sdk/trace` (`sdk/internal/attrnorm`), `go.opentelemetry.io/otel/sdk/log` (`sdk/log/internal/attrnorm`), and the auto-instrumentation tracer in `go.opentelemetry.io/otel/trace` (`trace/auto.go`, introduced in `v1.35.0`).
-
-This is an incomplete-fix issue: it is a distinct defect in the replacement code that GHSA-p9f8-wvj8-2fg8 introduced, affecting exactly the versions that advisory says are fixed (>= v1.33.0). The original advisory covers only the pre-v1.33.0 code.
-
-## Details
-
-The shared truncation helper is generated from `internal/shared/attrnorm/truncate.go.tmpl`. In the v1.46.0 release, the generated copies are `sdk/internal/attrnorm/truncate.go` and `sdk/log/internal/attrnorm/truncate.go` (identical logic, different package names). The optimistic path (v1.46.0, `sdk/internal/attrnorm/truncate.go:175-199`) is:
-
-```go
-// Optimistically, assume all valid UTF-8.
-var b strings.Builder
-count := 0
-for i, c := range s {
-    if c != utf8.RuneError {
-        count++
-        if count > limit {
-            return s[:i]
-        }
-        continue
-    }
-    _, size := utf8.DecodeRuneInString(s[i:])
-    if size == 1 {
-        // invalid encoding: fall through to the correct slow path
-        ...
-        break
-    }
-}
-```
-
-`range` over a string yields `utf8.RuneError` both for invalid bytes (size 1) and for a legitimately encoded U+FFFD (size 3). Only the size-1 case enters the slow path. A valid U+FFFD rune is therefore neither counted nor truncating: the loop slides over it. Consequences:
-
-1. A value made only of valid U+FFFD runes never increments `count`, so no truncation ever triggers and the value is returned unchanged, whatever its length.
-2. In a mixed string, every U+FFFD contributes 3 bytes that are not counted, and the final `return s[:i]` keeps all previously skipped U+FFFD runes, so the retained size grows linearly with the number of U+FFFD runes and is not bounded by `limit`.
-
-The OpenTelemetry specification states that truncation applies "counting any character in it as 1". A valid U+FFFD is one character and must count as 1; here it counts as 0. The regression test suite of the repository contains no U+FFFD case, which is why this went unnoticed.
-
-Call chains (v1.46.0):
-
-- trace: `span.SetAttributes` -> `sdk/trace/span.go` (`normAttr`) -> `attrnorm.Truncate` -> `sdk/internal/attrnorm/truncate.go` (`truncate`)
-- log: `Record.AddAttributes` / `SetAttributes` -> `sdk/log/record.go` (`attrnorm.TruncateValue`) -> `sdk/log/internal/attrnorm/truncate.go` (`truncate`)
-
-Deduplication: GHSA-p9f8-wvj8-2fg8 describes the pre-v1.33.0 helper (`safeTruncateValidUTF8`), which gave up truncating entirely for strings containing RuneError. The rewrite in `e016a78c9` replaced that code; this report concerns the rewritten code, is present only in versions that the advisory lists as fixed, and no public issue or advisory describes it.
-
-## PoC
-
-Minimal reproduction with the published release (no repository checkout needed). Go 1.25+ is required (the release declares `go 1.25.0`; any recent toolchain auto-selects one).
-
-Create a directory with these files.
-
-`go.mod` (then run `go mod tidy` once to fill `go.sum`):
-
-```
-module otelpoc
-
-go 1.25.0
-
-require (
-	go.opentelemetry.io/otel v1.46.0
-	go.opentelemetry.io/otel/log v0.22.0
-	go.opentelemetry.io/otel/sdk v1.46.0
-	go.opentelemetry.io/otel/sdk/log v0.22.0
-	go.opentelemetry.io/otel/trace v1.46.0
-)
-```
-
-`otelgo_truncate_test.go`:
-
-```go
-package otelpoc
-
-import (
-	"context"
-	"strings"
-	"testing"
-	"unicode/utf8"
-
-	"go.opentelemetry.io/otel/attribute"
-	sdktrace "go.opentelemetry.io/otel/sdk/trace"
-	"go.opentelemetry.io/otel/sdk/trace/tracetest"
-	"go.opentelemetry.io/otel/trace"
-)
-
-// limitsWithLen returns span limits with AttributeValueLengthLimit=limit and
-// everything else unlimited, isolating the length-limit enforcement under test.
-func limitsWithLen(limit int) sdktrace.SpanLimits {
-	lim := sdktrace.NewSpanLimits()
-	lim.AttributeValueLengthLimit = limit
-	lim.AttributeCountLimit = -1
-	lim.AttributePerEventCountLimit = -1
-	lim.AttributePerLinkCountLimit = -1
-	lim.EventCountLimit = -1
-	lim.LinkCountLimit = -1
-	return lim
-}
-
-func captureOneSpan(t *testing.T, limit int, attrs ...attribute.KeyValue) []attribute.KeyValue {
-	t.Helper()
-	sr := tracetest.NewSpanRecorder()
-	tp := sdktrace.NewTracerProvider(
-		sdktrace.WithSpanProcessor(sr),
-		sdktrace.WithSpanLimits(limitsWithLen(limit)),
-	)
-	defer func() { _ = tp.Shutdown(context.Background()) }()
-
-	tr := tp.Tracer("poc")
-	_, span := tr.Start(context.Background(), "op")
-	span.SetAttributes(attrs...)
-	span.End()
-
-	ended := sr.Ended()
-	if len(ended) != 1 {
-		t.Fatalf("expected 1 ended span, got %d", len(ended))
-	}
-	return ended[0].Attributes()
-}
-
-// TestOT001_FFFDOnlyStringBypassesTraceLengthLimit demonstrates that a string
-// attribute composed of valid U+FFFD runes is stored completely untruncated
-// although AttributeValueLengthLimit=5.
-func TestOT001_FFFDOnlyStringBypassesTraceLengthLimit(t *testing.T) {
-	const limit = 5
-	val := strings.Repeat("\uFFFD", 1000) // 1000 chars, 3000 bytes
-
-	got := captureOneSpan(t, limit, attribute.String("k", val))
-	if len(got) != 1 {
-		t.Fatalf("expected 1 attribute, got %d", len(got))
-	}
-	stored := got[0].Value.AsString()
-	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
-		utf8.RuneCountInString(val), len(val),
-		utf8.RuneCountInString(stored), len(stored), limit)
-	// Per OTel spec ("counting any character in it as 1") the stored value
-	// must be at most `limit` characters (<= 15 bytes for U+FFFD).
-	if maxBytes := 3 * limit; len(stored) > maxBytes {
-		t.Fatalf("BYPASS: AttributeValueLengthLimit=%d but %d bytes stored (expected <=%d)",
-			limit, len(stored), maxBytes)
-	}
-}
-
-// TestOT001_FFFDMixedStringOverRetains demonstrates that valid U+FFFD runes
-// are not counted in the optimistic truncation path: every U+FFFD adds 3
-// uncounted bytes to the retained value.
-func TestOT001_FFFDMixedStringOverRetains(t *testing.T) {
-	const limit = 5
-	val := strings.Repeat("\uFFFD", 100) + strings.Repeat("A", 6) // 106 chars, 306 bytes
-
-	got := captureOneSpan(t, limit, attribute.String("k", val))
-	stored := got[0].Value.AsString()
-	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
-		utf8.RuneCountInString(val), len(val),
-		utf8.RuneCountInString(stored), len(stored), limit)
-	if chars := utf8.RuneCountInString(stored); chars > limit {
-		t.Fatalf("BYPASS: AttributeValueLengthLimit=%d but %d chars / %d bytes stored",
-			limit, chars, len(stored))
-	}
-}
-
-// TestOT001_ASCIIControl is the control case: plain ASCII over-limit values
-// ARE truncated, proving the length limit is active in the same setup.
-func TestOT001_ASCIIControl(t *testing.T) {
-	const limit = 5
-	val := strings.Repeat("B", 20)
-
-	got := captureOneSpan(t, limit, attribute.String("k", val))
-	stored := got[0].Value.AsString()
-	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
-		utf8.RuneCountInString(val), len(val),
-		utf8.RuneCountInString(stored), len(stored), limit)
-	if len(stored) != limit {
-		t.Fatalf("control failed: ASCII value not truncated (stored %d bytes)", len(stored))
-	}
-}
-
-// TestOT001_EventAttributesNotLengthTruncated documents that span-event
-// attributes bypass AttributeValueLengthLimit entirely (no attrnorm.Truncate
-// call in recordingSpan.addEvent).
-func TestOT001_EventAttributesNotLengthTruncated(t *testing.T) {
-	const limit = 5
-	val := strings.Repeat("C", 100)
-
-	sr := tracetest.NewSpanRecorder()
-	tp := sdktrace.NewTracerProvider(
-		sdktrace.WithSpanProcessor(sr),
-		sdktrace.WithSpanLimits(limitsWithLen(limit)),
-	)
-	defer func() { _ = tp.Shutdown(context.Background()) }()
-	tr := tp.Tracer("poc")
-	_, span := tr.Start(context.Background(), "op")
-	span.AddEvent("ev", trace.WithAttributes(attribute.String("k", val)))
-	span.End()
-
-	ended := sr.Ended()
-	events := ended[0].Events()
-	if len(events) != 1 {
-		t.Fatalf("expected 1 event, got %d", len(events))
-	}
-	stored := events[0].Attributes[0].Value.AsString()
-	t.Logf("event attribute input: %d bytes; stored: %d bytes; limit=%d", len(val), len(stored), limit)
-	if len(stored) > limit {
-		t.Logf("CONFIRMED: event attribute not length-truncated (%d bytes > limit %d)", len(stored), limit)
-	}
-}
-```
-
-(The `-run` pattern above selects the three truncation cases plus the control; the fourth test function is included because it is part of the exact file that produced the output below - it compiles but is not selected by the pattern, and its output does not appear.)
-
-`otelgo_log_truncate_test.go`:
-
-```go
-package otelpoc
-
-import (
-	"context"
-	"strings"
-	"sync"
-	"testing"
-	"unicode/utf8"
-
-	"go.opentelemetry.io/otel/attribute"
-	apisdk "go.opentelemetry.io/otel/log"
-	sdklog "go.opentelemetry.io/otel/sdk/log"
-)
-
-type captureProcessor struct {
-	mu   sync.Mutex
-	recs []*sdklog.Record
-}
-
-func (c *captureProcessor) Enabled(context.Context, sdklog.EnabledParameters) bool { return true }
-
-func (c *captureProcessor) OnEmit(_ context.Context, r *sdklog.Record) error {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	clone := r.Clone()
-	c.recs = append(c.recs, &clone)
-	return nil
-}
-
-func (c *captureProcessor) Shutdown(context.Context) error { return nil }
-func (c *captureProcessor) ForceFlush(context.Context) error {
-	return nil
-}
-
-// TestOT001_FFFDOnlyStringBypassesLogLengthLimit repeats the bypass against
-// the sdk/log attribute path (sdk/log/internal/attrnorm, same template).
-func TestOT001_FFFDOnlyStringBypassesLogLengthLimit(t *testing.T) {
-	const limit = 5
-	cp := &captureProcessor{}
-	lp := sdklog.NewLoggerProvider(
-		sdklog.WithProcessor(cp),
-		sdklog.WithAttributeValueLengthLimit(limit),
-	)
-	defer func() { _ = lp.Shutdown(context.Background()) }()
-
-	logger := lp.Logger("poc")
-	var r apisdk.Record
-	r.SetSeverity(apisdk.SeverityInfo)
-	r.AddAttributes(attribute.String("k", strings.Repeat("\uFFFD", 1000)))
-	logger.Emit(context.Background(), r)
-
-	cp.mu.Lock()
-	if len(cp.recs) != 1 {
-		t.Fatalf("expected 1 record, got %d", len(cp.recs))
-	}
-	rec := cp.recs[0]
-	cp.mu.Unlock()
-
-	stored := ""
-	rec.WalkAttributes(func(kv attribute.KeyValue) bool {
-		if string(kv.Key) == "k" {
-			stored = kv.Value.AsString()
-		}
-		return true
-	})
-	t.Logf("sdk/log input: 1000 chars / 3000 bytes; stored: %d chars / %d bytes; limit=%d",
-		utf8.RuneCountInString(stored), len(stored), limit)
-	if maxBytes := 3 * limit; len(stored) > maxBytes {
-		t.Fatalf("BYPASS: sdk/log WithAttributeValueLengthLimit=%d but %d bytes stored (expected <=%d)",
-			limit, len(stored), maxBytes)
-	}
-}
-```
-
-Run:
-
-```
-go mod tidy
-go test -count=1 -v -run "TestOT001_FFFDOnlyStringBypassesTraceLengthLimit|TestOT001_FFFDMixedStringOverRetains|TestOT001_ASCIIControl|TestOT001_FFFDOnlyStringBypassesLogLengthLimit" .
-```
-
-Expected output (captured against the published v1.46.0 modules; the three FAIL lines are the bypass being triggered and the PASS control proves the limit is active in the same setup; the only varying parts are the durations in parentheses and the total on the `FAIL	otelpoc` summary line):
-
-```
-=== RUN   TestOT001_FFFDOnlyStringBypassesLogLengthLimit
-    otelgo_log_truncate_test.go:66: sdk/log input: 1000 chars / 3000 bytes; stored: 1000 chars / 3000 bytes; limit=5
-    otelgo_log_truncate_test.go:69: BYPASS: sdk/log WithAttributeValueLengthLimit=5 but 3000 bytes stored (expected <=15)
---- FAIL: TestOT001_FFFDOnlyStringBypassesLogLengthLimit (0.00s)
-=== RUN   TestOT001_FFFDOnlyStringBypassesTraceLengthLimit
-    otelgo_truncate_test.go:61: input: 1000 chars / 3000 bytes; stored: 1000 chars / 3000 bytes; limit=5
-    otelgo_truncate_test.go:67: BYPASS: AttributeValueLengthLimit=5 but 3000 bytes stored (expected <=15)
---- FAIL: TestOT001_FFFDOnlyStringBypassesTraceLengthLimit (0.00s)
-=== RUN   TestOT001_FFFDMixedStringOverRetains
-    otelgo_truncate_test.go:81: input: 106 chars / 306 bytes; stored: 105 chars / 305 bytes; limit=5
-    otelgo_truncate_test.go:85: BYPASS: AttributeValueLengthLimit=5 but 105 chars / 305 bytes stored
---- FAIL: TestOT001_FFFDMixedStringOverRetains (0.00s)
-=== RUN   TestOT001_ASCIIControl
-    otelgo_truncate_test.go:98: input: 20 chars / 20 bytes; stored: 5 chars / 5 bytes; limit=5
---- PASS: TestOT001_ASCIIControl (0.00s)
-FAIL
-FAIL	otelpoc	0.059s
-FAIL
-```
-
-The mixed-string case stores 105 characters for a limit of 5: the 100 U+FFFD runes (300 uncounted bytes) are all retained, plus 5 of the 6 ASCII characters.
-
-## Impact
-
-Applications that enable `AttributeValueLengthLimit` (or `WithAttributeValueLengthLimit` for logs) to bound attribute memory do not get that bound for values containing valid U+FFFD runes. Span and log-record attribute values are routinely derived from untrusted input (HTTP headers, request bodies, database fields), so an attacker can inflate per-span memory retention linearly, defeating the memory protection the operator explicitly enabled and accumulating increased memory usage over the span/log pipeline. Confidentiality and integrity are not affected.
-
-## Suggested fix
-
-In the optimistic loop, count every rune of size > 1 (including the legitimately encoded U+FFFD) and only divert size-1 invalid bytes to the slow path. Add regression cases for: pure U+FFFD strings, U+FFFD-dominated mixed strings, and a truncation point landing after a U+FFFD (the current `truncate_test.go` has no U+FFFD case).
 
 </blockquote>
 </details>
@@ -970,8 +623,8 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 <tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
 <tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
 <tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.469%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -1315,14 +968,383 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 <table>
 <tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.4</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.27.4</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.380%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>33rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
 For HTTP/1 servers, when MaxBytesReader's limit is exceeded, "Connection: close" header is automatically set without synchronization, which might race with another header being set explicitly in the server handler. As a result, an HTTP/1 server that utilizes MaxBytesReader or MaxBytesHandler can crash due to runtime panic if its handler reads the request body concurrently with writing the response header.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel</strong> <code>1.45.0</code> (golang)</summary>
+
+<small><code>pkg:golang/go.opentelemetry.io/otel@1.45.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-128086?s=golang&n=otel&ns=go.opentelemetry.io&t=golang&vr=%3E%3D1.0.0-RC1%2C%3C1.47.0"><img alt="medium : CVE--2026--128086" src="https://img.shields.io/badge/CVE--2026--128086-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.0.0-RC1<br/><1.47.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.617%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Memory allocation amplification in W3C baggage parsing in go.opentelemetry.io/otel
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.45.0</code> (golang)</summary>
+
+<small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.45.0</code></small><br/>
+<a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.33.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.33.0<br/><1.47.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
+<tr><td>CVSS Score</td><td><code>5.3</code></td></tr>
+<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.524%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+## Summary
+
+The `AttributeValueLengthLimit` span/log-record limit can be bypassed entirely with attribute values that consist of valid U+FFFD (REPLACEMENT CHARACTER) runes. The counting-based truncation introduced by the fix for GHSA-p9f8-wvj8-2fg8 (commit `e016a78c9`, first released in v1.33.0) has an "optimistic" fast path that skips every U+FFFD without counting it and without falling back to the correct slow path. A value of 1000 U+FFFD runes (3000 bytes) is stored verbatim even with a limit of 5 characters (15 bytes). The same defect affects the attribute truncation paths in `go.opentelemetry.io/otel/sdk/trace` (`sdk/internal/attrnorm`), `go.opentelemetry.io/otel/sdk/log` (`sdk/log/internal/attrnorm`), and the auto-instrumentation tracer in `go.opentelemetry.io/otel/trace` (`trace/auto.go`, introduced in `v1.35.0`).
+
+This is an incomplete-fix issue: it is a distinct defect in the replacement code that GHSA-p9f8-wvj8-2fg8 introduced, affecting exactly the versions that advisory says are fixed (>= v1.33.0). The original advisory covers only the pre-v1.33.0 code.
+
+## Details
+
+The shared truncation helper is generated from `internal/shared/attrnorm/truncate.go.tmpl`. In the v1.46.0 release, the generated copies are `sdk/internal/attrnorm/truncate.go` and `sdk/log/internal/attrnorm/truncate.go` (identical logic, different package names). The optimistic path (v1.46.0, `sdk/internal/attrnorm/truncate.go:175-199`) is:
+
+```go
+// Optimistically, assume all valid UTF-8.
+var b strings.Builder
+count := 0
+for i, c := range s {
+    if c != utf8.RuneError {
+        count++
+        if count > limit {
+            return s[:i]
+        }
+        continue
+    }
+    _, size := utf8.DecodeRuneInString(s[i:])
+    if size == 1 {
+        // invalid encoding: fall through to the correct slow path
+        ...
+        break
+    }
+}
+```
+
+`range` over a string yields `utf8.RuneError` both for invalid bytes (size 1) and for a legitimately encoded U+FFFD (size 3). Only the size-1 case enters the slow path. A valid U+FFFD rune is therefore neither counted nor truncating: the loop slides over it. Consequences:
+
+1. A value made only of valid U+FFFD runes never increments `count`, so no truncation ever triggers and the value is returned unchanged, whatever its length.
+2. In a mixed string, every U+FFFD contributes 3 bytes that are not counted, and the final `return s[:i]` keeps all previously skipped U+FFFD runes, so the retained size grows linearly with the number of U+FFFD runes and is not bounded by `limit`.
+
+The OpenTelemetry specification states that truncation applies "counting any character in it as 1". A valid U+FFFD is one character and must count as 1; here it counts as 0. The regression test suite of the repository contains no U+FFFD case, which is why this went unnoticed.
+
+Call chains (v1.46.0):
+
+- trace: `span.SetAttributes` -> `sdk/trace/span.go` (`normAttr`) -> `attrnorm.Truncate` -> `sdk/internal/attrnorm/truncate.go` (`truncate`)
+- log: `Record.AddAttributes` / `SetAttributes` -> `sdk/log/record.go` (`attrnorm.TruncateValue`) -> `sdk/log/internal/attrnorm/truncate.go` (`truncate`)
+
+Deduplication: GHSA-p9f8-wvj8-2fg8 describes the pre-v1.33.0 helper (`safeTruncateValidUTF8`), which gave up truncating entirely for strings containing RuneError. The rewrite in `e016a78c9` replaced that code; this report concerns the rewritten code, is present only in versions that the advisory lists as fixed, and no public issue or advisory describes it.
+
+## PoC
+
+Minimal reproduction with the published release (no repository checkout needed). Go 1.25+ is required (the release declares `go 1.25.0`; any recent toolchain auto-selects one).
+
+Create a directory with these files.
+
+`go.mod` (then run `go mod tidy` once to fill `go.sum`):
+
+```
+module otelpoc
+
+go 1.25.0
+
+require (
+	go.opentelemetry.io/otel v1.46.0
+	go.opentelemetry.io/otel/log v0.22.0
+	go.opentelemetry.io/otel/sdk v1.46.0
+	go.opentelemetry.io/otel/sdk/log v0.22.0
+	go.opentelemetry.io/otel/trace v1.46.0
+)
+```
+
+`otelgo_truncate_test.go`:
+
+```go
+package otelpoc
+
+import (
+	"context"
+	"strings"
+	"testing"
+	"unicode/utf8"
+
+	"go.opentelemetry.io/otel/attribute"
+	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/sdk/trace/tracetest"
+	"go.opentelemetry.io/otel/trace"
+)
+
+// limitsWithLen returns span limits with AttributeValueLengthLimit=limit and
+// everything else unlimited, isolating the length-limit enforcement under test.
+func limitsWithLen(limit int) sdktrace.SpanLimits {
+	lim := sdktrace.NewSpanLimits()
+	lim.AttributeValueLengthLimit = limit
+	lim.AttributeCountLimit = -1
+	lim.AttributePerEventCountLimit = -1
+	lim.AttributePerLinkCountLimit = -1
+	lim.EventCountLimit = -1
+	lim.LinkCountLimit = -1
+	return lim
+}
+
+func captureOneSpan(t *testing.T, limit int, attrs ...attribute.KeyValue) []attribute.KeyValue {
+	t.Helper()
+	sr := tracetest.NewSpanRecorder()
+	tp := sdktrace.NewTracerProvider(
+		sdktrace.WithSpanProcessor(sr),
+		sdktrace.WithSpanLimits(limitsWithLen(limit)),
+	)
+	defer func() { _ = tp.Shutdown(context.Background()) }()
+
+	tr := tp.Tracer("poc")
+	_, span := tr.Start(context.Background(), "op")
+	span.SetAttributes(attrs...)
+	span.End()
+
+	ended := sr.Ended()
+	if len(ended) != 1 {
+		t.Fatalf("expected 1 ended span, got %d", len(ended))
+	}
+	return ended[0].Attributes()
+}
+
+// TestOT001_FFFDOnlyStringBypassesTraceLengthLimit demonstrates that a string
+// attribute composed of valid U+FFFD runes is stored completely untruncated
+// although AttributeValueLengthLimit=5.
+func TestOT001_FFFDOnlyStringBypassesTraceLengthLimit(t *testing.T) {
+	const limit = 5
+	val := strings.Repeat("\uFFFD", 1000) // 1000 chars, 3000 bytes
+
+	got := captureOneSpan(t, limit, attribute.String("k", val))
+	if len(got) != 1 {
+		t.Fatalf("expected 1 attribute, got %d", len(got))
+	}
+	stored := got[0].Value.AsString()
+	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
+		utf8.RuneCountInString(val), len(val),
+		utf8.RuneCountInString(stored), len(stored), limit)
+	// Per OTel spec ("counting any character in it as 1") the stored value
+	// must be at most `limit` characters (<= 15 bytes for U+FFFD).
+	if maxBytes := 3 * limit; len(stored) > maxBytes {
+		t.Fatalf("BYPASS: AttributeValueLengthLimit=%d but %d bytes stored (expected <=%d)",
+			limit, len(stored), maxBytes)
+	}
+}
+
+// TestOT001_FFFDMixedStringOverRetains demonstrates that valid U+FFFD runes
+// are not counted in the optimistic truncation path: every U+FFFD adds 3
+// uncounted bytes to the retained value.
+func TestOT001_FFFDMixedStringOverRetains(t *testing.T) {
+	const limit = 5
+	val := strings.Repeat("\uFFFD", 100) + strings.Repeat("A", 6) // 106 chars, 306 bytes
+
+	got := captureOneSpan(t, limit, attribute.String("k", val))
+	stored := got[0].Value.AsString()
+	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
+		utf8.RuneCountInString(val), len(val),
+		utf8.RuneCountInString(stored), len(stored), limit)
+	if chars := utf8.RuneCountInString(stored); chars > limit {
+		t.Fatalf("BYPASS: AttributeValueLengthLimit=%d but %d chars / %d bytes stored",
+			limit, chars, len(stored))
+	}
+}
+
+// TestOT001_ASCIIControl is the control case: plain ASCII over-limit values
+// ARE truncated, proving the length limit is active in the same setup.
+func TestOT001_ASCIIControl(t *testing.T) {
+	const limit = 5
+	val := strings.Repeat("B", 20)
+
+	got := captureOneSpan(t, limit, attribute.String("k", val))
+	stored := got[0].Value.AsString()
+	t.Logf("input: %d chars / %d bytes; stored: %d chars / %d bytes; limit=%d",
+		utf8.RuneCountInString(val), len(val),
+		utf8.RuneCountInString(stored), len(stored), limit)
+	if len(stored) != limit {
+		t.Fatalf("control failed: ASCII value not truncated (stored %d bytes)", len(stored))
+	}
+}
+
+// TestOT001_EventAttributesNotLengthTruncated documents that span-event
+// attributes bypass AttributeValueLengthLimit entirely (no attrnorm.Truncate
+// call in recordingSpan.addEvent).
+func TestOT001_EventAttributesNotLengthTruncated(t *testing.T) {
+	const limit = 5
+	val := strings.Repeat("C", 100)
+
+	sr := tracetest.NewSpanRecorder()
+	tp := sdktrace.NewTracerProvider(
+		sdktrace.WithSpanProcessor(sr),
+		sdktrace.WithSpanLimits(limitsWithLen(limit)),
+	)
+	defer func() { _ = tp.Shutdown(context.Background()) }()
+	tr := tp.Tracer("poc")
+	_, span := tr.Start(context.Background(), "op")
+	span.AddEvent("ev", trace.WithAttributes(attribute.String("k", val)))
+	span.End()
+
+	ended := sr.Ended()
+	events := ended[0].Events()
+	if len(events) != 1 {
+		t.Fatalf("expected 1 event, got %d", len(events))
+	}
+	stored := events[0].Attributes[0].Value.AsString()
+	t.Logf("event attribute input: %d bytes; stored: %d bytes; limit=%d", len(val), len(stored), limit)
+	if len(stored) > limit {
+		t.Logf("CONFIRMED: event attribute not length-truncated (%d bytes > limit %d)", len(stored), limit)
+	}
+}
+```
+
+(The `-run` pattern above selects the three truncation cases plus the control; the fourth test function is included because it is part of the exact file that produced the output below - it compiles but is not selected by the pattern, and its output does not appear.)
+
+`otelgo_log_truncate_test.go`:
+
+```go
+package otelpoc
+
+import (
+	"context"
+	"strings"
+	"sync"
+	"testing"
+	"unicode/utf8"
+
+	"go.opentelemetry.io/otel/attribute"
+	apisdk "go.opentelemetry.io/otel/log"
+	sdklog "go.opentelemetry.io/otel/sdk/log"
+)
+
+type captureProcessor struct {
+	mu   sync.Mutex
+	recs []*sdklog.Record
+}
+
+func (c *captureProcessor) Enabled(context.Context, sdklog.EnabledParameters) bool { return true }
+
+func (c *captureProcessor) OnEmit(_ context.Context, r *sdklog.Record) error {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	clone := r.Clone()
+	c.recs = append(c.recs, &clone)
+	return nil
+}
+
+func (c *captureProcessor) Shutdown(context.Context) error { return nil }
+func (c *captureProcessor) ForceFlush(context.Context) error {
+	return nil
+}
+
+// TestOT001_FFFDOnlyStringBypassesLogLengthLimit repeats the bypass against
+// the sdk/log attribute path (sdk/log/internal/attrnorm, same template).
+func TestOT001_FFFDOnlyStringBypassesLogLengthLimit(t *testing.T) {
+	const limit = 5
+	cp := &captureProcessor{}
+	lp := sdklog.NewLoggerProvider(
+		sdklog.WithProcessor(cp),
+		sdklog.WithAttributeValueLengthLimit(limit),
+	)
+	defer func() { _ = lp.Shutdown(context.Background()) }()
+
+	logger := lp.Logger("poc")
+	var r apisdk.Record
+	r.SetSeverity(apisdk.SeverityInfo)
+	r.AddAttributes(attribute.String("k", strings.Repeat("\uFFFD", 1000)))
+	logger.Emit(context.Background(), r)
+
+	cp.mu.Lock()
+	if len(cp.recs) != 1 {
+		t.Fatalf("expected 1 record, got %d", len(cp.recs))
+	}
+	rec := cp.recs[0]
+	cp.mu.Unlock()
+
+	stored := ""
+	rec.WalkAttributes(func(kv attribute.KeyValue) bool {
+		if string(kv.Key) == "k" {
+			stored = kv.Value.AsString()
+		}
+		return true
+	})
+	t.Logf("sdk/log input: 1000 chars / 3000 bytes; stored: %d chars / %d bytes; limit=%d",
+		utf8.RuneCountInString(stored), len(stored), limit)
+	if maxBytes := 3 * limit; len(stored) > maxBytes {
+		t.Fatalf("BYPASS: sdk/log WithAttributeValueLengthLimit=%d but %d bytes stored (expected <=%d)",
+			limit, len(stored), maxBytes)
+	}
+}
+```
+
+Run:
+
+```
+go mod tidy
+go test -count=1 -v -run "TestOT001_FFFDOnlyStringBypassesTraceLengthLimit|TestOT001_FFFDMixedStringOverRetains|TestOT001_ASCIIControl|TestOT001_FFFDOnlyStringBypassesLogLengthLimit" .
+```
+
+Expected output (captured against the published v1.46.0 modules; the three FAIL lines are the bypass being triggered and the PASS control proves the limit is active in the same setup; the only varying parts are the durations in parentheses and the total on the `FAIL	otelpoc` summary line):
+
+```
+=== RUN   TestOT001_FFFDOnlyStringBypassesLogLengthLimit
+    otelgo_log_truncate_test.go:66: sdk/log input: 1000 chars / 3000 bytes; stored: 1000 chars / 3000 bytes; limit=5
+    otelgo_log_truncate_test.go:69: BYPASS: sdk/log WithAttributeValueLengthLimit=5 but 3000 bytes stored (expected <=15)
+--- FAIL: TestOT001_FFFDOnlyStringBypassesLogLengthLimit (0.00s)
+=== RUN   TestOT001_FFFDOnlyStringBypassesTraceLengthLimit
+    otelgo_truncate_test.go:61: input: 1000 chars / 3000 bytes; stored: 1000 chars / 3000 bytes; limit=5
+    otelgo_truncate_test.go:67: BYPASS: AttributeValueLengthLimit=5 but 3000 bytes stored (expected <=15)
+--- FAIL: TestOT001_FFFDOnlyStringBypassesTraceLengthLimit (0.00s)
+=== RUN   TestOT001_FFFDMixedStringOverRetains
+    otelgo_truncate_test.go:81: input: 106 chars / 306 bytes; stored: 105 chars / 305 bytes; limit=5
+    otelgo_truncate_test.go:85: BYPASS: AttributeValueLengthLimit=5 but 105 chars / 305 bytes stored
+--- FAIL: TestOT001_FFFDMixedStringOverRetains (0.00s)
+=== RUN   TestOT001_ASCIIControl
+    otelgo_truncate_test.go:98: input: 20 chars / 20 bytes; stored: 5 chars / 5 bytes; limit=5
+--- PASS: TestOT001_ASCIIControl (0.00s)
+FAIL
+FAIL	otelpoc	0.059s
+FAIL
+```
+
+The mixed-string case stores 105 characters for a limit of 5: the 100 U+FFFD runes (300 uncounted bytes) are all retained, plus 5 of the 6 ASCII characters.
+
+## Impact
+
+Applications that enable `AttributeValueLengthLimit` (or `WithAttributeValueLengthLimit` for logs) to bound attribute memory do not get that bound for values containing valid U+FFFD runes. Span and log-record attribute values are routinely derived from untrusted input (HTTP headers, request bodies, database fields), so an attacker can inflate per-span memory retention linearly, defeating the memory protection the operator explicitly enabled and accumulating increased memory usage over the span/log pipeline. Confidentiality and integrity are not affected.
+
+## Suggested fix
+
+In the optimistic loop, count every rune of size > 1 (including the legitimately encoded U+FFFD) and only divert size-1 invalid bytes to the slow path. Add regression cases for: pure U+FFFD strings, U+FFFD-dominated mixed strings, and a truncation point landing after a U+FFFD (the current `truncate_test.go` has no U+FFFD case).
 
 </blockquote>
 </details>
