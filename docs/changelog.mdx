@@ -40,7 +40,7 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 
 ### GitLab Quality Loop
 
-- **GitLab Quality Loop:** Run Test Workflows on GitLab merge requests and see the results on the merge request, just as with GitHub. Connect a project in **GitLab Repositories**, link existing Test Workflows or scan the repository to generate them, and add a project or group webhook. Testkube posts a commit status and a merge request comment that links to each Execution. [Read more](/articles/gitlab-quality-loop).
+- **GitLab Quality Loop:** Run Test Workflows on GitLab merge requests and see the results on the merge request, just as with GitHub. Connect a project in **GitLab Repositories**, link existing Test Workflows or scan the repository to generate them, and add a project or group webhook. Testkube posts a commit status and a merge request comment that links to each Execution.
 - **Rerun from a comment:** Comment `@testkube` on an open merge request to run its Test Workflows again, even when the commit hasn't changed. Only members with GitLab **Developer** access or higher can start a run, and **Event History** links each run to its merge request or comment.
 - **AI summary:** Add an AI summary to the merge request comment, for failed or aborted runs or for every run, with the AI Agent and model of your choice. **Continue analysis in Testkube** opens the analysis as a chat.
 - **Feedback settings:** Choose **Condensed** feedback for a short result, or **Detailed** for the phase breakdown, timings and the full AI summary. **Run as silent executions** keeps the runs out of Insights, metrics, CDEvents, webhooks and workflow health, while GitLab still gets statuses and comments.
