@@ -444,37 +444,6 @@ steps:
     shell: curl -f https://my-service/health
 ```
 
-### Retry the Whole Workflow After Infrastructure Failures
-
-A step `retry` runs inside the execution's pod, so it cannot help when the pod itself is lost: a node shutting
-down, the pod being evicted or preempted, or no node having room for it. For those, set `retry` on the
-Workflow's `execution`, and Testkube starts the whole Workflow again as a new execution:
-
-```yaml
-spec:
-  execution:
-    retry:
-      count: 2 # up to 2 automatic retries
-      on: [infrastructure] # the default; also: timeout, oom
-```
-
-A test that fails is never retried this way, so a real regression stays red. See
-[Retrying a Workflow Automatically](/articles/test-workflows-rerun#retrying-a-workflow-automatically) for the causes,
-the limits and how the attempts show in the execution history.
-
-Which `retry` to use:
-
-|                    | Step `retry`                               | Workflow `retry`                                 |
-| ------------------ | ------------------------------------------ | ------------------------------------------------ |
-| Where it is set    | `steps[*].retry`                           | `spec.execution.retry`                           |
-| What runs again    | The step, in the same pod                  | The whole Workflow, as a new execution           |
-| When it runs again | The step's result fails `until` (`passed`) | The execution stopped for a cause listed in `on` |
-| A failing test     | Is retried                                 | Is never retried                                 |
-| Use it for         | A flaky test, or waiting for a service     | A pod or node lost under the run                 |
-
-The two work together: keep a step `retry` for the flaky parts of a test, and add the Workflow `retry` to
-long-running or scheduled Workflows, where losing the pod would otherwise fail the run.
-
 ---
 
 ## Scheduling and Orchestration

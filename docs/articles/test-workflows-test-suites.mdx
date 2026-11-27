@@ -224,10 +224,6 @@ An entry can be scheduled as a **rerun** of an earlier execution rather than as 
 
 The scheduled execution then resolves `execution("rerun")` back to that one, which is what lets a Workflow read the previous run's report and repeat only the test cases that failed. See [Rerunning Failed Tests](/articles/test-workflows-rerun#rerunning-from-inside-a-workflow) for the full pattern, the difference from a rerun started on the CLI, and the rule on which executions may be named.
 
-:::note
-A Workflow's own [`retry`](/articles/test-workflows-rerun#retrying-a-workflow-automatically) on `spec.execution` applies only to executions that are not started by an `execute` step. A child whose pod is lost is not retried, and the parent's `execute` step fails as it would for any failing child.
-:::
-
 ## Branching on an earlier Workflow
 
 A suite can run one Workflow after an earlier one passes, and a different Workflow after it fails. The suite's result is the result of the branch that ran.
