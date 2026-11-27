@@ -10,6 +10,10 @@ A Test Workflow can do more than run tests. It can also install the application 
 hand that environment to other Workflows and remove it when they are done. Every execution then tests a fresh copy of
 the application, and parallel executions do not share state.
 
+This section is about environments that a Workflow provisions itself. If your environments are provisioned outside
+Testkube, for example by a CI/CD pipeline for every pull request, see
+[Ephemeral Environments](/articles/ephemeral-environments) for how to run Workflows in them.
+
 The examples in this section provision an environment in three ways:
 
 - [Helm](environment-provisioning-helm) - installs a Helm chart into a temporary namespace.
@@ -113,6 +117,9 @@ The test Workflows run in the namespace of the Runner and reach the application 
 A Runner only schedules executions in the namespaces it was configured for when it was installed
 ([Execution Namespace](/articles/test-workflows-job-and-pod#execution-namespace)). A Workflow that sets `job.namespace`
 to a namespace created during the execution is aborted with `namespace <name> not supported`.
+
+To run tests inside an environment instead, the Runner has to know its namespace beforehand, or the environment needs
+a Runner of its own. [Ephemeral Environments](/articles/ephemeral-environments) describes both setups.
 
 An application in a virtual cluster is reachable in the same way, through the copy of its Service that vCluster
 creates in the temporary namespace. See [Reaching the application](environment-provisioning-vcluster#reaching-the-application).
