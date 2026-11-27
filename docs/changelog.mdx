@@ -42,7 +42,7 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 ### A2A
 
 - **AI Agents over A2A:** Other agents can chat with an AI Agent over the Agent2Agent (A2A) protocol: send it a message, stream the answer, and follow or cancel its tasks. Turn A2A on for the organization in **Product features**, then for each AI Agent in its **A2A** section, which shows the AI Agent's A2A URL. Chats started over A2A carry an **A2A** tag. A2A is off by default and needs PostgreSQL; on self-hosted installs, enable it with `testkube-cloud-api.api.features.a2aEnabled`.
-- **Test Creation over A2A:** Ask Test Creation to write tests from another agent. Name a Test Bundle or a repository: Testkube finds its Test Bundle, or creates one when the repository has none, then writes and runs the tests and returns the Test Bundle, the Execution with its status, and links to the Execution and the chat. When it can't tell which Test Bundle you mean, or the chat has a question, the task waits for the caller's answer. Creating a Test Bundle needs the Write role.
+- **AI Test Creation over A2A:** Ask AI Test Creation to write tests from another agent. Name a Test Bundle or a repository, and Testkube writes and runs the tests and returns the Execution, with links to it and the chat. Questions go back to the caller; approvals and credential requests link to the dashboard. Creating a Test Bundle needs the Write role.
 - **Sign in with OAuth:** A2A clients can now sign in with OAuth, as MCP clients already can. A new consent page in the dashboard lets the person approve the client and pick the Organization, and every call then runs as that person, in that Organization only.
 
 ### Advanced GitLab Integration
