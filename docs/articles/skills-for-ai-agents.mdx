@@ -8,6 +8,8 @@ A **Skill** is guidance the AI follows: test conventions, business rules, test d
 up. You write it once and give it to the AI Agents and Test Bundles that need it, instead of repeating it in every
 instruction or chat.
 
+On a self-hosted Control Plane, Skills run on PostgreSQL.
+
 :::note
 These Skills are guidance for the AI in Testkube. To teach a coding agent such as Claude Code or Cursor how to use
 Testkube, see [Testkube Agent Skills](testkube-skills).
@@ -26,7 +28,8 @@ A Skill follows the [Agent Skills](https://agentskills.io/specification) format:
 **When should the AI use this Skill?** decides how the AI gets the content:
 
 - **When relevant** (the default): the AI always sees the Skill's name and description, and reads the content when a task
-  needs it.
+  needs it. In AI Agent chats, the list of names and descriptions holds up to 8,000 characters, so keep descriptions
+  short.
 - **Always**: the content is added to every chat.
 
 An AI Agent or a Test Bundle takes up to 32,000 characters of always-included Skills, in the order they are listed. A
@@ -88,7 +91,8 @@ Select an Environment Skill's card, or an Organization Skill's name, to open its
   grouped by Environment. Select **Open** to go to one. AI Agents you can't use, and Environments you can't open, are
   only counted.
 
-Deleting a shared Skill removes it from every AI Agent and Test Bundle that uses it.
+Deleting a shared Skill removes it from every AI Agent and Test Bundle that uses it. A Skill that a GitOps Runner
+manages, or that a GitOps-managed AI Agent uses, changes through its manifests instead.
 
 ![Details tab of a Skill](../img/ai-skill-details.png)
 
