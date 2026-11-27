@@ -1503,6 +1503,11 @@ const sidebars = {
           label: "Version Control",
           items: [
             { type: "doc", label: "GitHub", id: "articles/git-integration" },
+            {
+              type: "doc",
+              label: "GitLab",
+              id: "articles/gitlab-integration",
+            },
           ],
         },
         {
