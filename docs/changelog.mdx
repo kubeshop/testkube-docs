@@ -91,8 +91,8 @@ Control Plane is available in Helm chart `v2.339.0` and the Runner is available 
 - The `wait_for_executions` MCP tool now reports the ID, name and status of each Execution, where it used to leave them empty.
 - A new Test Bundle chat with no messages is no longer marked as failed after 20 minutes, where it used to show "Something went wrong".
 - Deleting a Test Workflow now removes only its own artifacts.
-- `testkube apply` in a cloud context no longer reads your local kubeconfig.
-- The MongoDB to PostgreSQL `convert` job now also copies executions that finish while it runs.
+- CLI commands in a cloud context no longer connect to the cluster in your local kubeconfig.
+- Running the standalone agent's MongoDB to PostgreSQL `convert` job again now updates executions that were still running at the first copy.
 - `parallel.parallelism` accepts an expression, such as `config.PARALLELISM`.
 
 ## Patch Release v2.15.1 (2026-11-12)
