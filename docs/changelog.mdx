@@ -81,7 +81,9 @@ Control Plane is available in Helm chart `v2.3XX.0` and the Runner is available 
 
 - The dashboard image now uses nginx 1.30.7, which fixes nginx2root (CVE-2026-123007, CVE-2026-123633, CVE-2026-123634, CVE-2026-121810, CVE-2026-113425) and CVE-2026-118899.
 - The CLI and the Control Plane no longer include the github.com/docker/docker library, which fixes CVE-2026-34040, CVE-2026-41567, CVE-2026-42306, CVE-2026-41568 and CVE-2026-33997. The CLI now streams Docker agent logs with `docker logs --follow`.
-- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images.
+- Upgraded bundled components to address known CVEs: PostgreSQL `18.7`, MongoDB `9.0.8`, SeaweedFS `4.55` and the NATS sidecars, plus rebuilt MinIO, Dex and kubectl images and an updated Test Authoring Sandbox image.
+- Strengthened access checks across invites, Resource Groups, AI Triggers, GitHub App installations and teams.
+- Repository scans now handle credentials more safely.
 
 ### Fixes
 
