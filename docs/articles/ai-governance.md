@@ -15,7 +15,7 @@ AI governance gives Organization admins and owners control over how AI is used i
 - **[Evals](ai-agent-evals).** Judging the answers of an AI Agent, and disabling it when too many of its turns fail. An AI Agent disabled this way shows as paused, and resuming it re-enables it. Evals are set on each AI Agent by Environment admins.
 - **[Audit log](audit-logs#ai-and-mcp-events).** Every tool call, both the ones made through MCP and the ones an AI Agent makes to its MCP Servers.
 
-Most of it lives on one page: **Organization Management** → **AI Governance**. Only Organization admins and owners see that page. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
+Most of it is in **Organization Management** under **AI & Governance**. Only Organization admins and owners see those pages, except **Skills**, which members and Org-wide read users can also open. Some settings sit on the thing they control, such as the **Access** card of an AI Agent or the **Token Limit** card of a Member.
 
 ![AI Governance page on the Access tab](images/ai-governance-access.png)
 
@@ -52,7 +52,7 @@ The page has one tab per area. **Access**, **Models** and **Limits** start from 
 ## Who can do what
 
 - **Organization admins and owners** can open the AI Governance page and change everything on it.
-- **Every member** can see the Organization's Skills; only Organization admins and owners can change them.
+- Members and Org-wide read users can see the Organization's Skills; only Organization admins and owners can change them.
 - **Environment admins** can set token limits and pauses for their Environment and its AI Agents, from **AI Settings**. They can use every AI Agent, but can't change AI Agent access or model access.
 - **The creator of an AI Agent** can make it public or private.
 
