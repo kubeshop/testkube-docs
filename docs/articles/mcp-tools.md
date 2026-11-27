@@ -90,3 +90,16 @@ Changes to a board made through MCP never overwrite a change someone else made i
 - `build_dashboard_url` - Generate dashboard URLs
 - `list_labels` - List available labels
 - `list_resource_groups` - List resource groups
+
+## Tool Annotations
+
+Every tool declares the [MCP tool annotations](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) `readOnlyHint`, `destructiveHint`, `idempotentHint` and `openWorldHint`. An MCP client can use them to decide which tool calls it runs without asking you. Testkube sets them as follows:
+
+| Kind        | Tools                                                                                                                                                                           | Hints                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Read-only   | Every `list_`, `get_`, `query_`, `fetch_`, `lookup_` and `read_` tool, plus `wait_for_executions`, `render_board` and `build_dashboard_url`                                     | read-only, idempotent                   |
+| Additive    | `create_workflow`, `create_workflowtemplate`, `create_board`, `add_board_report`                                                                                                | not read-only, not destructive          |
+| Destructive | `update_workflow`, `update_workflowtemplate`, `update_execution_tags`, `abort_workflow_execution`, `update_board`, `update_board_report`, `remove_board_report`, `delete_board` | destructive, idempotent                 |
+| Run         | `run_workflow`                                                                                                                                                                  | destructive, not idempotent, open world |
+
+`run_workflow` is marked open world because a workflow's steps can reach systems outside Testkube. The hints only guide your MCP client: the Testkube MCP Server does not ask for confirmation itself, and each call is still checked against the role of the user or API token.

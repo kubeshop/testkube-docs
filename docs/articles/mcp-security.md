@@ -20,7 +20,7 @@ This means the MCP Server operates within your existing security boundaries - it
 Each tool call is authorized like the API call it makes. Connecting to the hosted endpoint needs read access to the environment. Running and aborting executions and changing their tags needs the Run role, and creating or updating workflows and workflow templates needs Write.
 
 :::warning Changes run without a confirmation step
-The hosted endpoint has no approval step of its own. Tools that change something, such as `create_workflow`, `update_workflow`, `run_workflow`, `abort_workflow_execution` and `update_execution_tags`, run as soon as your AI tool calls them. Rely on your AI tool's own tool approval settings, and on the role of the user or API token, to control what an agent can change.
+The hosted endpoint has no approval step of its own. Tools that change something, such as `create_workflow`, `update_workflow`, `run_workflow`, `abort_workflow_execution` and `update_execution_tags`, run as soon as your AI tool calls them. Rely on your AI tool's own tool approval settings, and on the role of the user or API token, to control what an agent can change. Each tool declares whether it is read-only or destructive, which approval settings can use; see [Tool Annotations](/articles/mcp-tools#tool-annotations).
 :::
 
 ## Authentication Methods
