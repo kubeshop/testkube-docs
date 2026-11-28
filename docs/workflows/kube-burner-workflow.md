@@ -16,6 +16,10 @@ spec:
       type: integer
       default: 5
       description: Maximum number of API requests per second kube-burner sends
+    burst:
+      type: integer
+      default: 5
+      description: Maximum burst of API requests kube-burner can send
     readyThreshold:
       type: string
       default: 30s
@@ -43,7 +47,7 @@ spec:
               jobType: create
               jobIterations: {{ config.iterations }}
               qps: {{ config.qps }}
-              burst: {{ config.qps }}
+              burst: {{ config.burst }}
               namespace: kube-burner-pod-density
               namespacedIterations: true
               preLoadImages: false

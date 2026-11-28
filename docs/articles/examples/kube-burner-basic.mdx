@@ -24,7 +24,7 @@ Apply the following to the cluster where your Testkube Runner Agent runs, in the
 kubectl apply -f kube-burner-rbac.yaml
 ```
 
-The ClusterRole only covers what this example creates: namespaces and pods, the events the `podLatency` measurement watches, and read access to nodes. If you change the workload to create other objects, such as Deployments or Services, add them to the ClusterRole.
+The ClusterRole only covers what this example creates: namespaces and pods, the events the `podLatency` measurement watches, and read access to nodes. If you change the workload to create other objects, such as Deployments or Services, add them to the ClusterRole. For an easy fallback, you can use `cluster-admin` permissions instead.
 
 :::warning
 kube-burner generates real load on the cluster it runs against. Start with a small number of iterations and run it against a test or staging cluster before you point it at a shared one.
@@ -36,7 +36,7 @@ Below is the Workflow. You can paste it into the YAML of a new or existing Workf
 
 <KubeBurnerWorkflow />
 
-- `spec.config` defines three parameters you can set when you run the Workflow: the number of iterations, the queries per second that kube-burner sends to the API server, and the P99 pod ready latency threshold.
+- `spec.config` defines four parameters you can set when you run the Workflow: the number of iterations, the queries per second that kube-burner sends to the API server, the burst of API requests, and the P99 pod ready latency threshold.
 - `spec.pod.serviceAccountName` runs the execution pod with the `kube-burner` ServiceAccount from the prerequisites.
 - `spec.content.files` writes three files into the execution pod:
   - `/data/config.yml` is the kube-burner configuration. It enables the `podLatency` measurement with a threshold on the P99 `Ready` latency, writes the collected metrics to `/data/metrics` with the `local` indexer, and defines one `pod-density` job that creates a namespace per iteration. `gc: true` deletes the namespaces when the test ends, and `preLoadImages: false` skips the DaemonSet kube-burner otherwise creates to pull images in advance.
