@@ -3,255 +3,257 @@ hide_table_of_contents: true
 ---
 
 <table>
-<tr><td>digest</td><td><code>sha256:2ce2b271560502406b347f8a9c0704c4862bfe507ea4da82035d9f10d327b0ee</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 4" src="https://img.shields.io/badge/high-4-e25d68"/> <img alt="medium: 6" src="https://img.shields.io/badge/medium-6-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/low-0-lightgrey"/> <img alt="unspecified: 3" src="https://img.shields.io/badge/unspecified-3-lightgrey"/></td></tr>
-<tr><td>platform</td><td>linux/arm64</td></tr>
-<tr><td>size</td><td>58 MB</td></tr>
-<tr><td>packages</td><td>336</td></tr>
+<tr><td>digest</td><td><code>sha256:f0fb2f41529bde7664222e0ee5a3a1691028f97b68946fcba7c0b672d2deb09b</code></td><tr><tr><td>vulnerabilities</td><td><img alt="critical: 0" src="https://img.shields.io/badge/critical-0-lightgrey"/> <img alt="high: 7" src="https://img.shields.io/badge/high-7-e25d68"/> <img alt="medium: 8" src="https://img.shields.io/badge/medium-8-fbb552"/> <img alt="low: 4" src="https://img.shields.io/badge/low-4-fce1a9"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/unspecified-1-lightgrey"/></td></tr>
+<tr><td>platform</td><td>linux/amd64</td></tr>
+<tr><td>size</td><td>83 MB</td></tr>
+<tr><td>packages</td><td>266</td></tr>
 </table>
 </details></table>
 </details>
 
 <table>
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 3" src="https://img.shields.io/badge/H-3-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/docker</strong> <code>28.5.2+incompatible</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>git-init-template</strong> <code>2.54.1-r0</code> (apk)</summary>
 
-<small><code>pkg:golang/github.com/docker/docker@28.5.2%2Bincompatible</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-34040?s=golang&n=docker&ns=github.com%2Fdocker&t=golang&vr=%3E%3D0"><img alt="high : CVE--2026--34040" src="https://img.shields.io/badge/CVE--2026--34040-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+<small><code>pkg:apk/alpine/git-init-template@2.54.1-r0?arch=x86_64&distro=alpine-3.24.4&upstream=git</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 "git>=2.54.1-r0" "libexpat>=2.10.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-111760?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="high : CVE--2026--111760" src="https://img.shields.io/badge/CVE--2026--111760-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>EPSS Score</td><td><code>0.173%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>4th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-Moby has AuthZ plugin bypass when provided oversized request bodies in github.com/docker/docker
+
 
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-42306?s=github&n=docker&ns=github.com%2Fdocker&t=golang&vr=%3C%3D28.5.2"><img alt="high 7.2: CVE--2026--42306" src="https://img.shields.io/badge/CVE--2026--42306-lightgrey?label=high%207.2&labelColor=e25d68"/></a> <i>Time-of-check Time-of-use (TOCTOU) Race Condition</i>
+<a href="https://scout.docker.com/v/CVE-2026-105437?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="high : CVE--2026--105437" src="https://img.shields.io/badge/CVE--2026--105437-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=28.5.2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>7.2</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:N/I:H/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.100%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.530%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-## Summary
 
-A race condition during `docker cp` mount setup allows a malicious container to redirect a bind mount target to an arbitrary host path, potentially overwriting host files or causing denial of service.
-
-## Details
-
-When copying files into a container, the daemon sets up a temporary filesystem view by bind-mounting volumes into a private mount namespace. During this setup, the mount destination is created inside the container root and then a bind mount is attached using the container-relative path resolved to an absolute host path.
-
-Between mountpoint creation and the `mount()` syscall, a process running inside the container can replace the destination (or a parent path component) with a symlink pointing to an arbitrary location on the host. The `mount()` syscall follows the symlink, causing the volume to be bind-mounted onto an arbitrary host path instead of the intended container path.
-
-## Impact
-
-A malicious container can redirect a volume bind mount to an arbitrary host path. The impact depends on the volume content and mount options:
-
-- If the volume is writable, arbitrary host files at the redirected path could be overwritten with the volume's contents.
-- If the volume is read-only, the host path is masked by the mount for the duration of the operation, causing denial of service.
-- In all cases the mount is temporary (torn down after the `docker cp` completes), but the effects of any writes persist.
-
-### Conditions for exploitation
-
-- A container must have at least one volume mount.
-- A process inside the container must be able to rapidly create and swap symlinks at the volume mount destination path.
-- An operator must initiate a `docker cp` into that container, or call the `PUT /containers/{id}/archive` or `HEAD /containers/{id}/archive` API endpoints.
-
-### Not affected
-
-- Containers that do not have volume mounts are not affected, as the race occurs during volume bind-mount setup.
-
-## Workarounds
-
-- Only run containers from trusted images.
-- Avoid using `docker cp` with untrusted running containers.
-- Use authorization plugins to restrict access to the archive API endpoints (`PUT /containers/{id}/archive`, `HEAD /containers/{id}/archive`).
 
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-41567?s=github&n=docker&ns=github.com%2Fdocker&t=golang&vr=%3C%3D28.5.2"><img alt="high 7.2: CVE--2026--41567" src="https://img.shields.io/badge/CVE--2026--41567-lightgrey?label=high%207.2&labelColor=e25d68"/></a> <i>Uncontrolled Search Path Element</i>
+<a href="https://scout.docker.com/v/CVE-2026-114469?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="medium : CVE--2026--114469" src="https://img.shields.io/badge/CVE--2026--114469-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=28.5.2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>7.2</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.165%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>3rd percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.283%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-## Summary
 
-When a user uploads a compressed archive into a container, a malicious image can execute arbitrary code with daemon (host root) privileges.
-
-## Details
-
-When handling `PUT /containers/{id}/archive` requests with compressed archives, the daemon decompresses them using external system binaries. Due to incorrect ordering of operations, these binaries are resolved from the container's filesystem rather than the host's. A container image that includes a trojanized decompression binary can achieve code execution as the daemon process whenever a compressed archive is uploaded to that container.
-
-The executed binary runs with the daemon's full privileges, including host root UID and unrestricted capabilities.
-
-## Impact
-
-Arbitrary code execution as host root, crossing the container-to-host trust boundary.
-
-### Conditions for exploitation
-
-- A user must run a container from a malicious image that contains a trojanized decompression binary.
-- The user must then upload a compressed archive (xz or gzip) into that container, either by piping a compressed archive via `docker cp -` or by calling the `PUT /containers/{id}/archive` API directly with compressed content.
-
-### Not affected
-
-Standard `docker cp` usage is **not** affected, because the CLI sends uncompressed tar by default:
-
-```
-docker cp ./file.txt mycontainer:/file.txt
-```
-
-This can only be exploited when explicitly passing a xz or gzip-compressed archive to `docker cp` or the `PUT /containers/{id}/archive` API, for example:
-
-```
-cat archive.tar.xz | docker cp - mycontainer:/dir
-```
-
-Decompression formats using pure Go implementations (bzip2, zstd, and gzip when the container image does not contain an `unpigz` binary) are also not affected.
-
-## Workarounds
-
-- Only run containers from trusted images.
-- Use authorization plugins to limit access to the `PUT /containers/{id}/archive` endpoint.
-- Avoid piping compressed archives into containers created from untrusted images.
 
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-33997?s=github&n=docker&ns=github.com%2Fdocker&t=golang&vr=%3C29.3.1"><img alt="medium 6.8: CVE--2026--33997" src="https://img.shields.io/badge/CVE--2026--33997-lightgrey?label=medium%206.8&labelColor=fbb552"/></a> <i>Off-by-one Error</i>
+<a href="https://scout.docker.com/v/CVE-2026-114466?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="medium : CVE--2026--114466" src="https://img.shields.io/badge/CVE--2026--114466-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;29.3.1</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>6.8</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.543%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>39th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.254%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-## Summary
 
-A security vulnerability has been detected that allows [plugins](https://docs.docker.com/engine/extend/legacy_plugins/) privilege validation to be bypassed during `docker plugin install`. Due to an error in the daemon's privilege comparison logic, the daemon may incorrectly accept a privilege set that differs from the one approved by the user.
-
-Plugins that request exactly one privilege are also affected, because no comparison is performed at all.
-
-## Impact
-
-**If plugins are not in use, there is no impact.**
-
-When a plugin is installed, the daemon computes the privileges required by the plugin's configuration and compares them with the privileges approved during installation. A malicious plugin can exploit this bug so that the daemon accepts privileges that differ from what was intended to be approved.
-
-Anyone who depends on the plugin installation approval flow as a meaningful security boundary is potentially impacted.
-
-Depending on the privilege set involved, this may include highly sensitive plugin permissions such as broad device access.
-
-**For consideration: exploitation still requires a plugin to be installed from a malicious source, and Docker plugins are relatively uncommon. Docker Desktop also does not support plugins.**
-
-## Workarounds
-
-If unable to update immediately:
-- Do not install plugins from untrusted sources
-- Carefully review all privileges requested during `docker plugin install`
-- Restrict access to the Docker daemon to trusted parties, following the principle of least privilege
-- Avoid relying on plugin privilege approval as the only control boundary for sensitive environments
-
-## Credits
-
-- Reported by Cody (c@<!-- -->wormhole.guru, PGP 0x9FA5B73E)
 
 </blockquote>
 </details>
 
-<a href="https://scout.docker.com/v/CVE-2026-41568?s=github&n=docker&ns=github.com%2Fdocker&t=golang&vr=%3C%3D28.5.2"><img alt="medium 6.1: CVE--2026--41568" src="https://img.shields.io/badge/CVE--2026--41568-lightgrey?label=medium%206.1&labelColor=fbb552"/></a> <i>Time-of-check Time-of-use (TOCTOU) Race Condition</i>
+<a href="https://scout.docker.com/v/CVE-2026-114467?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="low : CVE--2026--114467" src="https://img.shields.io/badge/CVE--2026--114467-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
 <table>
-<tr><td>Affected range</td><td><code>&lt;=28.5.2</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-<tr><td>CVSS Score</td><td><code>6.1</code></td></tr>
-<tr><td>CVSS Vector</td><td><code>CVSS:3.1/AV:L/AC:H/PR:L/UI:R/S:C/C:N/I:L/A:H</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.098%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>0th percentile</code></td></tr>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
 <blockquote>
 
-## Summary
 
-A race condition during `docker cp` mount setup allows a malicious container to create empty files or directories at arbitrary absolute paths on the host filesystem.
 
-This advisory covers the race during mountpoint creation. The related race during the subsequent mount syscall is tracked in GHSA-rg2x-37c3-w2rh
+</blockquote>
+</details>
 
-## Details
+<a href="https://scout.docker.com/v/CVE-2026-113408?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="low : CVE--2026--113408" src="https://img.shields.io/badge/CVE--2026--113408-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
 
-When copying files into a container, the daemon sets up a temporary filesystem view by bind-mounting volumes into a private mount namespace. During this setup, the mount destination path is first resolved within the container's root filesystem using `GetResourcePath`, and then used to create the mountpoint (file or directory) if it does not already exist via `createIfNotExists`.
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.283%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
 
-Between path resolution and mountpoint creation, a process running inside the container can swap a path component for a symlink pointing to an arbitrary location on the host. Because `createIfNotExists` operates on the already-resolved absolute path using standard `os.MkdirAll` and `os.OpenFile` — which follow symlinks in intermediate path components — the symlink is followed and the file or directory is created outside the container root filesystem, as root.
+<details><summary>Description</summary>
+<blockquote>
 
-## Impact
 
-A malicious container can create empty files or directories at arbitrary absolute paths on the host filesystem, running as root. This enables persistent denial of service — for example:
-
-- Converting `/etc/docker/daemon.json` into a directory prevents the daemon from restarting
-- Creating `/etc/nologin` prevents user logins
-- Overwriting critical system paths with empty files can break host services
-
-The container does not gain read or write access to existing host files — only the ability to create new empty files or directories at chosen paths.
-
-### Conditions for exploitation
-
-- A container must be running with a process that can rapidly create and swap symlinks at a volume mount destination path.
-- An operator must initiate a `docker cp` into that container, or call the `PUT /containers/{id}/archive` or `HEAD /containers/{id}/archive` API endpoints.
-
-### Not affected
-
-- Containers that do not have volume mounts are not affected, as the race occurs during volume bind-mount setup.
-
-## Patches
-
-Mountpoint creation is now scoped to the container root using `os.Root` (Go 1.24+), which refuses to follow symlinks that escape the opened root directory. All filesystem operations in `createIfNotExists` (`MkdirAll`, `OpenFile`) are performed through the `os.Root` handle, so even if a symlink swap occurs after path resolution, the creation stays confined to the container root.
-
-## Workarounds
-
-- Only run containers from trusted images.
-- Avoid using `docker cp` with untrusted running containers.
-- Use authorization plugins to restrict access to the archive API endpoints (`PUT /containers/{id}/archive`, `HEAD /containers/{id}/archive`).
 
 </blockquote>
 </details>
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.7.2+incompatible</code> (golang)</summary>
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 2" src="https://img.shields.io/badge/H-2-e25d68"/> <img alt="medium: 2" src="https://img.shields.io/badge/M-2-fbb552"/> <img alt="low: 2" src="https://img.shields.io/badge/L-2-fce1a9"/> <!-- unspecified: 0 --><strong>git</strong> <code>2.54.1-r0</code> (apk)</summary>
 
-<small><code>pkg:golang/github.com/docker/cli@29.7.2%2Bincompatible</code></small><br/>
+<small><code>pkg:apk/alpine/git@2.54.1-r0?arch=x86_64&distro=alpine-3.24.4</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (34:34)
+RUN apk --no-cache upgrade && apk --no-cache add 'ca-certificates>=20261020-r0' libssl3 "git>=2.54.1-r0" "libexpat>=2.10.0-r0" "zlib>=1.3.2-r1" "brotli-libs>=1.2.1-r0" "libcurl>=8.23.0-r0"
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-111760?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="high : CVE--2026--111760" src="https://img.shields.io/badge/CVE--2026--111760-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.676%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>47th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-105437?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="high : CVE--2026--105437" src="https://img.shields.io/badge/CVE--2026--105437-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.530%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-114469?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="medium : CVE--2026--114469" src="https://img.shields.io/badge/CVE--2026--114469-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.283%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-114466?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="medium : CVE--2026--114466" src="https://img.shields.io/badge/CVE--2026--114466-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.254%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>10th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-114467?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="low : CVE--2026--114467" src="https://img.shields.io/badge/CVE--2026--114467-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.264%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>11th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+
+<a href="https://scout.docker.com/v/CVE-2026-113408?s=alpine&n=git&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C2.56.1-r0"><img alt="low : CVE--2026--113408" src="https://img.shields.io/badge/CVE--2026--113408-lightgrey?label=low%20&labelColor=fce1a9"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;2.56.1-r0</code></td></tr>
+<tr><td>Fixed version</td><td><code>2.56.1-r0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.283%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>13th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>github.com/docker/cli</strong> <code>29.9.3+incompatible</code> (golang)</summary>
+
+<small><code>pkg:golang/github.com/docker/cli@29.9.3%2Bincompatible</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
 <a href="https://scout.docker.com/v/CVE-2025-15558?s=golang&n=cli&ns=github.com%2Fdocker&t=golang&vr=%3E%3D19.03.0%2Bincompatible"><img alt="high : CVE--2025--15558" src="https://img.shields.io/badge/CVE--2025--15558-lightgrey?label=high%20&labelColor=e25d68"/></a> 
 
 <table>
@@ -271,9 +273,107 @@ Docker CLI Plugins: Uncontrolled Search Path Element Leads to Local Privilege Es
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl</strong> <code>1.2.6-r3</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl@1.2.6-r3?arch=x86_64&distro=alpine-3.24.4</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (33:33)
+FROM ${ALPINE_IMAGE}
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 1" src="https://img.shields.io/badge/H-1-e25d68"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>musl-utils</strong> <code>1.2.6-r3</code> (apk)</summary>
+
+<small><code>pkg:apk/alpine/musl-utils@1.2.6-r3?arch=x86_64&distro=alpine-3.24.4&upstream=musl</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (33:33)
+FROM ${ALPINE_IMAGE}
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-107891?s=alpine&n=musl&ns=alpine&t=apk&osn=alpine&osv=3.24&vr=%3C1.2.6-r6"><img alt="high : CVE--2026--107891" src="https://img.shields.io/badge/CVE--2026--107891-lightgrey?label=high%20&labelColor=e25d68"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>&lt;1.2.6-r6</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.2.6-r6</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.568%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>41st percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel</strong> <code>1.46.0</code> (golang)</summary>
+
+<small><code>pkg:golang/go.opentelemetry.io/otel@1.46.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-128086?s=golang&n=otel&ns=go.opentelemetry.io&t=golang&vr=%3E%3D1.0.0-RC1%2C%3C1.47.0"><img alt="medium : CVE--2026--128086" src="https://img.shields.io/badge/CVE--2026--128086-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.0.0-RC1<br/><1.47.0</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.617%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+Memory allocation amplification in W3C baggage parsing in go.opentelemetry.io/otel
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/sdk</strong> <code>1.46.0</code> (golang)</summary>
 
 <small><code>pkg:golang/go.opentelemetry.io/otel/sdk@1.46.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
 <a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=sdk&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.33.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
 
 <table>
@@ -618,53 +718,17 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 </details></td></tr>
 
 <tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel</strong> <code>1.46.0</code> (golang)</summary>
-
-<small><code>pkg:golang/go.opentelemetry.io/otel@1.46.0</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-128086?s=golang&n=otel&ns=go.opentelemetry.io&t=golang&vr=%3E%3D1.0.0-RC1%2C%3C1.47.0"><img alt="medium : CVE--2026--128086" src="https://img.shields.io/badge/CVE--2026--128086-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=1.0.0-RC1<br/><1.47.0</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.47.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.617%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>44th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-Memory allocation amplification in W3C baggage parsing in go.opentelemetry.io/otel
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.26.10</code> (golang)</summary>
-
-<small><code>pkg:golang/stdlib@1.26.10</code></small><br/>
-<a href="https://scout.docker.com/v/CVE-2026-97054?s=golang&n=stdlib&t=golang&vr=%3C1.26.11"><img alt="medium : CVE--2026--97054" src="https://img.shields.io/badge/CVE--2026--97054-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.26.11</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.26.11</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-For HTTP/1 servers, when MaxBytesReader's limit is exceeded, "Connection: close" header is automatically set without synchronization, which might race with another header being set explicitly in the server handler. As a result, an HTTP/1 server that utilizes MaxBytesReader or MaxBytesHandler can crash due to runtime panic if its handler reads the request body concurrently with writing the response header.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>go.opentelemetry.io/otel/trace</strong> <code>1.46.0</code> (golang)</summary>
 
 <small><code>pkg:golang/go.opentelemetry.io/otel/trace@1.46.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
 <a href="https://scout.docker.com/v/CVE-2026-128085?s=github&n=trace&ns=go.opentelemetry.io%2Fotel&t=golang&vr=%3E%3D1.35.0%2C%3C1.47.0"><img alt="medium 5.3: CVE--2026--128085" src="https://img.shields.io/badge/CVE--2026--128085-lightgrey?label=medium%205.3&labelColor=fbb552"/></a> <i>Incorrect Calculation of Multi-Byte String Length</i>
 
 <table>
@@ -1009,9 +1073,47 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 </details></td></tr>
 
 <tr><td valign="top">
+<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 1" src="https://img.shields.io/badge/M-1-fbb552"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <!-- unspecified: 0 --><strong>stdlib</strong> <code>1.27.3</code> (golang)</summary>
+
+<small><code>pkg:golang/stdlib@1.27.3</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
+<a href="https://scout.docker.com/v/CVE-2026-97054?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.4"><img alt="medium : CVE--2026--97054" src="https://img.shields.io/badge/CVE--2026--97054-lightgrey?label=medium%20&labelColor=fbb552"/></a> 
+
+<table>
+<tr><td>Affected range</td><td><code>>=1.27.0-0<br/><1.27.4</code></td></tr>
+<tr><td>Fixed version</td><td><code>1.27.4</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.479%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>34th percentile</code></td></tr>
+</table>
+
+<details><summary>Description</summary>
+<blockquote>
+
+For HTTP/1 servers, when MaxBytesReader's limit is exceeded, "Connection: close" header is automatically set without synchronization, which might race with another header being set explicitly in the server handler. As a result, an HTTP/1 server that utilizes MaxBytesReader or MaxBytesHandler can crash due to runtime panic if its handler reads the request body concurrently with writing the response header.
+
+</blockquote>
+</details>
+</details></td></tr>
+
+<tr><td valign="top">
 <details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>golang.org/x/crypto</strong> <code>0.58.0</code> (golang)</summary>
 
 <small><code>pkg:golang/golang.org/x/crypto@0.58.0</code></small><br/>
+
+```dockerfile
+# api-server.Dockerfile (36:36)
+COPY --from=build /app /bin/app
+```
+
+<br/>
+
 <a href="https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3C0.58.1-0.20261009181718-2f1f834330b2"><img alt="unspecified : GO--2026--5932" src="https://img.shields.io/badge/GO--2026--5932-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
 
 <table>
@@ -1025,53 +1127,6 @@ In the optimistic loop, count every rune of size > 1 (including the legitimately
 The golang.org/x/crypto/openpgp package is unsafe by design, has numerous known security issues, is not maintained, and should not be used.
 
 If you are required to interoperate with OpenPGP systems and need a maintained package, consider github.com/ProtonMail/go-crypto/openpgp which is a maintained fork that aims to be a drop-in replacement for this package.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/mark3labs/mcp-go</strong> <code>1.1.1</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/mark3labs/mcp-go@1.1.1</code></small><br/>
-<a href="https://scout.docker.com/v/GO-2026-6911?s=golang&n=mcp-go&ns=github.com%2Fmark3labs&t=golang&vr=%3C1.5.1-0.20261109144041-2f5b9637ea84"><img alt="unspecified : GO--2026--6911" src="https://img.shields.io/badge/GO--2026--6911-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>&lt;1.5.1-0.20261109144041-2f5b9637ea84</code></td></tr>
-<tr><td>Fixed version</td><td><code>1.5.1-0.20261109144041-2f5b9637ea84</code></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In github.com/mark3labs/mcp-go/client/transport, NewStreamableHTTP, NewSSE, and NewOAuthHandler construct default http.Client instances with a nil CheckRedirect policy when no custom HTTP client (WithHTTPBasicClient, WithHTTPClient, or OAuthConfig.HTTPClient) is supplied. Additionally, SSE.handleSSEEvent validates the server-supplied endpoint event URL only against the connection's host, without verifying the scheme or port.
-
-When an MCP or OAuth server responds with a 3xx redirect, net/http follows up to 10 http or https redirects to arbitrary origins:
-- Custom headers configured via WithHTTPHeaders, WithHTTPHeaderFunc, WithHeaders, or WithHeaderFunc are copied onto requests to any redirect host.
-- The Authorization header (including OAuth bearer tokens) is preserved when redirecting to the same host or a subdomain, including across port changes or https-to-http scheme downgrades.
-- On 307 and 308 redirects, the request body is resent to the redirect target, exposing JSON-RPC payloads on transport requests and form bodies containing client_secret, authorization codes, or refresh tokens on OAuth token, refresh, and client registration requests.
-
-This enables server-side request forgery (SSRF) and credential or payload disclosure.
-
-</blockquote>
-</details>
-</details></td></tr>
-
-<tr><td valign="top">
-<details><summary><img alt="critical: 0" src="https://img.shields.io/badge/C-0-lightgrey"/> <img alt="high: 0" src="https://img.shields.io/badge/H-0-lightgrey"/> <img alt="medium: 0" src="https://img.shields.io/badge/M-0-lightgrey"/> <img alt="low: 0" src="https://img.shields.io/badge/L-0-lightgrey"/> <img alt="unspecified: 1" src="https://img.shields.io/badge/U-1-lightgrey"/><strong>github.com/chrismellard/docker-credential-acr-env</strong> <code>0.0.0-20230304212654-82a0ddb27589</code> (golang)</summary>
-
-<small><code>pkg:golang/github.com/chrismellard/docker-credential-acr-env@0.0.0-20230304212654-82a0ddb27589</code></small><br/>
-<a href="https://scout.docker.com/v/GO-2026-6225?s=golang&n=docker-credential-acr-env&ns=github.com%2Fchrismellard&t=golang&vr=%3E%3D0"><img alt="unspecified : GO--2026--6225" src="https://img.shields.io/badge/GO--2026--6225-lightgrey?label=unspecified%20&labelColor=lightgrey"/></a> 
-
-<table>
-<tr><td>Affected range</td><td><code>>=0</code></td></tr>
-<tr><td>Fixed version</td><td><strong>Not Fixed</strong></td></tr>
-</table>
-
-<details><summary>Description</summary>
-<blockquote>
-
-In github.com/chrismellard/docker-credential-acr-env/pkg/credhelper, the regular expression used by isACRRegistry to validate Azure Container Registry hostnames is unanchored. As a result, arbitrary hostnames containing the substring ".azurecr.io" (such as evil.azurecr.io.attacker.com) are treated as valid ACR registries, causing ACRCredHelper.Get to send the Azure Active Directory (AAD) access token to attacker-controlled hosts.
 
 </blockquote>
 </details>

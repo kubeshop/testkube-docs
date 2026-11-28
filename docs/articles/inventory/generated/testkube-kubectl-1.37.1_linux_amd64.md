@@ -166,7 +166,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -200,7 +200,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -217,7 +217,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -234,7 +234,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -251,7 +251,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -268,7 +268,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -319,7 +319,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -336,7 +336,7 @@ FROM alpine/kubectl:1.37.1
 <tr><td>Affected range</td><td><code>&lt;8.23.0-r0</code></td></tr>
 <tr><td>Fixed version</td><td><code>8.23.0-r0</code></td></tr>
 <tr><td>EPSS Score</td><td><code>0.759%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>51st percentile</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>52nd percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -590,8 +590,8 @@ When parsing a Range header containing a large number of small ranges, FileServe
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.607%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.523%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -607,8 +607,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;1.26.9</code></td></tr>
 <tr><td>Fixed version</td><td><code>1.26.9</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.005%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.851%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -798,8 +798,8 @@ Accumulate coalesced text in per-node byte slices during parsing and materialize
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>0.607%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>43rd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.523%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>38th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
@@ -815,8 +815,8 @@ Historically, we have been rather lax about malformed framing-related headers in
 <table>
 <tr><td>Affected range</td><td><code>&lt;0.60.0</code></td></tr>
 <tr><td>Fixed version</td><td><code>0.60.0</code></td></tr>
-<tr><td>EPSS Score</td><td><code>1.005%</code></td></tr>
-<tr><td>EPSS Percentile</td><td><code>62nd percentile</code></td></tr>
+<tr><td>EPSS Score</td><td><code>0.851%</code></td></tr>
+<tr><td>EPSS Percentile</td><td><code>56th percentile</code></td></tr>
 </table>
 
 <details><summary>Description</summary>
