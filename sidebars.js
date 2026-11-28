@@ -1480,6 +1480,11 @@ const sidebars = {
               id: "articles/examples/environment-provisioning-vcluster",
               className: "sidebar-commercial-category",
             },
+            {
+              type: "doc",
+              label: "AI Agents",
+              id: "articles/examples/environment-provisioning-agent",
+            },
           ],
         },
         {
