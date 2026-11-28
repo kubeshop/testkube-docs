@@ -1,0 +1,193 @@
+---
+description: How an AI tool or agent provisions a temporary test environment through the Testkube MCP Server, runs test Workflows against it and tears it down, with the tool calls, instructions for the agent and the cleanup of environments it leaves behind.
+---
+
+# Provisioning an Environment from an AI Agent
+
+The other examples in this section run the provisioning, the tests and the teardown from a composite Workflow. An AI
+tool or agent that is connected to the [Testkube MCP Server](/articles/mcp-overview) can do that orchestration itself.
+The environment then lives for as long as the agent works on its task: the agent provisions it once, runs tests against
+it as often as it needs to, decides from the results what to run next, and removes it at the end.
+
+This example uses the provisioning, teardown and cleanup Workflows of the [Helm example](environment-provisioning-helm)
+and the [test Workflow](environment-provisioning#the-test-workflow) without changes. The same sequence works with the
+Workflows of the [ArgoCD](environment-provisioning-argocd) and [vCluster](environment-provisioning-vcluster) examples.
+
+## Prerequisites
+
+- An AI tool or agent that is connected to the Testkube MCP Server. See [Testkube MCP Server](/articles/mcp-overview)
+  for the ways to connect one.
+- The Workflows and the ServiceAccount of the [Helm example](environment-provisioning-helm).
+
+The agent does not need access to the cluster. It only runs Workflows, which needs the Run role in the Testkube
+environment ([Security & Compliance](/articles/mcp-security)). The permissions to create namespaces and deploy the
+application stay with the ServiceAccount of the provisioning Workflow.
+
+## The Sequence
+
+The agent replaces the composite Workflow with four kinds of tool calls.
+
+### 1. Provision the environment
+
+The agent chooses a name for the namespace and runs the provisioning Workflow with `run_workflow`:
+
+```json title="run_workflow"
+{
+  "workflowName": "env-helm-provision",
+  "config": { "namespace": "env-agent-7f3a" }
+}
+```
+
+The result contains the ID of the execution:
+
+```json
+{
+  "id": "6b0a89fcc2638315687317eb",
+  "name": "env-helm-provision-12",
+  "workflowName": "env-helm-provision",
+  "status": "queued"
+}
+```
+
+### 2. Wait for it and read the URL
+
+`wait_for_executions` returns when the execution has finished. Its result includes the
+[output values](/articles/test-workflows-execution-sharing#publishing-output-values) that the Workflow published, here
+the URL of the application:
+
+```json title="wait_for_executions"
+{ "executionIds": "6b0a89fcc2638315687317eb" }
+```
+
+```json
+{
+  "executions": [
+    {
+      "id": "6b0a89fcc2638315687317eb",
+      "name": "env-helm-provision-12",
+      "status": "passed",
+      "duration": "19.439s",
+      "outputs": {
+        "url": "http://podinfo.env-agent-7f3a.svc.cluster.local:9898"
+      }
+    }
+  ]
+}
+```
+
+`get_execution_info` returns the same `outputs` for an execution that has already finished.
+
+:::note
+Older versions of the Testkube MCP Server do not return `outputs`. If the result has none, upgrade the MCP Server, or
+let the agent build the URL from the name of the namespace.
+:::
+
+### 3. Run tests against the environment
+
+The agent runs a test Workflow with the URL as a configuration parameter and waits for it in the same way:
+
+```json title="run_workflow"
+{
+  "workflowName": "env-smoke-test",
+  "config": { "url": "http://podinfo.env-agent-7f3a.svc.cluster.local:9898" }
+}
+```
+
+When a test fails, the agent reads the log with `fetch_execution_logs` and the artifacts with `list_artifacts` and
+`read_artifact`. It can then change the code or the test and run the Workflow again, against the same environment. See
+[Available Tools](/articles/mcp-tools) for everything the MCP Server offers.
+
+### 4. Tear the environment down
+
+When the agent is done, it runs the teardown Workflow with the name of the namespace:
+
+```json title="run_workflow"
+{
+  "workflowName": "env-helm-teardown",
+  "config": { "namespace": "env-agent-7f3a" }
+}
+```
+
+## Where the Tests Run
+
+The URL that the provisioning Workflow publishes is an in-cluster DNS name. It resolves from a Workflow execution, but
+not from the machine the agent runs on, so the agent cannot call the application directly. Everything it wants to check
+has to run as a Workflow ([Where the Tests Run](environment-provisioning#where-the-tests-run)).
+
+That does not limit the agent to the test Workflows that already exist. With the Write role it can create one for the
+question at hand with `create_workflow`, for example a Workflow that calls a single endpoint with `curl`, and run it
+against the environment.
+
+## Instructions for the Agent
+
+An agent does not know about these Workflows unless you tell it. Add instructions like the following to the file your
+AI tool reads its project instructions from, such as `AGENTS.md` or `CLAUDE.md`:
+
+```markdown title="Instructions for the agent"
+## Test environments
+
+To test a change against a running copy of the application, use the Testkube MCP Server.
+
+1. Run the `env-helm-provision` Workflow. Set its `namespace` config parameter to `env-agent-` followed by eight
+   random lowercase letters or digits, and remember that name.
+2. Wait for the execution and read `outputs.url` from the result. If the execution failed, read its log, then go to
+   step 4.
+3. Run test Workflows with their `url` config parameter set to that URL, for example `env-smoke-test`. The URL only
+   resolves inside the cluster, so do not call it from your own machine.
+4. When you are done, and also when you give up, run `env-helm-teardown` with the same `namespace`.
+
+Provision one environment per task. Never run the teardown Workflow for a namespace you did not create in this task.
+```
+
+The [Testkube Agent Skills](/articles/testkube-skills) teach an agent how to write Workflows and diagnose failed
+executions, which helps with step 3.
+
+## What Differs from the Composite Workflow
+
+- **The teardown is not guaranteed.** A composite Workflow runs its teardown step with `condition: always`. An agent
+  can be closed, lose its connection or run out of context before it reaches step 4, and then the environment stays
+  behind. The [cleanup Workflow](environment-provisioning-helm#the-cleanup-workflow) of the Helm example removes it.
+  Set its `maxAgeSeconds` higher than the longest time an agent works on a task.
+- **The agent chooses the name of the namespace.** A composite Workflow derives it from its execution ID. The name has
+  to be a valid namespace name: lowercase letters, digits and hyphens, at most 63 characters. The provisioning
+  Workflow fails when the namespace already exists, so two agents that pick the same name never share an environment.
+- **Nothing groups the executions.** A composite Workflow shows the executions it started in its own log. The
+  executions of an agent are independent of each other, and the name of the namespace in their configuration is what
+  ties them together.
+
+## Testing a Specific Version
+
+An agent that works on a change usually wants an environment with that change in it. Give the provisioning Workflow a
+configuration parameter for the version and pass it on to Helm:
+
+```yaml title="Provisioning Workflow with a version parameter"
+spec:
+  config:
+    namespace:
+      type: string
+    version:
+      type: string
+      default: ""
+  steps:
+    - name: Install chart
+      shell: |
+        helm upgrade --install podinfo oci://ghcr.io/stefanprodan/charts/podinfo \
+          --namespace "{{ config.namespace }}" --version "{{ config.version }}" --wait --timeout 3m
+        kubectl rollout status deployment/podinfo \
+          --namespace "{{ config.namespace }}" --timeout 3m
+```
+
+The agent then provisions that version:
+
+```json title="run_workflow"
+{
+  "workflowName": "env-helm-provision",
+  "config": { "namespace": "env-agent-7f3a", "version": "6.7.1" }
+}
+```
+
+Without the parameter, Helm installs the latest version of the chart. For your own application the parameter is more
+likely the tag of an image that was built from the branch of the agent, passed to the chart with `--set`.
+
+Every version gets a new environment: the provisioning Workflow does not install into a namespace that exists. To test
+another version, the agent tears the environment down and provisions a new one.
